@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Dumbbell, Flame, Check, Play, X, Loader2 } from 'lucide-react';
-import PageHeader, { Disclaimer } from '@/components/PageHeader';
+import { Flame, Check, Play, X, Loader2, ArrowRight } from 'lucide-react';
 import { workoutLibrary, categories, calculateCaloriesBurned } from '@/lib/workoutData';
 import { getTodayStr } from '@/lib/dateUtils';
+
+const categoryImages = {
+  'Hip Hop Dance': 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&q=80',
+  'Latin Dance': 'https://images.unsplash.com/photo-1504609878373-06d740f60d8b?w=500&q=80',
+  'Street Dance': 'https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?w=500&q=80',
+  'Ballet Barre': 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=500&q=80',
+  'Aerobic Dance': 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80',
+  'Beginner Cardio': 'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=500&q=80',
+};
 
 export default function Fitness() {
   const [activeCategory, setActiveCategory] = useState('Hip Hop Dance');
@@ -13,9 +21,7 @@ export default function Fitness() {
   const [todayBurned, setTodayBurned] = useState(0);
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  useEffect(() => { loadData(); }, []);
 
   async function loadData() {
     try {
@@ -48,48 +54,55 @@ export default function Fitness() {
   const filtered = workoutLibrary.filter((w) => w.category === activeCategory);
 
   return (
-    <div className="pb-4">
-      <PageHeader title="Fitness" subtitle="10-minute dance & cardio workouts" icon={Dumbbell} />
+    <div className="min-h-screen bg-[#FDFBF8] pb-4">
+      <div className="px-5 pt-12 pb-3">
+        <h1 className="text-2xl font-bold text-[#1A1A1A]">Fitness</h1>
+        <p className="text-sm text-[#666]">10-minute dance & cardio workouts</p>
+      </div>
 
       <div className="px-5 mt-2">
         {/* Burned today */}
-        <div className="rounded-2xl bg-gradient-to-br from-orange-500 to-rose-500 text-white p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm opacity-80 font-medium">Calories Burned Today</p>
-              <p className="text-4xl font-bold mt-1">{todayBurned}</p>
+        <div className="relative overflow-hidden rounded-3xl">
+          <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/80 to-[#1A1A1A]/30" />
+          <div className="relative p-5 text-white">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm opacity-80 font-medium">Calories Burned Today</p>
+                <p className="text-4xl font-bold mt-1">{todayBurned}</p>
+              </div>
+              <Flame size={40} className="opacity-80" />
             </div>
-            <Flame size={40} className="opacity-80" />
+            <p className="text-xs opacity-70 mt-2">{completedIds.size} workout{completedIds.size !== 1 ? 's' : ''} completed today</p>
           </div>
-          <p className="text-xs opacity-70 mt-2">{completedIds.size} workout{completedIds.size !== 1 ? 's' : ''} completed today</p>
         </div>
 
         {/* Weight input */}
-        <div className="mt-4 rounded-2xl bg-card border border-border p-4">
+        <div className="mt-4 rounded-2xl bg-white border border-[#F5EFE6] p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium">Your Weight</p>
-              <p className="text-xs text-muted-foreground">For calorie burn estimation</p>
+              <p className="text-sm font-medium text-[#1A1A1A]">Your Weight</p>
+              <p className="text-xs text-[#666]">For calorie burn estimation</p>
             </div>
             <div className="flex items-center gap-2">
               <input
                 type="number"
                 value={weight}
                 onChange={(e) => setWeight(parseFloat(e.target.value) || 70)}
-                className="w-16 text-right rounded-lg bg-muted border border-border px-2 py-1.5 font-semibold focus:outline-none focus:border-primary"
+                className="w-16 text-right rounded-lg bg-[#FDF6EE] border border-[#F5EFE6] px-2 py-1.5 font-semibold text-[#1A1A1A] focus:outline-none focus:border-[#FF9F43]"
               />
-              <span className="text-sm text-muted-foreground">kg</span>
+              <span className="text-sm text-[#666]">kg</span>
             </div>
           </div>
         </div>
 
         {/* Categories */}
-        <div className="mt-5 flex gap-2 overflow-x-auto pb-2 -mx-5 px-5">
+        <div className="mt-5 flex gap-2 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${activeCategory === cat ? 'bg-primary text-primary-foreground' : 'bg-card border border-border text-muted-foreground'}`}
+              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${activeCategory === cat ? 'bg-[#FF9F43] text-white' : 'bg-white border border-[#F5EFE6] text-[#666]'}`}
             >
               {cat}
             </button>
@@ -97,36 +110,43 @@ export default function Fitness() {
         </div>
 
         {/* Workouts */}
-        <div className="mt-4 space-y-3">
+        <div className="mt-4 grid grid-cols-1 gap-3">
           {filtered.map((w) => {
             const burned = calculateCaloriesBurned(w.met, weight, w.duration);
             const done = completedIds.has(w.id);
             return (
-              <div key={w.id} className={`rounded-2xl bg-card border p-4 flex items-center gap-3 transition-colors ${done ? 'border-primary/30 bg-primary/5' : 'border-border'}`}>
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${w.color} flex items-center justify-center flex-shrink-0`}>
-                  {done ? <Check size={20} className="text-white" /> : <Play size={18} className="text-white ml-0.5" />}
+              <div key={w.id} className={`rounded-3xl overflow-hidden border transition-colors ${done ? 'border-[#FF9F43]/30 bg-[#FDDDBD]/30' : 'border-[#F5EFE6] bg-white'}`}>
+                <div className="relative h-28">
+                  <img src={categoryImages[w.category]} alt={w.name} className="absolute inset-0 w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-white text-sm">{w.name}</p>
+                      <p className="text-xs text-white/80">{w.duration} min · ~{burned} kcal</p>
+                    </div>
+                    <button
+                      onClick={() => setSelectedWorkout(w)}
+                      className="px-4 py-2 rounded-full bg-[#FFD5A8] text-[#1A1A1A] text-xs font-semibold flex items-center gap-1"
+                    >
+                      {done ? <><Check size={14} /> Again</> : <><Play size={14} /> Start</>}
+                    </button>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-sm truncate">{w.name}</p>
-                  <p className="text-xs text-muted-foreground">{w.duration} min · ~{burned} kcal</p>
+                <div className="p-3">
+                  <p className="text-xs text-[#666]">{w.description}</p>
                 </div>
-                <button
-                  onClick={() => setSelectedWorkout(w)}
-                  className="px-3 py-2 rounded-xl bg-primary/10 text-primary text-xs font-medium"
-                >
-                  {done ? 'Again' : 'Start'}
-                </button>
               </div>
             );
           })}
         </div>
 
         <div className="mt-6">
-          <Disclaimer text="⚠️ Calories burned are estimates based on MET values and body weight. Actual burn varies. Not medical advice." />
+          <p className="text-[11px] text-[#999] text-center leading-relaxed">
+            ⚠️ Calories burned are estimates based on MET values and body weight. Not medical advice.
+          </p>
         </div>
       </div>
 
-      {/* Workout Player Modal */}
       {selectedWorkout && (
         <WorkoutModal
           workout={selectedWorkout}
@@ -144,41 +164,42 @@ export default function Fitness() {
 function WorkoutModal({ workout, weight, onClose, onComplete, done, saving }) {
   const burned = calculateCaloriesBurned(workout.met, weight, workout.duration);
   return (
-    <div className="fixed inset-0 z-[100] bg-background flex flex-col">
-      <div className="flex items-center justify-between px-5 pt-14 pb-3 border-b border-border">
+    <div className="fixed inset-0 z-[100] bg-[#FDFBF8] flex flex-col">
+      <div className="flex items-center justify-between px-5 pt-14 pb-3 border-b border-[#F5EFE6]">
         <div>
-          <p className="text-xs text-muted-foreground">{workout.category}</p>
-          <h2 className="text-lg font-bold">{workout.name}</h2>
+          <p className="text-xs text-[#666]">{workout.category}</p>
+          <h2 className="text-lg font-bold text-[#1A1A1A]">{workout.name}</h2>
         </div>
-        <button onClick={onClose} className="p-2 rounded-full bg-muted"><X size={20} /></button>
+        <button onClick={onClose} className="p-2 rounded-full bg-[#FDDDBD]"><X size={20} className="text-[#E8821E]" /></button>
       </div>
       <div className="flex-1 overflow-y-auto p-5">
-        <div className="aspect-video rounded-2xl overflow-hidden bg-black">
-          <iframe
+        <div className="aspect-video rounded-3xl overflow-hidden bg-black">
+          <video
             src={workout.videoUrl}
-            title={workout.name}
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            className="w-full h-full object-cover"
+            controls
+            autoPlay
+            loop
+            playsInline
           />
         </div>
-        <p className="text-sm text-muted-foreground mt-4">{workout.description}</p>
+        <p className="text-sm text-[#666] mt-4">{workout.description}</p>
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <div className="rounded-xl bg-card border border-border p-3 text-center">
-            <p className="text-xs text-muted-foreground">Duration</p>
-            <p className="text-xl font-bold">{workout.duration} min</p>
+          <div className="rounded-2xl bg-white border border-[#F5EFE6] p-3 text-center">
+            <p className="text-xs text-[#666]">Duration</p>
+            <p className="text-xl font-bold text-[#1A1A1A]">{workout.duration} min</p>
           </div>
-          <div className="rounded-xl bg-card border border-border p-3 text-center">
-            <p className="text-xs text-muted-foreground">Est. Calories</p>
-            <p className="text-xl font-bold text-primary">{burned}</p>
+          <div className="rounded-2xl bg-white border border-[#F5EFE6] p-3 text-center">
+            <p className="text-xs text-[#666]">Est. Calories</p>
+            <p className="text-xl font-bold text-[#FF9F43]">{burned}</p>
           </div>
         </div>
       </div>
-      <div className="p-5 border-t border-border">
+      <div className="p-5 border-t border-[#F5EFE6]">
         <button
           onClick={onComplete}
           disabled={saving}
-          className="w-full rounded-2xl bg-primary text-primary-foreground py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full rounded-full bg-[#FFD5A8] text-[#1A1A1A] py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {saving ? <Loader2 size={18} className="animate-spin" /> : <Check size={18} />}
           {done ? 'Log Another Session' : 'Mark as Completed'}

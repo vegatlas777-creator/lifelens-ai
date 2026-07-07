@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Camera, Upload, Sparkles, Leaf, Shield, HeartPulse, Recycle, Loader2, X } from 'lucide-react';
-import PageHeader, { Disclaimer } from '@/components/PageHeader';
+import { Camera, Upload, Sparkles, Leaf, Shield, HeartPulse, Recycle, Loader2, X, ArrowRight } from 'lucide-react';
 
 export default function ClothingAnalyzer() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -22,7 +21,7 @@ export default function ClothingAnalyzer() {
       setImageUrl(file_url);
 
       const result = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are an expert textile and sustainability analyst. Analyze the clothing item/label in this image. Identify the materials used. For EACH material, provide: name, advantages (array of strings), disadvantages (array of strings). Then provide an overall summary, a boolean eco_friendly, scores 1-10 for sustainability, comfort, durability, and health_impact, and suggest better alternatives (array of objects with name and reason). Respond as JSON matching this schema.`,
+        prompt: `You are an expert textile and sustainability analyst. Analyze the clothing item in this photo. Examine the garment itself — its fabric texture, weave pattern, sheen, drape, weight, and visual characteristics — to identify the material composition. Do NOT rely on care labels; identify the fabric by visually analyzing the garment. For EACH material you identify, provide: name, advantages (array of strings), disadvantages (array of strings). Then provide an overall summary, a boolean eco_friendly, scores 1-10 for sustainability, comfort, durability, and health_impact, and suggest better alternatives (array of objects with name and reason). Respond as JSON matching this schema.`,
         response_json_schema: {
           type: 'object',
           properties: {
@@ -72,7 +71,7 @@ export default function ClothingAnalyzer() {
         alternatives: result.alternatives,
       });
     } catch (e) {
-      setError('Could not analyze the image. Please try a clearer photo of the label or garment.');
+      setError('Could not analyze the garment. Please try a clearer photo of the clothing item.');
       console.error(e);
     } finally {
       setLoading(false);
@@ -87,20 +86,23 @@ export default function ClothingAnalyzer() {
   }
 
   return (
-    <div className="pb-4">
-      <PageHeader title="Clothing Analyzer" subtitle="AI-powered material & sustainability scan" icon={Sparkles} />
+    <div className="min-h-screen bg-[#FDFBF8] pb-4">
+      <div className="px-5 pt-12 pb-3">
+        <h1 className="text-2xl font-bold text-[#1A1A1A]">Clothing Analyzer</h1>
+        <p className="text-sm text-[#666]">AI-powered fabric & sustainability scan</p>
+      </div>
 
       <div className="px-5 mt-2">
         {!imagePreview && (
           <button
             onClick={() => fileRef.current?.click()}
-            className="w-full rounded-3xl border-2 border-dashed border-border bg-card hover:border-primary/50 transition-colors p-10 flex flex-col items-center gap-3"
+            className="w-full rounded-3xl border-2 border-dashed border-[#FDDDBD] bg-white hover:border-[#FF9F43] transition-colors p-10 flex flex-col items-center gap-3"
           >
-            <div className="p-4 rounded-2xl bg-primary/10 text-primary">
-              <Camera size={32} />
+            <div className="p-4 rounded-2xl bg-[#FDDDBD]">
+              <Camera size={32} className="text-[#E8821E]" />
             </div>
-            <p className="font-semibold">Scan a Clothing Label</p>
-            <p className="text-sm text-muted-foreground text-center max-w-xs">Upload a photo of the care label or garment to analyze materials, sustainability, and health impact.</p>
+            <p className="font-semibold text-[#1A1A1A]">Scan a Garment</p>
+            <p className="text-sm text-[#666] text-center max-w-xs">Upload a photo of any clothing item — our AI analyzes the fabric itself, no label needed.</p>
           </button>
         )}
 
@@ -113,10 +115,10 @@ export default function ClothingAnalyzer() {
         />
 
         {imagePreview && (
-          <div className="relative rounded-2xl overflow-hidden border border-border">
+          <div className="relative rounded-3xl overflow-hidden border border-[#F5EFE6]">
             <img src={imagePreview} alt="clothing" className="w-full h-56 object-cover" />
             {!loading && (
-              <button onClick={reset} className="absolute top-3 right-3 p-2 rounded-full bg-background/80 backdrop-blur">
+              <button onClick={reset} className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur">
                 <X size={18} />
               </button>
             )}
@@ -125,20 +127,19 @@ export default function ClothingAnalyzer() {
 
         {loading && (
           <div className="flex flex-col items-center gap-3 mt-6 py-8">
-            <Loader2 size={32} className="text-primary animate-spin" />
-            <p className="text-sm text-muted-foreground">Analyzing materials with AI...</p>
+            <Loader2 size={32} className="text-[#FF9F43] animate-spin" />
+            <p className="text-sm text-[#666]">Analyzing fabric with AI...</p>
           </div>
         )}
 
         {error && (
-          <div className="mt-4 rounded-2xl bg-destructive/10 border border-destructive/20 p-4">
-            <p className="text-sm text-destructive">{error}</p>
+          <div className="mt-4 rounded-2xl bg-red-50 border border-red-200 p-4">
+            <p className="text-sm text-red-600">{error}</p>
           </div>
         )}
 
         {analysis && (
           <div className="mt-5 space-y-4">
-            {/* Scores */}
             <div className="grid grid-cols-2 gap-3">
               <ScoreCard icon={Leaf} label="Sustainability" score={analysis.sustainability_score} color="text-emerald-500" />
               <ScoreCard icon={HeartPulse} label="Comfort" score={analysis.comfort_score} color="text-blue-500" />
@@ -146,30 +147,28 @@ export default function ClothingAnalyzer() {
               <ScoreCard icon={HeartPulse} label="Health Impact" score={analysis.health_score} color="text-rose-500" />
             </div>
 
-            {/* Eco Badge */}
-            <div className={`rounded-2xl p-4 flex items-center gap-3 ${analysis.eco_friendly ? 'bg-emerald-500/10' : 'bg-amber-500/10'}`}>
-              <div className={`p-2 rounded-xl ${analysis.eco_friendly ? 'bg-emerald-500/20 text-emerald-600' : 'bg-amber-500/20 text-amber-600'}`}>
+            <div className={`rounded-2xl p-4 flex items-center gap-3 ${analysis.eco_friendly ? 'bg-emerald-50' : 'bg-amber-50'}`}>
+              <div className={`p-2 rounded-xl ${analysis.eco_friendly ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'}`}>
                 <Leaf size={20} />
               </div>
               <div>
-                <p className="font-semibold text-sm">{analysis.eco_friendly ? 'Eco-Friendly Choice' : 'Not Very Eco-Friendly'}</p>
-                <p className="text-xs text-muted-foreground">{analysis.summary}</p>
+                <p className="font-semibold text-sm text-[#1A1A1A]">{analysis.eco_friendly ? 'Eco-Friendly Choice' : 'Not Very Eco-Friendly'}</p>
+                <p className="text-xs text-[#666]">{analysis.summary}</p>
               </div>
             </div>
 
-            {/* Materials */}
             <div>
-              <h3 className="font-semibold text-sm mb-2 px-1">Materials Detected</h3>
+              <h3 className="font-semibold text-sm mb-2 px-1 text-[#1A1A1A]">Materials Detected</h3>
               <div className="space-y-3">
                 {analysis.materials?.map((mat, i) => (
-                  <div key={i} className="rounded-2xl bg-card border border-border p-4">
-                    <p className="font-semibold">{mat.name}</p>
+                  <div key={i} className="rounded-2xl bg-white border border-[#F5EFE6] p-4">
+                    <p className="font-semibold text-[#1A1A1A]">{mat.name}</p>
                     <div className="mt-2 grid grid-cols-2 gap-3">
                       <div>
                         <p className="text-xs font-medium text-emerald-600 mb-1">Advantages</p>
                         <ul className="space-y-1">
                           {mat.advantages?.map((a, j) => (
-                            <li key={j} className="text-xs text-muted-foreground flex gap-1">
+                            <li key={j} className="text-xs text-[#666] flex gap-1">
                               <span className="text-emerald-500">+</span> {a}
                             </li>
                           ))}
@@ -179,7 +178,7 @@ export default function ClothingAnalyzer() {
                         <p className="text-xs font-medium text-rose-600 mb-1">Disadvantages</p>
                         <ul className="space-y-1">
                           {mat.disadvantages?.map((d, j) => (
-                            <li key={j} className="text-xs text-muted-foreground flex gap-1">
+                            <li key={j} className="text-xs text-[#666] flex gap-1">
                               <span className="text-rose-500">−</span> {d}
                             </li>
                           ))}
@@ -191,17 +190,16 @@ export default function ClothingAnalyzer() {
               </div>
             </div>
 
-            {/* Alternatives */}
             {analysis.alternatives?.length > 0 && (
               <div>
-                <h3 className="font-semibold text-sm mb-2 px-1 flex items-center gap-2">
-                  <Recycle size={16} className="text-primary" /> Better Alternatives
+                <h3 className="font-semibold text-sm mb-2 px-1 flex items-center gap-2 text-[#1A1A1A]">
+                  <Recycle size={16} className="text-[#FF9F43]" /> Better Alternatives
                 </h3>
                 <div className="space-y-2">
                   {analysis.alternatives.map((alt, i) => (
-                    <div key={i} className="rounded-2xl bg-primary/5 border border-primary/20 p-3">
-                      <p className="font-medium text-sm">{alt.name}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">{alt.reason}</p>
+                    <div key={i} className="rounded-2xl bg-[#FDDDBD]/40 border border-[#FDDDBD] p-3">
+                      <p className="font-medium text-sm text-[#1A1A1A]">{alt.name}</p>
+                      <p className="text-xs text-[#666] mt-0.5">{alt.reason}</p>
                     </div>
                   ))}
                 </div>
@@ -210,15 +208,17 @@ export default function ClothingAnalyzer() {
 
             <button
               onClick={() => fileRef.current?.click()}
-              className="w-full rounded-2xl border border-border bg-card py-3 font-medium text-sm flex items-center justify-center gap-2 hover:border-primary/40 transition-colors"
+              className="w-full rounded-full bg-[#FFD5A8] text-[#1A1A1A] py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#FFC58A] transition-colors"
             >
-              <Upload size={16} /> Analyze Another Item
+              <Upload size={16} /> Analyze Another Item <ArrowRight size={16} />
             </button>
           </div>
         )}
 
         <div className="mt-6">
-          <Disclaimer />
+          <p className="text-[11px] text-[#999] text-center leading-relaxed">
+            ⚠️ Fabric analysis is AI-generated and approximate. Not professional textile advice.
+          </p>
         </div>
       </div>
     </div>
@@ -228,16 +228,16 @@ export default function ClothingAnalyzer() {
 function ScoreCard({ icon: Icon, label, score, color }) {
   const pct = (score / 10) * 100;
   return (
-    <div className="rounded-2xl bg-card border border-border p-4">
+    <div className="rounded-2xl bg-white border border-[#F5EFE6] p-4">
       <div className="flex items-center gap-2 mb-2">
         <Icon size={16} className={color} />
-        <span className="text-xs text-muted-foreground font-medium">{label}</span>
+        <span className="text-xs text-[#666] font-medium">{label}</span>
       </div>
       <div className="flex items-baseline gap-1 mb-2">
-        <span className="text-2xl font-bold">{score}</span>
-        <span className="text-xs text-muted-foreground">/10</span>
+        <span className="text-2xl font-bold text-[#1A1A1A]">{score}</span>
+        <span className="text-xs text-[#999]">/10</span>
       </div>
-      <div className="w-full h-1.5 rounded-full bg-muted overflow-hidden">
+      <div className="w-full h-1.5 rounded-full bg-[#F5EFE6] overflow-hidden">
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, backgroundColor: `hsl(${pct * 1.2}, 60%, 50%)` }} />
       </div>
     </div>
