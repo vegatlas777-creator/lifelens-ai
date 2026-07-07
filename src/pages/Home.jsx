@@ -146,8 +146,8 @@ export default function Home() {
         />
         <FeatureCard
           to="/fitness"
-          title="Fitness & Dance Workouts"
-          desc="Enjoy 10-min dance workouts in different styles and burn calories."
+          title="Activity Calorie Burn"
+          desc="AI-personalized calorie estimates for 13 activities and YouTube fitness videos."
           image="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&q=80"
         />
         <FeatureCard
