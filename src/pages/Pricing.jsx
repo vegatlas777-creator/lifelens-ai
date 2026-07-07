@@ -36,16 +36,26 @@ export default function Pricing() {
 
   return (
     <div className="pb-4 min-h-screen">
-      {/* Hero */}
+      {/* Hero with background images */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500" />
+        {/* Background image collage */}
+        <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-0.5">
+          <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=70" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=70" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=70" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&q=70" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=70" alt="" className="w-full h-full object-cover" />
+          <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&q=70" alt="" className="w-full h-full object-cover" />
+        </div>
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-orange-900/80 via-orange-800/85 to-red-900/90" />
         <div className="relative px-5 pt-14 pb-8 text-center text-white">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/25 backdrop-blur mb-3">
             <Crown size={14} />
             <span className="text-xs font-semibold">3 in 1 Healthy Choice Premium</span>
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">Unlock Your Full Potential</h1>
-          <p className="text-sm opacity-90 mt-2 max-w-xs mx-auto">Personalized plans, daily AI coaching, and advanced insights to reach your goals faster.</p>
+          <h1 className="text-3xl font-bold tracking-tight drop-shadow-lg">Unlock Your Full Potential</h1>
+          <p className="text-sm opacity-95 mt-2 max-w-xs mx-auto drop-shadow">Personalized plans, daily AI coaching, and advanced insights to reach your goals faster.</p>
         </div>
       </div>
 
@@ -72,10 +82,11 @@ export default function Pricing() {
 
             {/* Annual plan (best value) */}
             <PlanCard
-              badge="BEST VALUE — Save 33%"
+              badge="BEST VALUE — Save 17%"
               badgeColor="bg-red-500"
               name="Premium Annual"
-              price="$79.99"
+              price="$50"
+              altPrice="€45"
               period="/year"
               trial="7-day free trial"
               features={PREMIUM_FEATURES}
@@ -89,7 +100,8 @@ export default function Pricing() {
             <div className="mt-4">
               <PlanCard
                 name="Premium Monthly"
-                price="$9.99"
+                price="$5"
+                altPrice="€4"
                 period="/month"
                 trial="7-day free trial"
                 features={PREMIUM_FEATURES}
@@ -106,7 +118,7 @@ export default function Pricing() {
               </p>
               <ul className="mt-2 space-y-1.5">
                 <li className="text-xs text-muted-foreground">🎁 7-day free trial on all plans</li>
-                <li className="text-xs text-muted-foreground">🏆 Save 33% with annual billing</li>
+                <li className="text-xs text-muted-foreground">🏆 Save 17% with annual billing</li>
                 <li className="text-xs text-muted-foreground">👫 Refer a friend and get a free month</li>
               </ul>
             </div>
@@ -134,7 +146,7 @@ export default function Pricing() {
   );
 }
 
-function PlanCard({ badge, badgeColor, name, price, period, trial, features, cta, loading, onClick, highlighted }) {
+function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, features, cta, loading, onClick, highlighted }) {
   return (
     <div className={`rounded-3xl p-6 shadow-lg transition-all ${highlighted ? 'bg-card border-2 border-primary scale-[1.02]' : 'bg-card border border-border'}`}>
       {badge && (
@@ -143,9 +155,10 @@ function PlanCard({ badge, badgeColor, name, price, period, trial, features, cta
         </div>
       )}
       <p className="text-sm font-semibold text-muted-foreground">{name}</p>
-      <div className="flex items-baseline gap-1 mt-1">
+      <div className="flex items-baseline gap-1.5 mt-1">
         <span className="text-4xl font-bold">{price}</span>
         <span className="text-sm text-muted-foreground">{period}</span>
+        {altPrice && <span className="text-sm text-muted-foreground ml-1">({altPrice}{period})</span>}
       </div>
       <p className="text-xs text-primary font-medium mt-1">✨ {trial}</p>
 

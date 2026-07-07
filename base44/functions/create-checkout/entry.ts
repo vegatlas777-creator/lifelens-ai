@@ -6,7 +6,7 @@ const WIX_SITE_ID = Deno.env.get("WIX_PAYMENTS_SITE_ID");
 const PLANS = {
   monthly: {
     name: "3 in 1 Healthy Choice — Premium Monthly",
-    price: "9.99",
+    price: "5.00",
     frequency: "MONTH",
     interval: 1,
     title: "Premium Monthly",
@@ -14,11 +14,11 @@ const PLANS = {
   },
   annual: {
     name: "3 in 1 Healthy Choice — Premium Annual",
-    price: "79.99",
+    price: "50.00",
     frequency: "YEAR",
     interval: 1,
     title: "Premium Annual",
-    description: "Full access to personalized plans, daily AI coaching, and advanced insights. Billed yearly with a 7-day free trial — save 33%.",
+    description: "Full access to personalized plans, daily AI coaching, and advanced insights. Billed yearly with a 7-day free trial — save 17%.",
   },
 };
 
