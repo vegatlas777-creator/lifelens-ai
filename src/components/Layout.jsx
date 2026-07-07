@@ -1,5 +1,5 @@
 import { Outlet, NavLink, useLocation } from 'react-router-dom';
-import { Home, Shirt, UtensilsCrossed, Dumbbell, Footprints, MessageCircle, User } from 'lucide-react';
+import { Home, Shirt, UtensilsCrossed, Dumbbell, Footprints, MessageCircle, Users, User } from 'lucide-react';
 
 const navItems = [
   { to: '/', label: 'Home', icon: Home },
@@ -7,6 +7,7 @@ const navItems = [
   { to: '/calories', label: 'Calories', icon: UtensilsCrossed },
   { to: '/fitness', label: 'Fitness', icon: Dumbbell },
   { to: '/activity', label: 'Activity', icon: Footprints },
+  { to: '/community', label: 'Community', icon: Users },
   { to: '/coach', label: 'Coach', icon: MessageCircle },
   { to: '/profile', label: 'Profile', icon: User },
 ];

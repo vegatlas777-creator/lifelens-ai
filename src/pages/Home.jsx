@@ -162,6 +162,12 @@ export default function Home() {
           desc="Get personal advice, motivation and support from your AI coach."
           image="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80"
         />
+        <FeatureCard
+          to="/community"
+          title="Community & Support"
+          desc="Join discussions, share progress, and connect with others on the same journey."
+          image="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&q=80"
+        />
       </div>
 
       {/* Today's Progress */}

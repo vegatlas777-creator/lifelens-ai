@@ -23,6 +23,8 @@ import Pricing from '@/pages/Pricing';
 import Activity from '@/pages/Activity';
 import ThankYou from '@/pages/ThankYou';
 import PremiumProfile from '@/pages/PremiumProfile';
+import Community from '@/pages/Community';
+import PostDetail from '@/pages/PostDetail';
 import { Navigate } from 'react-router-dom';
 // Add page imports here
 
@@ -69,6 +71,8 @@ const AuthenticatedApp = () => {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/premium-profile" element={<PremiumProfile />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/:postId" element={<PostDetail />} />
           <Route path="/premium-profile" element={<PremiumProfile />} />
         </Route>
       </Route>

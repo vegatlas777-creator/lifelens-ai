@@ -1,0 +1,62 @@
+{
+  "name": "CommunityPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "weight_loss",
+        "weight_maintenance",
+        "weight_gain",
+        "nutrition",
+        "calorie_tracking",
+        "fitness",
+        "walking",
+        "running",
+        "cycling",
+        "motivation",
+        "success_stories",
+        "qa",
+        "general_wellness"
+      ]
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "author_name": {
+      "type": "string"
+    },
+    "author_id": {
+      "type": "string"
+    },
+    "liked_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "followed_by": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "report_count": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "category"
+  ]
+}
