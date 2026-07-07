@@ -29,13 +29,16 @@ export const FREE_FEATURES = [
 ];
 
 export const PREMIUM_FEATURES = [
+  'Premium profile & progress tracking',
+  'Weight & body measurement history',
+  'Progress charts & advanced analytics',
+  'Goal tracking & milestone achievements',
   'Personalized calorie targets',
   'Personalized weight loss / maintenance / gain plans',
   'Walking, running & cycling recommendations',
-  'Daily AI coaching',
-  'Weekly progress reports',
+  'Daily AI coaching with profile data',
+  'Weekly & monthly AI progress reports',
   'Advanced nutrition insights',
   'Advanced fitness recommendations',
   'Unlimited fabric & sustainability analysis',
-  'Goal tracking dashboard',
 ];

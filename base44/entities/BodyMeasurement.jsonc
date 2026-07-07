@@ -1,0 +1,28 @@
+{
+  "name": "BodyMeasurement",
+  "type": "object",
+  "properties": {
+    "chest_cm": {
+      "type": "number"
+    },
+    "waist_cm": {
+      "type": "number"
+    },
+    "hips_cm": {
+      "type": "number"
+    },
+    "arm_cm": {
+      "type": "number"
+    },
+    "thigh_cm": {
+      "type": "number"
+    },
+    "entry_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "entry_date"
+  ]
+}

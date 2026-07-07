@@ -138,6 +138,14 @@ export default function Profile() {
             <span className="flex-1 text-left text-sm font-medium text-[#1A1A1A]">Metabolic Calculator</span>
             <ChevronRight size={18} className="text-[#666]" />
           </Link>
+          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#FDF6EE] transition-colors">
+            <div className="p-2 rounded-xl bg-[#FDDDBD]"><Activity size={18} className="text-[#E8821E]" /></div>
+            <div className="flex-1 text-left">
+              <p className="text-sm font-medium text-[#1A1A1A]">Premium Profile & Progress</p>
+              <p className="text-[10px] text-[#666]">Track weight, measurements & goals</p>
+            </div>
+            <ChevronRight size={18} className="text-[#666]" />
+          </Link>
           <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#FDF6EE] transition-colors">
             <div className="p-2 rounded-xl bg-[#FDDDBD]"><Crown size={18} className="text-[#E8821E]" /></div>
             <span className="flex-1 text-left text-sm font-medium text-[#1A1A1A]">Subscription & Pricing</span>

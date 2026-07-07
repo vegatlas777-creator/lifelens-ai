@@ -18,6 +18,9 @@
     "weight_kg": {
       "type": "number"
     },
+    "target_weight": {
+      "type": "number"
+    },
     "activity_level": {
       "type": "string",
       "enum": [
@@ -39,12 +42,24 @@
       "enum": [
         "loss",
         "maintenance",
-        "gain"
+        "gain",
+        "general_fitness"
       ],
       "default": "maintenance"
     },
     "target_calories": {
       "type": "number"
+    },
+    "daily_step_goal": {
+      "type": "number",
+      "default": 10000
+    },
+    "daily_calorie_goal": {
+      "type": "number"
+    },
+    "weekly_activity_goal": {
+      "type": "number",
+      "default": 150
     }
   },
   "required": [

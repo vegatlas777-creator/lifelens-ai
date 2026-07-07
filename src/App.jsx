@@ -22,6 +22,7 @@ import Profile from '@/pages/Profile';
 import Pricing from '@/pages/Pricing';
 import Activity from '@/pages/Activity';
 import ThankYou from '@/pages/ThankYou';
+import PremiumProfile from '@/pages/PremiumProfile';
 import { Navigate } from 'react-router-dom';
 // Add page imports here
 
@@ -67,6 +68,8 @@ const AuthenticatedApp = () => {
           <Route path="/coach" element={<HealthCoach />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/premium-profile" element={<PremiumProfile />} />
+          <Route path="/premium-profile" element={<PremiumProfile />} />
         </Route>
       </Route>
       <Route path="*" element={<PageNotFound />} />
