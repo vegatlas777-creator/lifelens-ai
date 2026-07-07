@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { User, Moon, Sun, LogOut, Activity, Flame, Dumbbell, ChevronRight } from 'lucide-react';
+import { User, Moon, Sun, LogOut, Activity, Flame, Dumbbell, ChevronRight, Crown } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import { getTodayStr } from '@/lib/dateUtils';
+import { getSubscriptionStatus } from '@/lib/subscription';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [todayStats, setTodayStats] = useState({ calories: 0, burned: 0, workouts: 0 });
   const [dark, setDark] = useState(false);
+  const [subStatus, setSubStatus] = useState({ isPremium: false, loading: true });
 
   useEffect(() => {
     loadData();
@@ -21,10 +23,11 @@ export default function Profile() {
       const me = await base44.auth.me();
       setUser(me);
       const today = getTodayStr();
-      const [food, workouts, profiles] = await Promise.all([
+      const [food, workouts, profiles, sub] = await Promise.all([
         base44.entities.FoodEntry.filter({ entry_date: today }),
         base44.entities.WorkoutLog.filter({ completed_date: today }),
         base44.entities.MetabolicProfile.list('-created_date', 1),
+        getSubscriptionStatus(),
       ]);
       setTodayStats({
         calories: food.reduce((s, e) => s + (e.calories || 0), 0),
@@ -32,6 +35,7 @@ export default function Profile() {
         workouts: workouts.length,
       });
       if (profiles.length) setProfile(profiles[0]);
+      setSubStatus(sub);
     } catch (e) { console.error(e); }
   }
 
@@ -48,14 +52,45 @@ export default function Profile() {
 
       <div className="px-5 mt-2">
         {/* User card */}
-        <div className="rounded-3xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground p-6 flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-primary-foreground/20 flex items-center justify-center text-2xl font-bold">
+        <div className="rounded-3xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 text-white p-6 flex items-center gap-4 shadow-lg">
+          <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur flex items-center justify-center text-2xl font-bold">
             {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
           </div>
-          <div>
+          <div className="flex-1">
             <p className="text-lg font-bold">{user?.full_name || 'User'}</p>
-            <p className="text-sm opacity-80">{user?.email}</p>
+            <p className="text-sm opacity-90">{user?.email}</p>
           </div>
+          {subStatus.isPremium && (
+            <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/20 backdrop-blur text-xs font-bold">
+              <Crown size={12} /> PRO
+            </div>
+          )}
+        </div>
+
+        {/* Subscription card */}
+        <div className="mt-4">
+          {subStatus.isPremium ? (
+            <div className="rounded-2xl bg-card border border-primary/30 p-4 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+                <Crown size={20} />
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold text-sm">Premium Active</p>
+                <p className="text-xs text-muted-foreground">{subStatus.subscription?.billing_cycle === 'annual' ? 'Annual plan' : 'Monthly plan'}</p>
+              </div>
+            </div>
+          ) : (
+            <Link to="/pricing" className="rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white p-4 flex items-center gap-3 shadow-md">
+              <div className="p-2.5 rounded-xl bg-white/20 backdrop-blur">
+                <Crown size={20} />
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold text-sm">Upgrade to Premium</p>
+                <p className="text-xs opacity-90">7-day free trial</p>
+              </div>
+              <ChevronRight size={18} />
+            </Link>
+          )}
         </div>
 
         {/* Today's stats */}
@@ -94,6 +129,11 @@ export default function Profile() {
             <span className="flex-1 text-left text-sm font-medium">Metabolic Calculator</span>
             <ChevronRight size={18} className="text-muted-foreground" />
           </Link>
+          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-muted/50 transition-colors">
+            <div className="p-2 rounded-xl bg-muted"><Crown size={18} /></div>
+            <span className="flex-1 text-left text-sm font-medium">Subscription & Pricing</span>
+            <ChevronRight size={18} className="text-muted-foreground" />
+          </Link>
         </div>
 
         {/* Logout */}
@@ -105,7 +145,7 @@ export default function Profile() {
         </button>
 
         <div className="mt-6 text-center">
-          <p className="text-xs text-muted-foreground">LifeLens AI · v1.0</p>
+          <p className="text-xs text-muted-foreground">3 in 1 Healthy Choice · v2.0</p>
           <p className="text-[10px] text-muted-foreground/70 mt-1">All estimates are approximations and not medical advice.</p>
         </div>
       </div>

@@ -1,0 +1,51 @@
+{
+  "name": "Subscription",
+  "type": "object",
+  "properties": {
+    "plan": {
+      "type": "string",
+      "enum": [
+        "free",
+        "premium"
+      ],
+      "default": "free"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "canceled",
+        "expired",
+        "trialing",
+        "pending",
+        "free"
+      ],
+      "default": "free"
+    },
+    "billing_cycle": {
+      "type": "string",
+      "enum": [
+        "monthly",
+        "annual"
+      ],
+      "default": "monthly"
+    },
+    "trial_end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "current_period_end": {
+      "type": "string",
+      "format": "date"
+    },
+    "wix_subscription_id": {
+      "type": "string"
+    },
+    "wix_checkout_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "plan"
+  ]
+}

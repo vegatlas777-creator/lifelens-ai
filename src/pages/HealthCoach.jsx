@@ -1,22 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { MessageCircle, Send, Loader2, Sparkles, Trash2 } from 'lucide-react';
+import { MessageCircle, Send, Loader2, Sparkles, Trash2, Crown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { getSubscriptionStatus } from '@/lib/subscription';
+import { getTodayStr } from '@/lib/dateUtils';
 
-const SYSTEM_CONTEXT = `You are LifeLens AI, a friendly and knowledgeable health coach. You help users with:
-- Nutrition questions and calorie explanations
-- Workout suggestions and fitness goals
-- Healthy habit encouragement
-- Explaining how BMR/TDEE and calorie burning work
-Always be encouraging, clear, and concise. Keep responses under 200 words unless the user asks for detail. Always remind users that your advice is educational and not a substitute for professional medical guidance.`;
+const SYSTEM_CONTEXT = `You are the AI Health Coach for "3 in 1 Healthy Choice", a supportive wellness coach and motivator. Your role:
+- Encourage healthy habits and celebrate milestones (e.g., hitting step goals, logging meals consistently, completing workouts)
+- Track user progress and suggest realistic, achievable fitness goals
+- Help users stay consistent with gentle accountability and positive reinforcement
+- Answer nutrition questions, explain calorie/BMR/TDEE calculations
+- Suggest workouts (dance, walking, running) with estimated calorie burns
+- Provide personalized recommendations based on the user's context provided
+- Be warm, energetic, and motivational — like a supportive fitness friend
+Keep responses under 200 words unless the user asks for detail. Use emojis occasionally to feel encouraging. Always remind that advice is educational and not a substitute for professional medical guidance.`;
 
 export default function HealthCoach() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [subStatus, setSubStatus] = useState({ isPremium: false, loading: true });
   const scrollRef = useRef(null);
 
   useEffect(() => {
     loadMessages();
+    getSubscriptionStatus().then(setSubStatus);
   }, []);
 
   useEffect(() => {
@@ -51,8 +59,22 @@ export default function HealthCoach() {
 
       const history = messages.filter((m) => m.id !== 'welcome').map((m) => ({ role: m.role, content: m.content }));
 
+      // Gather user progress context for personalized coaching
+      const today = getTodayStr();
+      const [foodEntries, workouts, activityLogs, profiles] = await Promise.all([
+        base44.entities.FoodEntry.filter({ entry_date: today }),
+        base44.entities.WorkoutLog.filter({ completed_date: today }),
+        base44.entities.ActivityLog.filter({ log_date: today }),
+        base44.entities.MetabolicProfile.list('-created_date', 1),
+      ]);
+      const todayCalories = foodEntries.reduce((s, e) => s + (e.calories || 0), 0);
+      const todaySteps = activityLogs.reduce((s, l) => s + (l.steps || 0), 0);
+      const todayBurned = workouts.reduce((s, w) => s + (w.calories_burned || 0), 0);
+      const profile = profiles[0];
+      const userContext = `User's progress today: ${todayCalories} calories consumed (target: ${profile?.target_calories || 2000}), ${todaySteps} steps, ${todayBurned} calories burned from workouts. Goal: ${profile?.goal || 'maintenance'}. Activity level: ${profile?.activity_level || 'moderate'}.`;
+
       const response = await base44.integrations.Core.InvokeLLM({
-        prompt: `${SYSTEM_CONTEXT}\n\nConversation so far:\n${history.map((m) => `${m.role}: ${m.content}`).join('\n')}\n\nUser: ${userMsg}\n\nAssistant:`,
+        prompt: `${SYSTEM_CONTEXT}\n\n${userContext}\n\nConversation so far:\n${history.map((m) => `${m.role}: ${m.content}`).join('\n')}\n\nUser: ${userMsg}\n\nAssistant:`,
       });
 
       const assistantMsg = { id: 'temp-a', role: 'assistant', content: response };
@@ -73,7 +95,7 @@ export default function HealthCoach() {
       setMessages([{
         id: 'welcome',
         role: 'assistant',
-        content: "Hi! I'm your AI Health Coach 🌿 Ask me about nutrition, calories, workouts, or any health questions. How can I help you today?",
+        content: "Hi! I'm your AI Health Coach 🔥 I'm here to support your wellness journey — ask me about nutrition, workouts, calorie goals, or anything health-related. Let's make today count! 💪",
       }]);
     } catch (e) { console.error(e); }
   }
@@ -91,11 +113,18 @@ export default function HealthCoach() {
             <p className="text-xs text-muted-foreground flex items-center gap-1"><Sparkles size={10} /> Powered by AI</p>
           </div>
         </div>
-        {messages.length > 1 && (
-          <button onClick={clearChat} className="p-2 rounded-xl text-muted-foreground hover:text-destructive">
-            <Trash2 size={18} />
-          </button>
-        )}
+        <div className="flex items-center gap-2">
+          {!subStatus.isPremium && (
+            <Link to="/pricing" className="p-2 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white">
+              <Crown size={18} />
+            </Link>
+          )}
+          {messages.length > 1 && (
+            <button onClick={clearChat} className="p-2 rounded-xl text-muted-foreground hover:text-destructive">
+              <Trash2 size={18} />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Messages */}

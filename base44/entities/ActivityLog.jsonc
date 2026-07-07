@@ -1,0 +1,33 @@
+{
+  "name": "ActivityLog",
+  "type": "object",
+  "properties": {
+    "log_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "steps": {
+      "type": "number",
+      "default": 0
+    },
+    "walking_distance_km": {
+      "type": "number",
+      "default": 0
+    },
+    "running_distance_km": {
+      "type": "number",
+      "default": 0
+    },
+    "active_minutes": {
+      "type": "number",
+      "default": 0
+    },
+    "calories_burned_activity": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "log_date"
+  ]
+}

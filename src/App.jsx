@@ -19,6 +19,9 @@ import Fitness from '@/pages/Fitness';
 import MetabolicCalculator from '@/pages/MetabolicCalculator';
 import HealthCoach from '@/pages/HealthCoach';
 import Profile from '@/pages/Profile';
+import Pricing from '@/pages/Pricing';
+import Activity from '@/pages/Activity';
+import ThankYou from '@/pages/ThankYou';
 import { Navigate } from 'react-router-dom';
 // Add page imports here
 
@@ -52,14 +55,17 @@ const AuthenticatedApp = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/thank-you" element={<ThankYou />} />
       <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/clothing" element={<ClothingAnalyzer />} />
           <Route path="/calories" element={<CalorieCounter />} />
           <Route path="/fitness" element={<Fitness />} />
+          <Route path="/activity" element={<Activity />} />
           <Route path="/metabolic" element={<MetabolicCalculator />} />
           <Route path="/coach" element={<HealthCoach />} />
+          <Route path="/pricing" element={<Pricing />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Route>
