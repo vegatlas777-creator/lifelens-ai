@@ -13,7 +13,7 @@ const goalOptions = [
 
 export default function ProfileForm() {
   const [profile, setProfile] = useState(null);
-  const [form, setForm] = useState({ age: '', gender: 'male', height_cm: '', weight_kg: '', target_weight: '', activity_level: 'moderate', goal: 'maintenance', daily_step_goal: 10000, daily_calorie_goal: '', weekly_activity_goal: 150 });
+  const [form, setForm] = useState({ name: '', age: '', gender: 'male', height_cm: '', weight_kg: '', target_weight: '', activity_level: 'moderate', goal: 'maintenance', daily_step_goal: 10000, daily_calorie_goal: '', weekly_activity_goal: 150 });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -22,11 +22,15 @@ export default function ProfileForm() {
 
   async function load() {
     try {
+      const me = await base44.auth.me();
       const profiles = await base44.entities.MetabolicProfile.list('-created_date', 1);
+      const nameFromAccount = me?.full_name || '';
       if (profiles.length) {
         const p = profiles[0];
         setProfile(p);
-        setForm({ age: String(p.age || ''), gender: p.gender || 'male', height_cm: String(p.height_cm || ''), weight_kg: String(p.weight_kg || ''), target_weight: String(p.target_weight || ''), activity_level: p.activity_level || 'moderate', goal: p.goal || 'maintenance', daily_step_goal: p.daily_step_goal || 10000, daily_calorie_goal: String(p.daily_calorie_goal || ''), weekly_activity_goal: p.weekly_activity_goal || 150 });
+        setForm({ name: nameFromAccount, age: String(p.age || ''), gender: p.gender || 'male', height_cm: String(p.height_cm || ''), weight_kg: String(p.weight_kg || ''), target_weight: String(p.target_weight || ''), activity_level: p.activity_level || 'moderate', goal: p.goal || 'maintenance', daily_step_goal: p.daily_step_goal || 10000, daily_calorie_goal: String(p.daily_calorie_goal || ''), weekly_activity_goal: p.weekly_activity_goal || 150 });
+      } else {
+        setForm((prev) => ({ ...prev, name: nameFromAccount }));
       }
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
@@ -36,6 +40,7 @@ export default function ProfileForm() {
     setSaving(true);
     setSaved(false);
     try {
+      if (form.name) await base44.auth.updateMe({ full_name: form.name });
       const payload = { age: parseFloat(form.age), gender: form.gender, height_cm: parseFloat(form.height_cm), weight_kg: parseFloat(form.weight_kg), target_weight: form.target_weight ? parseFloat(form.target_weight) : null, activity_level: form.activity_level, goal: form.goal, daily_step_goal: parseInt(form.daily_step_goal) || 10000, daily_calorie_goal: form.daily_calorie_goal ? parseInt(form.daily_calorie_goal) : null, weekly_activity_goal: parseInt(form.weekly_activity_goal) || 150 };
       let bmr = form.gender === 'male' ? 10 * payload.weight_kg + 6.25 * payload.height_cm - 5 * payload.age + 5 : 10 * payload.weight_kg + 6.25 * payload.height_cm - 5 * payload.age - 161;
       const mult = activityLevels.find((l) => l.value === form.activity_level)?.multiplier || 1.55;
@@ -58,6 +63,7 @@ export default function ProfileForm() {
           <User size={18} className="text-[#FF9F43]" />
           <h2 className="text-base font-bold text-[#1A1A1A]">Personal Information</h2>
         </div>
+        <Field label="Name"><input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className={inputCls} /></Field>
         <div className="grid grid-cols-2 gap-3">
           <Field label="Age"><input type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} placeholder="30" className={inputCls} /></Field>
           <Field label="Gender">
