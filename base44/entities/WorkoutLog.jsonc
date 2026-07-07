@@ -1,0 +1,32 @@
+{
+  "name": "WorkoutLog",
+  "type": "object",
+  "properties": {
+    "workout_id": {
+      "type": "string"
+    },
+    "workout_name": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "default": 10
+    },
+    "calories_burned": {
+      "type": "number",
+      "default": 0
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "workout_id",
+    "workout_name",
+    "completed_date"
+  ]
+}

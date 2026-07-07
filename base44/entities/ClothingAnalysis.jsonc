@@ -1,0 +1,42 @@
+{
+  "name": "ClothingAnalysis",
+  "type": "object",
+  "properties": {
+    "image_url": {
+      "type": "string"
+    },
+    "materials": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "sustainability_score": {
+      "type": "number"
+    },
+    "comfort_score": {
+      "type": "number"
+    },
+    "durability_score": {
+      "type": "number"
+    },
+    "health_score": {
+      "type": "number"
+    },
+    "eco_friendly": {
+      "type": "boolean"
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "summary"
+  ]
+}

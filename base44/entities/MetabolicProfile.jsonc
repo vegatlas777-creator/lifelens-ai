@@ -1,0 +1,57 @@
+{
+  "name": "MetabolicProfile",
+  "type": "object",
+  "properties": {
+    "age": {
+      "type": "number"
+    },
+    "gender": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ]
+    },
+    "height_cm": {
+      "type": "number"
+    },
+    "weight_kg": {
+      "type": "number"
+    },
+    "activity_level": {
+      "type": "string",
+      "enum": [
+        "sedentary",
+        "light",
+        "moderate",
+        "active",
+        "very_active"
+      ]
+    },
+    "bmr": {
+      "type": "number"
+    },
+    "tdee": {
+      "type": "number"
+    },
+    "goal": {
+      "type": "string",
+      "enum": [
+        "loss",
+        "maintenance",
+        "gain"
+      ],
+      "default": "maintenance"
+    },
+    "target_calories": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "age",
+    "gender",
+    "height_cm",
+    "weight_kg",
+    "activity_level"
+  ]
+}
