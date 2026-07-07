@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { LineChart, Line, ResponsiveContainer } from 'recharts';
 import { getTodayStr, getLast7Days } from '@/lib/dateUtils';
 import { getSubscriptionStatus } from '@/lib/subscription';
+import { useUsage } from '@/hooks/useUsage';
+import UsageBanner from '@/components/UsageBanner';
 
 export default function Home() {
   const [todayCalories, setTodayCalories] = useState(0);
@@ -17,6 +19,7 @@ export default function Home() {
   const [subStatus, setSubStatus] = useState({ isPremium: false, loading: true });
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const { material, calorie } = useUsage();
 
   useEffect(() => {
     loadData();
@@ -128,6 +131,15 @@ export default function Home() {
           value="7"
           sub="days"
         />
+      </div>
+
+      {/* Weekly AI Usage */}
+      <div className="px-5 mt-5">
+        <h2 className="text-base font-bold text-[#1A1A1A] mb-3">Weekly AI Usage</h2>
+        <div className="space-y-2">
+          <UsageBanner usage={material} label="Material Checks Remaining" icon={Leaf} />
+          <UsageBanner usage={calorie} label="Calorie Analyses Remaining" icon={Flame} />
+        </div>
       </div>
 
       {/* Feature Grid */}

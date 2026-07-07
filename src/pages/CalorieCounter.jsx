@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Camera, Mic, Keyboard, Loader2, Flame, Trash2, X, ArrowRight } from 'lucide-react';
+import { Camera, Mic, Keyboard, Loader2, Flame, Trash2, X, ArrowRight, Crown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { getTodayStr } from '@/lib/dateUtils';
+import { useUsage } from '@/hooks/useUsage';
+import UsageBanner from '@/components/UsageBanner';
 
 const mealTypes = [
   { value: 'breakfast', label: 'Breakfast' },
@@ -23,6 +26,8 @@ export default function CalorieCounter() {
   const fileRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
+  const { calorie, consume } = useUsage();
+  const [limitReached, setLimitReached] = useState(false);
 
   useEffect(() => { loadEntries(); }, []);
 
@@ -36,7 +41,13 @@ export default function CalorieCounter() {
 
   async function handlePhoto(file) {
     if (!file) return;
-    setError(null); setResult(null);
+    setError(null); setResult(null); setLimitReached(false);
+    const check = await consume('calorie_analysis');
+    if (!check.allowed) {
+      setLimitReached(true);
+      setImagePreview(URL.createObjectURL(file));
+      return;
+    }
     setImagePreview(URL.createObjectURL(file));
     setLoading(true);
     try {
@@ -67,7 +78,13 @@ export default function CalorieCounter() {
 
   async function analyzeTextOrVoice(description) {
     if (!description.trim()) return;
-    setError(null); setResult(null); setLoading(true);
+    setError(null); setResult(null); setLimitReached(false);
+    const check = await consume('calorie_analysis');
+    if (!check.allowed) {
+      setLimitReached(true);
+      return;
+    }
+    setLoading(true);
     try {
       const llmResult = await base44.integrations.Core.InvokeLLM({
         prompt: `You are a nutrition AI. The user described their meal as: "${description}". Estimate calories, protein (g), carbs (g), fats (g), and fiber (g). Provide a short description. Respond as JSON.`,
@@ -156,7 +173,7 @@ export default function CalorieCounter() {
   }
 
   function resetAll() {
-    setMode(null); setImagePreview(null); setTextDesc(''); setResult(null); setError(null);
+    setMode(null); setImagePreview(null); setTextDesc(''); setResult(null); setError(null); setLimitReached(false);
   }
 
   const todayTotals = entries.reduce(
@@ -177,6 +194,10 @@ export default function CalorieCounter() {
       </div>
 
       <div className="px-5 mt-2">
+        <div className="mb-3">
+          <UsageBanner usage={calorie} label="Calorie Analyses" icon={Flame} />
+        </div>
+
         {/* Today summary */}
         <div className="relative overflow-hidden rounded-3xl">
           <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
@@ -254,6 +275,21 @@ export default function CalorieCounter() {
         {error && (
           <div className="mt-4 rounded-2xl bg-red-50 border border-red-200 p-4">
             <p className="text-sm text-red-600">{error}</p>
+          </div>
+        )}
+
+        {limitReached && (
+          <div className="mt-4 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 p-5 text-center">
+            <div className="w-12 h-12 rounded-full bg-[#FDDDBD] flex items-center justify-center mx-auto mb-3">
+              <Crown size={24} className="text-[#E8821E]" />
+            </div>
+            <p className="text-sm font-semibold text-[#1A1A1A]">Weekly Limit Reached</p>
+            <p className="text-xs text-[#666] mt-1 leading-relaxed">
+              You have used all 5 free calorie analyses for this week. Upgrade to Premium for unlimited calorie analysis, unlimited food photo uploads, personalized AI coaching, and advanced progress tracking.
+            </p>
+            <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold">
+              <Crown size={16} /> Upgrade to Premium <ArrowRight size={16} />
+            </Link>
           </div>
         )}
 

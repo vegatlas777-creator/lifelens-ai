@@ -1,0 +1,21 @@
+{
+  "name": "UsageRecord",
+  "type": "object",
+  "properties": {
+    "feature_type": {
+      "type": "string",
+      "enum": [
+        "material_check",
+        "calorie_analysis"
+      ]
+    },
+    "week_start": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "feature_type",
+    "week_start"
+  ]
+}

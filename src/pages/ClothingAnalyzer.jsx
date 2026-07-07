@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Camera, Upload, Sparkles, Leaf, Shield, HeartPulse, Recycle, Loader2, X, ArrowRight } from 'lucide-react';
+import { Camera, Upload, Sparkles, Leaf, Shield, HeartPulse, Recycle, Loader2, X, ArrowRight, Crown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useUsage } from '@/hooks/useUsage';
+import UsageBanner from '@/components/UsageBanner';
 
 export default function ClothingAnalyzer() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -8,12 +11,21 @@ export default function ClothingAnalyzer() {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [limitReached, setLimitReached] = useState(false);
   const fileRef = useRef(null);
+  const { material, consume } = useUsage();
 
   async function handleFile(file) {
     if (!file) return;
     setError(null);
     setAnalysis(null);
+    setLimitReached(false);
+    const check = await consume('material_check');
+    if (!check.allowed) {
+      setLimitReached(true);
+      setImagePreview(URL.createObjectURL(file));
+      return;
+    }
     setImagePreview(URL.createObjectURL(file));
     setLoading(true);
     try {
@@ -83,6 +95,7 @@ export default function ClothingAnalyzer() {
     setImageUrl(null);
     setAnalysis(null);
     setError(null);
+    setLimitReached(false);
   }
 
   return (
@@ -93,6 +106,10 @@ export default function ClothingAnalyzer() {
       </div>
 
       <div className="px-5 mt-2">
+        <div className="mb-3">
+          <UsageBanner usage={material} label="Material Checks" icon={Leaf} />
+        </div>
+
         {!imagePreview && (
           <button
             onClick={() => fileRef.current?.click()}
@@ -135,6 +152,21 @@ export default function ClothingAnalyzer() {
         {error && (
           <div className="mt-4 rounded-2xl bg-red-50 border border-red-200 p-4">
             <p className="text-sm text-red-600">{error}</p>
+          </div>
+        )}
+
+        {limitReached && (
+          <div className="mt-4 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 p-5 text-center">
+            <div className="w-12 h-12 rounded-full bg-[#FDDDBD] flex items-center justify-center mx-auto mb-3">
+              <Crown size={24} className="text-[#E8821E]" />
+            </div>
+            <p className="text-sm font-semibold text-[#1A1A1A]">Weekly Limit Reached</p>
+            <p className="text-xs text-[#666] mt-1 leading-relaxed">
+              You have used all 5 free material checks for this week. Upgrade to Premium for unlimited material checks, unlimited calorie analysis, personalized AI coaching, and advanced progress tracking.
+            </p>
+            <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold">
+              <Crown size={16} /> Upgrade to Premium <ArrowRight size={16} />
+            </Link>
           </div>
         )}
 

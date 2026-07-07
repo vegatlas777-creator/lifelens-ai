@@ -21,24 +21,26 @@ export async function startCheckout(plan) {
 }
 
 export const FREE_FEATURES = [
-  'Food photo calorie estimation',
+  '5 material checks per week',
+  '5 calorie analyses per week (photo, voice, text)',
   'Basic calorie tracking',
   'Basic BMR & TDEE calculations',
-  'Limited fabric analysis',
   'General AI health questions',
 ];
 
 export const PREMIUM_FEATURES = [
+  'Unlimited material checks',
+  'Unlimited calorie analyses',
+  'Unlimited food photo uploads',
+  'Unlimited voice meal analysis',
+  'Personalized AI calorie targets',
+  'Personalized metabolic rate calculations',
+  'Personalized fitness recommendations',
   'Premium profile & progress tracking',
-  'Weight & body measurement history',
-  'Progress charts & advanced analytics',
-  'Goal tracking & milestone achievements',
-  'Personalized calorie targets',
-  'Personalized weight loss / maintenance / gain plans',
-  'Walking, running & cycling recommendations',
-  'Daily AI coaching with profile data',
+  'Community photo uploads',
+  'Advanced analytics & reports',
+  'Priority AI responses',
   'Weekly & monthly AI progress reports',
-  'Advanced nutrition insights',
-  'Advanced fitness recommendations',
-  'Unlimited fabric & sustainability analysis',
+  'Daily AI coaching with profile data',
+  'Personalized weight loss / maintenance / gain plans',
 ];
