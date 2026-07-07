@@ -24,19 +24,18 @@ export const FREE_FEATURES = [
   'Food photo calorie estimation',
   'Basic calorie tracking',
   'Basic BMR & TDEE calculations',
-  'Limited workout videos',
+  'Limited fabric analysis',
   'General AI health questions',
 ];
 
 export const PREMIUM_FEATURES = [
   'Personalized calorie targets',
   'Personalized weight loss / maintenance / gain plans',
-  'Personalized dance recommendations',
-  'Walking & running recommendations',
+  'Walking, running & cycling recommendations',
   'Daily AI coaching',
   'Weekly progress reports',
   'Advanced nutrition insights',
   'Advanced fitness recommendations',
-  'Full workout video library',
+  'Unlimited fabric & sustainability analysis',
   'Goal tracking dashboard',
 ];
