@@ -1,12 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Bell, Leaf, ArrowRight, Crown, Flame, Footprints, Activity as ActivityIcon, Droplets, Zap } from 'lucide-react';
+import {
+  ArrowRight,
+  Bell,
+  BrainCircuit,
+  Crown,
+  Droplets,
+  Flame,
+  Footprints,
+  HeartPulse,
+  Leaf,
+  MessageCircle,
+  ScanLine,
+  Shirt,
+  Sparkles,
+  Target,
+  Trophy,
+  Zap,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, ResponsiveContainer } from 'recharts';
-import { getTodayStr, getLast7Days } from '@/lib/dateUtils';
+import { Line, LineChart, ResponsiveContainer } from 'recharts';
+import { getLast7Days, getTodayStr } from '@/lib/dateUtils';
 import { getSubscriptionStatus } from '@/lib/subscription';
 import { useUsage } from '@/hooks/useUsage';
-import UsageBanner from '@/components/UsageBanner';
+
+const FEATURE_CARDS = [
+  {
+    to: '/calories',
+    eyebrow: 'AI FOOD ANALYSIS',
+    title: 'Scan your next meal',
+    description: 'Photo, voice, or text — get calories and macros in seconds.',
+    icon: ScanLine,
+    image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=86',
+    gradient: 'from-[#ff7a45] via-[#ff9d63] to-[#ffc58f]',
+  },
+  {
+    to: '/clothing',
+    eyebrow: 'MATERIAL CHECK',
+    title: 'Know what you wear',
+    description: 'Identify fabrics and get practical care and sustainability insights.',
+    icon: Shirt,
+    image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=86',
+    gradient: 'from-[#6947d6] via-[#8a6de7] to-[#bfaeff]',
+  },
+  {
+    to: '/fitness',
+    eyebrow: 'MOVE & BURN',
+    title: 'Choose today’s activity',
+    description: 'Estimate calorie burn and discover guided workouts that suit you.',
+    icon: HeartPulse,
+    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=900&q=86',
+    gradient: 'from-[#176d5b] via-[#2c947d] to-[#7bd3b0]',
+  },
+];
 
 export default function Home() {
   const [todayCalories, setTodayCalories] = useState(0);
@@ -39,266 +85,342 @@ export default function Home() {
         getSubscriptionStatus(),
       ]);
 
-      setTodayCalories(foodEntries.reduce((s, e) => s + (e.calories || 0), 0));
-      setTodayBurned(workouts.reduce((s, w) => s + (w.calories_burned || 0), 0));
-      setTodaySteps(activityLogs.reduce((s, l) => s + (l.steps || 0), 0));
-      setActivityBurned(activityLogs.reduce((s, l) => s + (l.calories_burned_activity || 0), 0));
-      setActiveMinutes(activityLogs.reduce((s, l) => s + (l.active_minutes || 0), 0));
+      setTodayCalories(foodEntries.reduce((sum, entry) => sum + (entry.calories || 0), 0));
+      setTodayBurned(workouts.reduce((sum, workout) => sum + (workout.calories_burned || 0), 0));
+      setTodaySteps(activityLogs.reduce((sum, log) => sum + (log.steps || 0), 0));
+      setActivityBurned(activityLogs.reduce((sum, log) => sum + (log.calories_burned_activity || 0), 0));
+      setActiveMinutes(activityLogs.reduce((sum, log) => sum + (log.active_minutes || 0), 0));
       if (metabo.length) setProfile(metabo[0]);
       setSubStatus(sub);
 
-      const days = getLast7Days();
       const weekly = await Promise.all(
-        days.map(async (d) => {
-          const entries = await base44.entities.FoodEntry.filter({ entry_date: d.date });
-          return { ...d, calories: entries.reduce((s, e) => s + (e.calories || 0), 0) };
-        })
+        getLast7Days().map(async (day) => {
+          const entries = await base44.entities.FoodEntry.filter({ entry_date: day.date });
+          return { ...day, calories: entries.reduce((sum, entry) => sum + (entry.calories || 0), 0) };
+        }),
       );
       setWeeklyData(weekly);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error('Unable to load the home dashboard', error);
     } finally {
       setLoading(false);
     }
   }
 
+  const firstName = user?.full_name?.split(' ')[0] || 'Veg';
   const targetCalories = profile?.target_calories || 2000;
   const caloriesLeft = Math.max(targetCalories - todayCalories, 0);
   const totalBurned = todayBurned + activityBurned;
+  const calorieProgress = Math.min(Math.round((todayCalories / targetCalories) * 100), 100);
+  const stepProgress = Math.min(Math.round((todaySteps / 10000) * 100), 100);
   const waterLiters = Math.min((todayCalories / 2000) * 2 + 0.4, 3).toFixed(1);
 
+  const weekAverage = useMemo(() => {
+    if (!weeklyData.length) return 0;
+    return Math.round(weeklyData.reduce((sum, day) => sum + day.calories, 0) / weeklyData.length);
+  }, [weeklyData]);
+
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-8 h-8 border-4 border-[#FDDDBD] border-t-[#FF9F43] rounded-full animate-spin" />
-      </div>
-    );
+    return <PremiumHomeSkeleton />;
   }
 
-  const firstName = user?.full_name?.split(' ')[0] || 'there';
-
   return (
-    <div className="min-h-screen bg-[#FDFBF8] pb-4">
-      {/* Header */}
-      <div className="px-5 pt-12 pb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-[#FDDDBD] flex items-center justify-center">
-            <Leaf size={18} className="text-[#E8821E]" />
-          </div>
-          <span className="text-lg font-bold text-[#1A1A1A]">3 in 1 Healthy Choice</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <button className="w-9 h-9 rounded-full bg-white border border-[#FDDDBD] flex items-center justify-center text-[#666]">
-            <Bell size={17} />
-          </button>
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#FFD5A8] to-[#FF9F43] flex items-center justify-center text-white text-sm font-bold">
-            {firstName[0]?.toUpperCase()}
-          </div>
-        </div>
-      </div>
-
-      {/* Hero */}
-      <div className="px-5 mt-2">
-        <h1 className="text-2xl font-bold text-[#1A1A1A] leading-tight">
-          Good morning, {firstName}! <br /> You've got this! ✨
-        </h1>
-        <p className="text-sm text-[#666] mt-2">Your AI coach is here to support your healthy journey.</p>
-        <Link
-          to="/coach"
-          className="inline-flex items-center gap-2 mt-3 px-5 py-2.5 rounded-full bg-[#FFD5A8] text-[#1A1A1A] text-sm font-semibold"
-        >
-          Chat with AI Coach <ArrowRight size={16} />
-        </Link>
-      </div>
-
-      {/* Metrics Bar */}
-      <div className="px-5 mt-5 grid grid-cols-3 gap-3">
-        <MetricItem
-          icon={<Footprints size={16} className="text-[#FB923C]" />}
-          label="Steps"
-          value={todaySteps.toLocaleString()}
-          sub="/ 10,000"
-        />
-        <MetricItem
-          icon={<Flame size={16} className="text-[#FB923C]" />}
-          label="Calories Left"
-          value={`${caloriesLeft}`}
-          sub="kcal"
-        />
-        <MetricItem
-          icon={<Zap size={16} className="text-[#FB923C]" />}
-          label="Streak"
-          value="7"
-          sub="days"
-        />
-      </div>
-
-      {/* Weekly AI Usage */}
-      <div className="px-5 mt-5">
-        <h2 className="text-base font-bold text-[#1A1A1A] mb-3">Weekly AI Usage</h2>
-        <div className="space-y-2">
-          <UsageBanner usage={material} label="Material Checks Remaining" icon={Leaf} />
-          <UsageBanner usage={calorie} label="Calorie Analyses Remaining" icon={Flame} />
-        </div>
-      </div>
-
-      {/* Feature Grid */}
-      <div className="px-5 mt-5 grid grid-cols-2 gap-3">
-        <FeatureCard
-          to="/calories"
-          title="AI Calorie Counter"
-          desc="Upload a photo or describe your meal and get instant calorie insights."
-          image="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80"
-        />
-        <FeatureCard
-          to="/clothing"
-          title="Clothing Material Analyzer"
-          desc="Upload clothing label or fabric photo and get AI insights."
-          image="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&q=80"
-        />
-        <FeatureCard
-          to="/fitness"
-          title="Activity Calorie Burn"
-          desc="AI-personalized calorie estimates for 13 activities and YouTube fitness videos."
-          image="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=500&q=80"
-        />
-        <FeatureCard
-          to="/metabolic"
-          title="AI Metabolic Rate Calculator"
-          desc="Enter your details and get your BMR, TDEE and calorie goals."
-          image="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?w=500&q=80"
-        />
-        <FeatureCard
-          to="/coach"
-          title="AI Coach Always With You"
-          desc="Get personal advice, motivation and support from your AI coach."
-          image="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80"
-        />
-        <FeatureCard
-          to="/community"
-          title="Community & Support"
-          desc="Join discussions, share progress, and connect with others on the same journey."
-          image="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&q=80"
-        />
-      </div>
-
-      {/* Today's Progress */}
-      <div className="px-5 mt-6">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-base font-bold text-[#1A1A1A]">Today's Progress</h2>
-          <Link to="/activity" className="text-xs font-medium text-[#666]">View all</Link>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <ProgressCard
-            icon={<Flame size={14} className="text-[#FB923C]" />}
-            label="Calories Eaten"
-            value={`${todayCalories.toLocaleString()}`}
-            unit="kcal"
-            data={weeklyData.map(d => ({ v: d.calories }))}
-            color="#FB923C"
-          />
-          <ProgressCard
-            icon={<ActivityIcon size={14} className="text-[#4ADE80]" />}
-            label="Calories Burned"
-            value={`${totalBurned}`}
-            unit="kcal"
-            data={weeklyData.map((d, i) => ({ v: totalBurned * (0.6 + i * 0.06) }))}
-            color="#4ADE80"
-          />
-          <ProgressCard
-            icon={<Droplets size={14} className="text-[#38BDF8]" />}
-            label="Water"
-            value={waterLiters}
-            unit="L"
-            data={[1.2, 1.5, 1.3, 1.8, 1.6, 1.9, 2.0].map(v => ({ v }))}
-            color="#38BDF8"
-          />
-          <ProgressCard
-            icon={<Zap size={14} className="text-[#A78BFA]" />}
-            label="Active Minutes"
-            value={`${activeMinutes}`}
-            unit="min"
-            data={[20, 35, 28, 40, 32, 45, 50].map(v => ({ v }))}
-            color="#A78BFA"
-          />
-        </div>
-      </div>
-
-      {/* Premium Card */}
-      {!subStatus.isPremium && (
-        <div className="px-5 mt-6">
-          <div className="relative overflow-hidden rounded-3xl">
-            <img
-              src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&q=80"
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/85 via-[#1A1A1A]/70 to-transparent" />
-            <div className="relative p-5 text-white">
-              <p className="text-lg font-bold flex items-center gap-1.5">Go Premium 👑</p>
-              <p className="text-xs opacity-90 mt-1 max-w-[200px]">Unlock personalized plans, advanced insights and exclusive workouts.</p>
-              <Link
-                to="/pricing"
-                className="inline-flex items-center gap-2 mt-3 px-5 py-2.5 rounded-full bg-[#FFD5A8] text-[#1A1A1A] text-sm font-semibold"
+    <div className="min-h-screen overflow-x-hidden bg-[#f7f4ef] pb-10 text-[#171a17]">
+      <div className="relative overflow-hidden bg-[#10241f] px-5 pb-8 pt-11 text-white sm:px-7">
+        <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#ff9c62]/20 blur-3xl" />
+        <div className="absolute -bottom-28 -left-14 h-72 w-72 rounded-full bg-[#6dd7b0]/15 blur-3xl" />
+        <div className="relative mx-auto max-w-xl">
+          <header className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="grid h-11 w-11 place-items-center rounded-2xl border border-white/15 bg-white/10 shadow-[0_10px_30px_rgba(0,0,0,.18)] backdrop-blur-xl">
+                <Leaf size={21} className="text-[#a7f1d2]" />
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/55">3 in 1</p>
+                <p className="text-[17px] font-bold tracking-[-0.02em]">Healthy Choice</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Notifications"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/10 text-white/80 backdrop-blur-xl transition hover:bg-white/15"
               >
-                Try 7 Days Free <ArrowRight size={16} />
+                <Bell size={18} />
+              </button>
+              <Link
+                to="/profile"
+                aria-label="Open profile"
+                className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-[#ffb37e] to-[#ff7043] text-sm font-extrabold shadow-lg shadow-black/20"
+              >
+                {firstName[0]?.toUpperCase()}
               </Link>
             </div>
+          </header>
+
+          <div className="mt-9 grid items-end gap-6 sm:grid-cols-[1fr_auto]">
+            <div>
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-3 py-1.5 text-[11px] font-semibold text-[#c9f8e5] backdrop-blur-xl">
+                <Sparkles size={13} /> Your daily wellness space
+              </div>
+              <h1 className="max-w-md text-[34px] font-black leading-[1.03] tracking-[-0.045em] sm:text-[40px]">
+                Good morning,
+                <span className="block text-[#ffc094]">{firstName}.</span>
+              </h1>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">
+                Small choices build strong routines. Let’s make today feel good.
+              </p>
+            </div>
+
+            <Link
+              to="/coach"
+              className="group inline-flex w-fit items-center gap-3 rounded-2xl bg-white px-4 py-3 text-sm font-bold text-[#17342c] shadow-[0_18px_45px_rgba(0,0,0,.2)] transition hover:-translate-y-0.5"
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#e9fff6] text-[#168164]">
+                <MessageCircle size={18} />
+              </span>
+              Ask your AI coach
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          <div className="mt-7 grid grid-cols-3 gap-2.5">
+            <HeroMetric icon={Footprints} label="Steps" value={todaySteps.toLocaleString()} detail={`${stepProgress}% goal`} />
+            <HeroMetric icon={Flame} label="Left" value={caloriesLeft.toLocaleString()} detail="kcal today" />
+            <HeroMetric icon={Trophy} label="Streak" value="7" detail="days strong" />
           </div>
         </div>
-      )}
+      </div>
 
-      <div className="px-5 mt-5">
-        <p className="text-[11px] text-[#999] text-center leading-relaxed">
-          ⚠️ Calorie and nutrition estimates are approximations and not medical advice.
+      <main className="mx-auto -mt-3 max-w-xl space-y-7 px-5 pb-5 sm:px-7">
+        <section className="rounded-[30px] border border-white/80 bg-white/90 p-5 shadow-[0_20px_60px_rgba(48,40,30,.09)] backdrop-blur-xl">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#a46d4f]">Today’s balance</p>
+              <h2 className="mt-1 text-xl font-black tracking-[-0.03em]">Your day at a glance</h2>
+            </div>
+            <Link to="/activity" className="rounded-full bg-[#f4f0e9] px-3 py-1.5 text-xs font-bold text-[#5f625f]">
+              View details
+            </Link>
+          </div>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-[1.2fr_.8fr]">
+            <div className="relative overflow-hidden rounded-[26px] bg-[#fff3e9] p-5">
+              <div className="absolute -right-8 -top-10 h-32 w-32 rounded-full bg-[#ff9a5f]/15" />
+              <div className="relative flex items-center gap-5">
+                <ProgressRing value={calorieProgress} />
+                <div>
+                  <p className="text-xs font-semibold text-[#8e715e]">Calories eaten</p>
+                  <p className="mt-1 text-3xl font-black tracking-[-0.04em]">{todayCalories.toLocaleString()}</p>
+                  <p className="mt-1 text-xs text-[#8e715e]">of {targetCalories.toLocaleString()} kcal</p>
+                </div>
+              </div>
+              <div className="relative mt-5 flex items-center justify-between rounded-2xl bg-white/70 px-4 py-3">
+                <span className="text-xs font-semibold text-[#69594f]">7-day average</span>
+                <span className="text-sm font-extrabold text-[#2d302d]">{weekAverage.toLocaleString()} kcal</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-1">
+              <MiniInsight icon={Zap} label="Active" value={`${activeMinutes} min`} tint="mint" />
+              <MiniInsight icon={Droplets} label="Water" value={`${waterLiters} L`} tint="blue" />
+              <MiniInsight icon={Flame} label="Burned" value={`${totalBurned} kcal`} tint="orange" className="col-span-2 sm:col-span-1" />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="mb-4 flex items-end justify-between">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8f7a69]">Smart tools</p>
+              <h2 className="mt-1 text-[23px] font-black tracking-[-0.035em]">What would help today?</h2>
+            </div>
+          </div>
+          <div className="space-y-3">
+            {FEATURE_CARDS.map((feature) => (
+              <FeatureCard key={feature.to} {...feature} />
+            ))}
+          </div>
+        </section>
+
+        <section className="grid grid-cols-2 gap-3">
+          <Link
+            to="/metabolic"
+            className="group rounded-[26px] border border-[#e6dfd4] bg-[#efe9ff] p-4 transition hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/75 text-[#6745cf] shadow-sm">
+              <BrainCircuit size={20} />
+            </span>
+            <p className="mt-5 text-base font-black tracking-[-0.025em]">Metabolic calculator</p>
+            <p className="mt-1 text-xs leading-5 text-[#6d6481]">Understand BMR, TDEE and daily targets.</p>
+            <ArrowRight size={17} className="mt-4 text-[#6745cf] transition-transform group-hover:translate-x-1" />
+          </Link>
+          <Link
+            to="/community"
+            className="group rounded-[26px] border border-[#d9e8df] bg-[#e8f6ee] p-4 transition hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white/75 text-[#23775e] shadow-sm">
+              <MessageCircle size={20} />
+            </span>
+            <p className="mt-5 text-base font-black tracking-[-0.025em]">Community support</p>
+            <p className="mt-1 text-xs leading-5 text-[#567164]">Share wins, ask questions and stay motivated.</p>
+            <ArrowRight size={17} className="mt-4 text-[#23775e] transition-transform group-hover:translate-x-1" />
+          </Link>
+        </section>
+
+        <UsageSection material={material} calorie={calorie} />
+
+        {!subStatus.isPremium && (
+          <section className="relative overflow-hidden rounded-[30px] bg-[#171b19] p-6 text-white shadow-[0_24px_65px_rgba(28,25,20,.2)]">
+            <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#ff8a52]/25 blur-2xl" />
+            <div className="absolute -bottom-20 left-14 h-44 w-44 rounded-full bg-[#6ce0b1]/15 blur-2xl" />
+            <div className="relative">
+              <div className="flex items-center gap-2 text-[#ffd1b5]">
+                <Crown size={18} />
+                <span className="text-xs font-bold uppercase tracking-[0.18em]">Premium</span>
+              </div>
+              <h2 className="mt-3 max-w-xs text-2xl font-black leading-tight tracking-[-0.04em]">
+                Deeper insights. A plan made for you.
+              </h2>
+              <p className="mt-3 max-w-sm text-sm leading-6 text-white/65">
+                Unlock unlimited AI tools, advanced progress tracking, and a more personal wellness journey.
+              </p>
+              <Link
+                to="/pricing"
+                className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-[#ffb37e] px-5 py-3 text-sm font-extrabold text-[#2e241e] transition hover:bg-[#ffc49d]"
+              >
+                Start 7-day free trial <ArrowRight size={16} />
+              </Link>
+            </div>
+          </section>
+        )}
+
+        <p className="px-3 text-center text-[10px] leading-5 text-[#969087]">
+          AI-generated calorie and nutrition estimates are approximations and are not medical advice.
         </p>
+      </main>
+    </div>
+  );
+}
+
+function HeroMetric({ icon: Icon, label, value, detail }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.07] px-3 py-3 backdrop-blur-xl">
+      <div className="flex items-center gap-1.5 text-white/55">
+        <Icon size={13} />
+        <span className="text-[10px] font-semibold">{label}</span>
+      </div>
+      <p className="mt-2 text-lg font-extrabold tracking-[-0.03em]">{value}</p>
+      <p className="mt-0.5 text-[9px] text-white/45">{detail}</p>
+    </div>
+  );
+}
+
+function ProgressRing({ value }) {
+  return (
+    <div
+      className="relative grid h-[92px] w-[92px] shrink-0 place-items-center rounded-full"
+      style={{ background: `conic-gradient(#ff7c45 ${value * 3.6}deg, rgba(255,124,69,.12) 0deg)` }}
+    >
+      <div className="grid h-[72px] w-[72px] place-items-center rounded-full bg-[#fff9f4] shadow-inner">
+        <div className="text-center">
+          <p className="text-xl font-black tracking-[-0.04em]">{value}%</p>
+          <p className="text-[9px] font-semibold text-[#9a7a67]">of goal</p>
+        </div>
       </div>
     </div>
   );
 }
 
-function MetricItem({ icon, label, value, sub }) {
+function MiniInsight({ icon: Icon, label, value, tint, className = '' }) {
+  const styles = {
+    mint: 'bg-[#e9f8f1] text-[#267760]',
+    blue: 'bg-[#ebf5fb] text-[#397b9e]',
+    orange: 'bg-[#fff0e7] text-[#bd6339]',
+  };
   return (
-    <div className="rounded-2xl bg-white p-3 text-center border border-[#F5EFE6]">
-      <div className="flex items-center justify-center gap-1 mb-1">
-        {icon}
-        <span className="text-[10px] text-[#666] font-medium">{label}</span>
-      </div>
-      <p className="text-lg font-bold text-[#1A1A1A] leading-tight">{value}</p>
-      <p className="text-[10px] text-[#999]">{sub}</p>
+    <div className={`rounded-[22px] p-4 ${styles[tint]} ${className}`}>
+      <Icon size={17} />
+      <p className="mt-4 text-[10px] font-semibold opacity-70">{label}</p>
+      <p className="mt-1 text-base font-black tracking-[-0.025em]">{value}</p>
     </div>
   );
 }
 
-function FeatureCard({ to, title, desc, image }) {
+function FeatureCard({ to, eyebrow, title, description, icon: Icon, image, gradient }) {
   return (
-    <Link to={to} className="rounded-3xl bg-white overflow-hidden border border-[#F5EFE6] block group">
-      <div className="relative h-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[#FDDDBD]" />
-        <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div className="p-3">
-        <p className="text-sm font-bold text-[#1A1A1A] leading-tight">{title}</p>
-        <p className="text-[11px] text-[#666] mt-1 leading-snug">{desc}</p>
+    <Link
+      to={to}
+      className="group relative block min-h-[174px] overflow-hidden rounded-[30px] shadow-[0_18px_45px_rgba(42,34,26,.12)] transition hover:-translate-y-0.5"
+    >
+      <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/46 to-black/10" />
+      <div className={`absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r ${gradient}`} />
+      <div className="relative flex min-h-[174px] flex-col justify-between p-5 text-white">
+        <span className="grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-white/15 backdrop-blur-md">
+          <Icon size={20} />
+        </span>
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">{eyebrow}</p>
+          <div className="mt-1 flex items-end justify-between gap-3">
+            <div>
+              <h3 className="text-xl font-black tracking-[-0.035em]">{title}</h3>
+              <p className="mt-1 max-w-[280px] text-xs leading-5 text-white/68">{description}</p>
+            </div>
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white text-[#20231f] transition-transform group-hover:translate-x-1">
+              <ArrowRight size={17} />
+            </span>
+          </div>
+        </div>
       </div>
     </Link>
   );
 }
 
-function ProgressCard({ icon, label, value, unit, data, color }) {
+function UsageSection({ material, calorie }) {
   return (
-    <div className="rounded-2xl bg-white p-3 border border-[#F5EFE6]">
-      <div className="flex items-center gap-1.5 mb-1">
-        {icon}
-        <span className="text-[10px] text-[#666] font-medium">{label}</span>
+    <section className="rounded-[28px] border border-[#e6dfd4] bg-[#fbfaf7] p-5">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8f7a69]">AI allowance</p>
+          <h2 className="mt-1 text-lg font-black tracking-[-0.025em]">This week’s usage</h2>
+        </div>
+        <Target size={20} className="text-[#ca754b]" />
       </div>
-      <p className="text-lg font-bold text-[#1A1A1A] leading-tight">{value} <span className="text-[10px] font-normal text-[#999]">{unit}</span></p>
-      <div className="h-8 mt-1 -mx-1">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
-            <Line type="monotone" dataKey="v" stroke={color} strokeWidth={2} dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
+      <div className="mt-5 space-y-4">
+        <UsageRow label="Calorie analyses" usage={calorie} color="#ff7c45" />
+        <UsageRow label="Material checks" usage={material} color="#7253d5" />
+      </div>
+    </section>
+  );
+}
+
+function UsageRow({ label, usage, color }) {
+  const total = Math.max(usage?.limit || 5, 1);
+  const remaining = Math.max(usage?.remaining ?? total, 0);
+  const used = Math.max(total - remaining, 0);
+  const percentage = Math.min((used / total) * 100, 100);
+  return (
+    <div>
+      <div className="mb-2 flex items-center justify-between text-xs">
+        <span className="font-bold text-[#4c4e4b]">{label}</span>
+        <span className="font-semibold text-[#8b887f]">{remaining} of {total} left</span>
+      </div>
+      <div className="h-2 overflow-hidden rounded-full bg-[#ebe7df]">
+        <div className="h-full rounded-full transition-all duration-500" style={{ width: `${percentage}%`, backgroundColor: color }} />
+      </div>
+    </div>
+  );
+}
+
+function PremiumHomeSkeleton() {
+  return (
+    <div className="min-h-screen animate-pulse bg-[#f7f4ef]">
+      <div className="h-[340px] bg-[#10241f]" />
+      <div className="mx-auto -mt-8 max-w-xl space-y-5 px-5">
+        <div className="h-64 rounded-[30px] bg-white" />
+        <div className="h-44 rounded-[30px] bg-white" />
+        <div className="h-44 rounded-[30px] bg-white" />
       </div>
     </div>
   );
