@@ -52,22 +52,8 @@ export default function CalorieCounter() {
     setLoading(true);
     try {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
-      const llmResult = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are a nutrition AI. Analyze the food in this image. Estimate calories, protein (g), carbs (g), fats (g), and fiber (g). Provide a short description of the food. Respond as JSON.`,
-        response_json_schema: {
-          type: 'object',
-          properties: {
-            description: { type: 'string' },
-            calories: { type: 'number' },
-            protein: { type: 'number' },
-            carbs: { type: 'number' },
-            fats: { type: 'number' },
-            fiber: { type: 'number' },
-          },
-        },
-        file_urls: [file_url],
-      });
-      setResult({ ...llmResult, image_url: file_url });
+      const response = await base44.functions.invoke('analyze-meal', { image_url: file_url });
+      setResult({ ...response.data, image_url: file_url });
     } catch (e) {
       setError('Could not analyze the image. Please try again.');
       console.error(e);
@@ -86,21 +72,8 @@ export default function CalorieCounter() {
     }
     setLoading(true);
     try {
-      const llmResult = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are a nutrition AI. The user described their meal as: "${description}". Estimate calories, protein (g), carbs (g), fats (g), and fiber (g). Provide a short description. Respond as JSON.`,
-        response_json_schema: {
-          type: 'object',
-          properties: {
-            description: { type: 'string' },
-            calories: { type: 'number' },
-            protein: { type: 'number' },
-            carbs: { type: 'number' },
-            fats: { type: 'number' },
-            fiber: { type: 'number' },
-          },
-        },
-      });
-      setResult(llmResult);
+      const response = await base44.functions.invoke('analyze-meal', { description });
+      setResult(response.data);
     } catch (e) {
       setError('Could not analyze the meal description. Please try again.');
       console.error(e);
@@ -121,7 +94,8 @@ export default function CalorieCounter() {
         setRecording(false); setLoading(true); setError(null);
         try {
           const { file_url } = await base44.integrations.Core.UploadFile({ file });
-          const transcript = await base44.integrations.Core.TranscribeAudio({ audio_url: file_url });
+          const response = await base44.functions.invoke('transcribe-audio', { audio_url: file_url });
+          const transcript = response.data.transcript;
           setTextDesc(transcript);
           await analyzeTextOrVoice(transcript);
         } catch (e) {

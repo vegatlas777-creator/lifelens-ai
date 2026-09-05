@@ -32,42 +32,8 @@ export default function ClothingAnalyzer() {
       const { file_url } = await base44.integrations.Core.UploadFile({ file });
       setImageUrl(file_url);
 
-      const result = await base44.integrations.Core.InvokeLLM({
-        prompt: `You are an expert textile and sustainability analyst. Analyze the clothing item in this photo. Examine the garment itself — its fabric texture, weave pattern, sheen, drape, weight, and visual characteristics — to identify the material composition. Do NOT rely on care labels; identify the fabric by visually analyzing the garment. For EACH material you identify, provide: name, advantages (array of strings), disadvantages (array of strings). Then provide an overall summary, a boolean eco_friendly, scores 1-10 for sustainability, comfort, durability, and health_impact, and suggest better alternatives (array of objects with name and reason). Respond as JSON matching this schema.`,
-        response_json_schema: {
-          type: 'object',
-          properties: {
-            materials: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  name: { type: 'string' },
-                  advantages: { type: 'array', items: { type: 'string' } },
-                  disadvantages: { type: 'array', items: { type: 'string' } },
-                },
-              },
-            },
-            summary: { type: 'string' },
-            eco_friendly: { type: 'boolean' },
-            sustainability_score: { type: 'number' },
-            comfort_score: { type: 'number' },
-            durability_score: { type: 'number' },
-            health_score: { type: 'number' },
-            alternatives: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  name: { type: 'string' },
-                  reason: { type: 'string' },
-                },
-              },
-            },
-          },
-        },
-        file_urls: [file_url],
-      });
+      const response = await base44.functions.invoke('analyze-clothing', { image_url: file_url });
+      const result = response.data;
 
       setAnalysis(result);
 
