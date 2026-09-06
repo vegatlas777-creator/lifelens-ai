@@ -108,15 +108,15 @@ export default function CommentSection({ postId, user, isPremium }) {
   const topLevel = comments.filter((c) => !c.parent_comment_id);
   const repliesOf = (id) => comments.filter((c) => c.parent_comment_id === id);
 
-  if (loading) return <div className="flex justify-center py-8"><Loader2 size={24} className="text-[#C87883] animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><Loader2 size={24} className="text-[#FF149C] animate-spin" /></div>;
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold text-[#2D1E1E] px-1 font-heading">{comments.length} Comments</h3>
+      <h3 className="text-sm font-bold text-[#4A0E2E] px-1 font-heading">{comments.length} Comments</h3>
 
       {/* New comment form */}
-      <div className="rounded-3xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 space-y-2">
-        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment..." rows={2} className="w-full rounded-xl bg-[#FDF2F2] border border-[#F0D5D5] px-3 py-2.5 text-sm focus:outline-none focus:border-[#C87883] text-[#2D1E1E] resize-none" />
+      <div className="rounded-3xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-4 space-y-2">
+        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment..." rows={2} className="w-full rounded-xl bg-[#FFF0F5] border border-[#FFC0D6] px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF149C] text-[#4A0E2E] resize-none" />
         {imagePreview && (
           <div className="relative rounded-xl overflow-hidden">
             <img src={imagePreview} alt="preview" className="w-full h-32 object-cover" />
@@ -125,16 +125,16 @@ export default function CommentSection({ postId, user, isPremium }) {
         )}
         <div className="flex items-center gap-2">
           {isPremium ? (
-            <label className="flex items-center gap-1 px-2.5 py-2 rounded-full bg-[#FDF2F2] border border-[#F0D5D5] text-xs text-[#8A6A6A] cursor-pointer">
+            <label className="flex items-center gap-1 px-2.5 py-2 rounded-full bg-[#FFF0F5] border border-[#FFC0D6] text-xs text-[#B0407A] cursor-pointer">
               <ImagePlus size={14} />
               <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
             </label>
           ) : (
-            <Link to="/pricing" className="px-2.5 py-2 rounded-full bg-[#FDF2F2] border border-[#F0D5D5] text-xs text-[#B59A9A]">
-              <Crown size={14} className="text-[#C87883]" />
+            <Link to="/pricing" className="px-2.5 py-2 rounded-full bg-[#FFF0F5] border border-[#FFC0D6] text-xs text-[#D67A9E]">
+              <Crown size={14} className="text-[#FF149C]" />
             </Link>
           )}
-          <button onClick={addComment} disabled={!newComment.trim() || submitting} className="flex-1 rounded-full bg-gradient-to-r from-[#E89AA4] to-[#C87883] text-white py-2.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-rose-300/50">
+          <button onClick={addComment} disabled={!newComment.trim() || submitting} className="flex-1 rounded-full bg-gradient-to-r from-[#FF69B4] to-[#FF149C] text-white py-2.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-pink-300/50">
             {submitting ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />} Comment
           </button>
         </div>
@@ -142,8 +142,8 @@ export default function CommentSection({ postId, user, isPremium }) {
 
       {/* Comments list */}
       {topLevel.length === 0 && (
-        <div className="rounded-2xl border border-dashed border-[#F0D5D5] p-8 text-center">
-          <p className="text-sm text-[#8A6A6A]">No comments yet. Be the first to share!</p>
+        <div className="rounded-2xl border border-dashed border-[#FFC0D6] p-8 text-center">
+          <p className="text-sm text-[#B0407A]">No comments yet. Be the first to share!</p>
         </div>
       )}
       {topLevel.map((c) => (
@@ -153,8 +153,8 @@ export default function CommentSection({ postId, user, isPremium }) {
           ))}
           {replyingTo === c.id && (
             <div className="mt-2 flex items-center gap-2">
-              <input value={replyText} onChange={(e) => setReplyText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addReply(c.id)} placeholder="Write a reply..." className="flex-1 rounded-full bg-[#FDF2F2] border border-[#F0D5D5] px-3 py-2 text-xs focus:outline-none focus:border-[#C87883] text-[#2D1E1E]" />
-              <button onClick={() => addReply(c.id)} className="p-2 rounded-full bg-[#C87883]"><Send size={14} className="text-white" /></button>
+              <input value={replyText} onChange={(e) => setReplyText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addReply(c.id)} placeholder="Write a reply..." className="flex-1 rounded-full bg-[#FFF0F5] border border-[#FFC0D6] px-3 py-2 text-xs focus:outline-none focus:border-[#FF149C] text-[#4A0E2E]" />
+              <button onClick={() => addReply(c.id)} className="p-2 rounded-full bg-[#FF149C]"><Send size={14} className="text-white" /></button>
             </div>
           )}
         </CommentItem>
@@ -168,22 +168,22 @@ function CommentItem({ comment, userId, onLike, onReply, onReport, isReply, chil
   const likeCount = comment.liked_by?.length || 0;
   return (
     <div className={isReply ? 'ml-8' : ''}>
-      <div className={`rounded-2xl ${isReply ? 'bg-[#FDF2F2] border border-[#F0D5D5]' : 'bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50'} p-3`}>
+      <div className={`rounded-2xl ${isReply ? 'bg-[#FFF0F5] border border-[#FFC0D6]' : 'bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60'} p-3`}>
         <div className="flex items-center gap-2 mb-1">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#E89AA4] to-[#C87883] flex items-center justify-center text-white text-[10px] font-bold">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#FF69B4] to-[#FF149C] flex items-center justify-center text-white text-[10px] font-bold">
             {comment.author_name?.[0]?.toUpperCase() || 'U'}
           </div>
-          <p className="text-xs font-semibold text-[#2D1E1E]">{comment.author_name || 'Member'}</p>
-          <p className="text-[10px] text-[#B59A9A]">{timeAgo(comment.created_date)}</p>
+          <p className="text-xs font-semibold text-[#4A0E2E]">{comment.author_name || 'Member'}</p>
+          <p className="text-[10px] text-[#D67A9E]">{timeAgo(comment.created_date)}</p>
         </div>
-        <p className="text-sm text-[#2D1E1E] leading-relaxed">{comment.content}</p>
+        <p className="text-sm text-[#4A0E2E] leading-relaxed">{comment.content}</p>
         {comment.image_url && <img src={comment.image_url} alt="" className="mt-2 rounded-xl w-full h-32 object-cover" />}
         <div className="flex items-center gap-1 mt-2">
-          <button onClick={() => onLike(comment)} className={`flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium ${liked ? 'text-rose-500' : 'text-[#8A6A6A]'}`}>
+          <button onClick={() => onLike(comment)} className={`flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium ${liked ? 'text-pink-500' : 'text-[#B0407A]'}`}>
             <Heart size={12} fill={liked ? 'currentColor' : 'none'} /> {likeCount > 0 && likeCount}
           </button>
-          {!isReply && <button onClick={onReply} className="flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium text-[#8A6A6A]"><Reply size={12} /> Reply</button>}
-          <button onClick={() => onReport(comment.id)} className="ml-auto px-2 py-1 rounded-full text-[11px] text-[#B59A9A]"><Flag size={12} /></button>
+          {!isReply && <button onClick={onReply} className="flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium text-[#B0407A]"><Reply size={12} /> Reply</button>}
+          <button onClick={() => onReport(comment.id)} className="ml-auto px-2 py-1 rounded-full text-[11px] text-[#D67A9E]"><Flag size={12} /></button>
         </div>
         {children}
       </div>

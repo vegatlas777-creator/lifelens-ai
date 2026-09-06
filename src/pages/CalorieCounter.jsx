@@ -167,10 +167,10 @@ export default function CalorieCounter() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FDF2F2] pb-4">
+    <div className="min-h-screen bg-[#FFF0F5] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#2D1E1E] font-heading">Calorie Counter</h1>
-        <p className="text-sm text-[#8A6A6A]">Log meals by photo, voice, or text</p>
+        <h1 className="text-2xl font-bold text-[#4A0E2E] font-heading">Calorie Counter</h1>
+        <p className="text-sm text-[#B0407A]">Log meals by photo, voice, or text</p>
       </div>
 
       <div className="px-5 mt-2">
@@ -179,9 +179,9 @@ export default function CalorieCounter() {
         </div>
 
         {/* Today summary */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#F0D5D5] shadow-sm shadow-rose-200/50">
+        <div className="relative overflow-hidden rounded-3xl border border-[#FFC0D6] shadow-sm shadow-pink-200/60">
           <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#C87883]/90 to-[#A85A66]/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FF149C]/90 to-[#E91E63]/75" />
           <div className="relative p-5 text-white">
             <p className="text-sm opacity-80 font-medium">Today's Intake</p>
             <p className="text-4xl font-bold mt-1 font-heading">{Math.round(todayTotals.calories)} <span className="text-base font-normal opacity-80">kcal</span></p>
@@ -207,23 +207,23 @@ export default function CalorieCounter() {
         {mode === 'photo' && (imagePreview || loading) && (
           <div className="mt-4">
             {imagePreview && (
-              <div className="relative rounded-3xl overflow-hidden border border-[#F0D5D5] shadow-sm shadow-rose-200/50">
+              <div className="relative rounded-3xl overflow-hidden border border-[#FFC0D6] shadow-sm shadow-pink-200/60">
                 <img src={imagePreview} alt="food" className="w-full h-48 object-cover" />
-                {!loading && <button onClick={resetAll} className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur"><X size={18} className="text-[#2D1E1E]" /></button>}
+                {!loading && <button onClick={resetAll} className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur"><X size={18} className="text-[#4A0E2E]" /></button>}
               </div>
             )}
           </div>
         )}
 
         {mode === 'voice' && (
-          <div className="mt-4 flex flex-col items-center gap-3 py-8 rounded-3xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50">
+          <div className="mt-4 flex flex-col items-center gap-3 py-8 rounded-3xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60">
             <button
               onClick={recording ? stopRecording : startRecording}
-              className={`p-6 rounded-full transition-all ${recording ? 'bg-red-500 text-white animate-pulse' : 'bg-[#C87883] text-white'}`}
+              className={`p-6 rounded-full transition-all ${recording ? 'bg-red-500 text-white animate-pulse' : 'bg-gradient-to-br from-[#FF69B4] to-[#FF149C] text-white shadow-lg shadow-pink-300/50'}`}
             >
               <Mic size={28} />
             </button>
-            <p className="text-sm text-[#8A6A6A]">{recording ? 'Tap to stop recording' : 'Tap to describe your meal'}</p>
+            <p className="text-sm text-[#B0407A]">{recording ? 'Tap to stop recording' : 'Tap to describe your meal'}</p>
           </div>
         )}
 
@@ -233,12 +233,12 @@ export default function CalorieCounter() {
               value={textDesc}
               onChange={(e) => setTextDesc(e.target.value)}
               placeholder="Describe what you ate... e.g., 'A bowl of oatmeal with banana and honey'"
-              className="w-full rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 text-sm resize-none focus:outline-none focus:border-[#C87883] min-h-24 text-[#2D1E1E]"
+              className="w-full rounded-2xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-4 text-sm resize-none focus:outline-none focus:border-[#FF149C] min-h-24 text-[#4A0E2E]"
             />
             <button
               onClick={() => analyzeTextOrVoice(textDesc)}
               disabled={!textDesc.trim() || loading}
-              className="w-full rounded-full bg-gradient-to-r from-[#E89AA4] to-[#C87883] text-white py-3 font-semibold text-sm disabled:opacity-50 flex items-center justify-center gap-2 shadow-md shadow-rose-300/50"
+              className="w-full rounded-full bg-gradient-to-r from-[#FF69B4] to-[#FF149C] text-white py-3 font-semibold text-sm disabled:opacity-50 flex items-center justify-center gap-2 shadow-md shadow-pink-300/50"
             >
               {loading ? <><Loader2 size={16} className="animate-spin" /> Analyzing...</> : <>Estimate Nutrition <ArrowRight size={16} /></>}
             </button>
@@ -247,8 +247,8 @@ export default function CalorieCounter() {
 
         {loading && !result && (
           <div className="flex flex-col items-center gap-3 mt-6 py-8">
-            <Loader2 size={32} className="text-[#C87883] animate-spin" />
-            <p className="text-sm text-[#8A6A6A]">Estimating nutrition with AI...</p>
+            <Loader2 size={32} className="text-[#FF149C] animate-spin" />
+            <p className="text-sm text-[#B0407A]">Estimating nutrition with AI...</p>
           </div>
         )}
 
@@ -259,15 +259,15 @@ export default function CalorieCounter() {
         )}
 
         {limitReached && (
-          <div className="mt-4 rounded-3xl bg-gradient-to-br from-[#F9E8E8] to-[#F5E0E0] border border-[#F0D5D5] p-5 text-center">
-            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mx-auto mb-3 shadow-sm shadow-rose-200/50">
-              <Crown size={24} className="text-[#C87883]" />
+          <div className="mt-4 rounded-3xl bg-gradient-to-br from-[#FFD9E6] to-[#FFC0D6] border border-[#FF69B4]/40 p-5 text-center">
+            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mx-auto mb-3 shadow-sm shadow-pink-200/60">
+              <Crown size={24} className="text-[#FF149C]" />
             </div>
-            <p className="text-sm font-semibold text-[#2D1E1E]">Weekly Limit Reached</p>
-            <p className="text-xs text-[#8A6A6A] mt-1 leading-relaxed">
+            <p className="text-sm font-semibold text-[#4A0E2E]">Weekly Limit Reached</p>
+            <p className="text-xs text-[#B0407A] mt-1 leading-relaxed">
               You have used all 5 free calorie analyses for this week. Upgrade to Premium for unlimited calorie analysis, unlimited food photo uploads, personalized AI coaching, and advanced progress tracking.
             </p>
-            <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#E89AA4] to-[#C87883] text-white text-sm font-semibold shadow-md shadow-rose-300/50">
+            <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FF69B4] to-[#FF149C] text-white text-sm font-semibold shadow-md shadow-pink-300/50">
               <Crown size={16} /> Upgrade to Premium <ArrowRight size={16} />
             </Link>
           </div>
@@ -275,8 +275,8 @@ export default function CalorieCounter() {
 
         {result && (
           <div className="mt-5 space-y-4">
-            <div className="rounded-3xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-5">
-              <p className="font-semibold text-[#2D1E1E]">{result.description}</p>
+            <div className="rounded-3xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-5">
+              <p className="font-semibold text-[#4A0E2E]">{result.description}</p>
               <div className="grid grid-cols-2 gap-3 mt-4">
                 <ResultStat label="Calories" value={`${result.calories}`} unit="kcal" icon={Flame} />
                 <ResultStat label="Protein" value={`${result.protein}`} unit="g" />
@@ -287,13 +287,13 @@ export default function CalorieCounter() {
             </div>
 
             <div>
-              <p className="text-xs font-medium text-[#8A6A6A] mb-2 px-1">Save as</p>
+              <p className="text-xs font-medium text-[#B0407A] mb-2 px-1">Save as</p>
               <div className="flex gap-2 overflow-x-auto scrollbar-hide">
                 {mealTypes.map((m) => (
                   <button
                     key={m.value}
                     onClick={() => setMealType(m.value)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${mealType === m.value ? 'bg-[#A85A66] text-white' : 'bg-white border border-[#F0D5D5] text-[#8A6A6A]'}`}
+                    className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${mealType === m.value ? 'bg-[#E91E63] text-white' : 'bg-white border border-[#FFC0D6] text-[#B0407A]'}`}
                   >
                     {m.label}
                   </button>
@@ -302,30 +302,30 @@ export default function CalorieCounter() {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={resetAll} className="flex-1 rounded-full border border-[#F0D5D5] bg-white py-3 font-medium text-sm text-[#2D1E1E]">Cancel</button>
-              <button onClick={saveEntry} className="flex-1 rounded-full bg-gradient-to-r from-[#E89AA4] to-[#C87883] text-white py-3 font-medium text-sm shadow-md shadow-rose-300/50">Save to Diary</button>
+              <button onClick={resetAll} className="flex-1 rounded-full border border-[#FFC0D6] bg-white py-3 font-medium text-sm text-[#4A0E2E]">Cancel</button>
+              <button onClick={saveEntry} className="flex-1 rounded-full bg-gradient-to-r from-[#FF69B4] to-[#FF149C] text-white py-3 font-medium text-sm shadow-md shadow-pink-300/50">Save to Diary</button>
             </div>
           </div>
         )}
 
         <div className="mt-8">
-          <h3 className="font-semibold text-sm mb-3 text-[#2D1E1E]">Today's Diary</h3>
+          <h3 className="font-semibold text-sm mb-3 text-[#4A0E2E]">Today's Diary</h3>
           {entries.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-[#F0D5D5] p-8 text-center">
-              <p className="text-sm text-[#8A6A6A]">No meals logged yet today.</p>
+            <div className="rounded-2xl border border-dashed border-[#FFC0D6] p-8 text-center">
+              <p className="text-sm text-[#B0407A]">No meals logged yet today.</p>
             </div>
           ) : (
             <div className="space-y-2">
               {entries.map((e) => (
-                <div key={e.id} className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-3 flex items-center gap-3">
+                <div key={e.id} className="rounded-2xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-3 flex items-center gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] uppercase tracking-wide bg-[#F5E0E0] text-[#A85A66] px-2 py-0.5 rounded-full font-medium">{e.meal_type}</span>
-                      <span className="text-sm font-medium truncate text-[#2D1E1E]">{e.description}</span>
+                      <span className="text-[10px] uppercase tracking-wide bg-[#FFD9E6] text-[#E91E63] px-2 py-0.5 rounded-full font-medium">{e.meal_type}</span>
+                      <span className="text-sm font-medium truncate text-[#4A0E2E]">{e.description}</span>
                     </div>
-                    <p className="text-xs text-[#8A6A6A] mt-1">{Math.round(e.calories)} kcal · P{Math.round(e.protein)}g · C{Math.round(e.carbs)}g · F{Math.round(e.fats)}g</p>
+                    <p className="text-xs text-[#B0407A] mt-1">{Math.round(e.calories)} kcal · P{Math.round(e.protein)}g · C{Math.round(e.carbs)}g · F{Math.round(e.fats)}g</p>
                   </div>
-                  <button onClick={() => deleteEntry(e.id)} className="p-2 text-[#B59A9A] hover:text-red-500">
+                  <button onClick={() => deleteEntry(e.id)} className="p-2 text-[#D67A9E] hover:text-red-500">
                     <Trash2 size={16} />
                   </button>
                 </div>
@@ -335,7 +335,7 @@ export default function CalorieCounter() {
         </div>
 
         <div className="mt-6">
-          <p className="text-[11px] text-[#B59A9A] text-center leading-relaxed">
+          <p className="text-[11px] text-[#D67A9E] text-center leading-relaxed">
             ⚠️ Calorie and nutrition estimates are AI-generated approximations and may not be exact. Not medical advice.
           </p>
         </div>
@@ -346,11 +346,11 @@ export default function CalorieCounter() {
 
 function ModeButton({ icon: Icon, label, onClick }) {
   return (
-    <button onClick={onClick} className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 flex flex-col items-center gap-2 hover:border-[#C87883] transition-colors">
-      <div className="p-2.5 rounded-xl bg-[#F5E0E0]">
-        <Icon size={20} className="text-[#C87883]" />
+    <button onClick={onClick} className="rounded-2xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-4 flex flex-col items-center gap-2 hover:border-[#FF149C] transition-colors">
+      <div className="p-2.5 rounded-xl bg-[#FFD9E6]">
+        <Icon size={20} className="text-[#FF149C]" />
       </div>
-      <span className="text-xs font-medium text-[#2D1E1E]">{label}</span>
+      <span className="text-xs font-medium text-[#4A0E2E]">{label}</span>
     </button>
   );
 }
@@ -366,12 +366,12 @@ function MacroPill({ label, value, unit }) {
 
 function ResultStat({ label, value, unit, icon: Icon }) {
   return (
-    <div className="rounded-xl bg-[#FDF2F2] p-3">
+    <div className="rounded-xl bg-[#FFF0F5] p-3">
       <div className="flex items-center gap-1.5 mb-1">
-        {Icon && <Icon size={12} className="text-[#A85A66]" />}
-        <span className="text-xs text-[#8A6A6A]">{label}</span>
+        {Icon && <Icon size={12} className="text-[#E91E63]" />}
+        <span className="text-xs text-[#B0407A]">{label}</span>
       </div>
-      <p className="text-xl font-bold text-[#2D1E1E]">{value} <span className="text-xs font-normal text-[#B59A9A]">{unit}</span></p>
+      <p className="text-xl font-bold text-[#4A0E2E]">{value} <span className="text-xs font-normal text-[#D67A9E]">{unit}</span></p>
     </div>
   );
 }
