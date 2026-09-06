@@ -1,8 +1,10 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.44';
 
-const CLOTHING_SCHEMA = {
+const SPORTS_SCHEMA = {
   type: 'object',
   properties: {
+    sport_type: { type: 'string' },
+    garment_type: { type: 'string' },
     materials: {
       type: 'array',
       items: {
@@ -15,11 +17,12 @@ const CLOTHING_SCHEMA = {
       },
     },
     summary: { type: 'string' },
-    eco_friendly: { type: 'boolean' },
-    sustainability_score: { type: 'number' },
+    performance_score: { type: 'number' },
+    breathability_score: { type: 'number' },
     comfort_score: { type: 'number' },
     durability_score: { type: 'number' },
-    health_score: { type: 'number' },
+    fit_score: { type: 'number' },
+    recommended_sports: { type: 'array', items: { type: 'string' } },
     alternatives: {
       type: 'array',
       items: {
@@ -33,7 +36,22 @@ const CLOTHING_SCHEMA = {
   },
 };
 
-const CLOTHING_PROMPT = `You are an expert textile and sustainability analyst. Analyze the clothing item in this photo. Examine the garment itself — its fabric texture, weave pattern, sheen, drape, weight, and visual characteristics — to identify the material composition. Do NOT rely on care labels; identify the fabric by visually analyzing the garment. For EACH material you identify, provide: name, advantages (array of strings), disadvantages (array of strings). Then provide an overall summary, a boolean eco_friendly, scores 1-10 for sustainability, comfort, durability, and health_impact, and suggest better alternatives (array of objects with name and reason). Respond as JSON matching this schema.`;
+const SPORTS_PROMPT = `You are an expert sports apparel analyst. Analyze the sports clothing item in this photo. Examine the garment — its fabric texture, weave, compression level, design features (mesh panels, zippers, padding, reflective elements, etc.), and visual characteristics — to identify what sport or athletic activity it is designed for and evaluate how well it would perform.
+
+Provide:
+- sport_type: the primary sport or activity this garment is designed for (e.g., "Running", "Yoga", "Weightlifting", "Cycling", "Basketball")
+- garment_type: the type of garment (e.g., "running shoes", "compression shirt", "yoga pants", "sports bra", "track jacket")
+- materials: array of materials you can identify, each with name, advantages (for athletic performance), and disadvantages (for athletic performance)
+- summary: a concise overall assessment of how well this garment performs for its intended sport
+- performance_score (1-10): overall athletic performance and quality
+- breathability_score (1-10): ventilation, airflow, and moisture-wicking ability
+- comfort_score (1-10): comfort during physical activity and movement
+- durability_score (1-10): how well it holds up to repeated sports use and washing
+- fit_score (1-10): support, flexibility, range of motion, and how well it stays in place
+- recommended_sports: array of sports/activities this garment is well-suited for
+- alternatives: array of better-performing alternatives, each with name and reason
+
+Respond as JSON matching this schema.`;
 
 export default async function(req) {
   try {
@@ -46,8 +64,8 @@ export default async function(req) {
     if (!image_url) return Response.json({ error: 'image_url is required' }, { status: 400 });
 
     const result = await base44.asServiceRole.integrations.Core.InvokeLLM({
-      prompt: CLOTHING_PROMPT,
-      response_json_schema: CLOTHING_SCHEMA,
+      prompt: SPORTS_PROMPT,
+      response_json_schema: SPORTS_SCHEMA,
       file_urls: [image_url],
     });
 

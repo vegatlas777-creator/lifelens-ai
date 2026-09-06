@@ -204,7 +204,7 @@ export default function Home() {
         <SectionTitle title="Explore Features" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           <FeatureCard to="/calories" title="AI Calorie Counter" desc="Upload a photo or describe your meal and get instant calorie insights." image="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" delay={0} />
-          <FeatureCard to="/clothing" title="Material Analyzer" desc="Scan clothing labels or fabric and get AI sustainability insights." image="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&q=80" delay={0.05} />
+          <FeatureCard to="/clothing" title="Sports Gear Analyzer" desc="Scan sports clothing and get AI performance ratings for your activity." image="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&q=80" delay={0.05} />
           <FeatureCard to="/fitness" title="Activity Calorie Burn" desc="AI-personalized calorie estimates for 13 activities and videos." image="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=600&q=80" delay={0.1} />
           <FeatureCard to="/activity" title="Activity Tracking" desc="Track steps, distance, and active minutes throughout your day." image="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&q=80" delay={0.15} />
           <FeatureCard to="/metabolic" title="Metabolic Calculator" desc="Enter your details and get your BMR, TDEE and calorie goals." image="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?w=600&q=80" delay={0.2} />

@@ -3,7 +3,7 @@ import { Home, Shirt, UtensilsCrossed, Dumbbell, Footprints, MessageCircle, User
 
 const navItems = [
   { to: '/', label: 'Home', icon: Home },
-  { to: '/clothing', label: 'Clothing', icon: Shirt },
+  { to: '/clothing', label: 'Sports', icon: Shirt },
   { to: '/calories', label: 'Calories', icon: UtensilsCrossed },
   { to: '/fitness', label: 'Fitness', icon: Dumbbell },
   { to: '/activity', label: 'Activity', icon: Footprints },

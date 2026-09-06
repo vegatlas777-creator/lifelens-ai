@@ -5,6 +5,12 @@
     "image_url": {
       "type": "string"
     },
+    "sport_type": {
+      "type": "string"
+    },
+    "garment_type": {
+      "type": "string"
+    },
     "materials": {
       "type": "array",
       "items": {
@@ -14,7 +20,10 @@
     "summary": {
       "type": "string"
     },
-    "sustainability_score": {
+    "performance_score": {
+      "type": "number"
+    },
+    "breathability_score": {
       "type": "number"
     },
     "comfort_score": {
@@ -23,11 +32,15 @@
     "durability_score": {
       "type": "number"
     },
-    "health_score": {
+    "fit_score": {
       "type": "number"
     },
-    "eco_friendly": {
-      "type": "boolean"
+    "recommended_sports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
     },
     "alternatives": {
       "type": "array",
