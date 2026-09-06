@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, Save, User } from 'lucide-react';
 import { activityLevels } from '@/lib/workoutData';
 
-const inputCls = "w-full rounded-xl bg-[#0A1628] border border-[#1E293B] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#FFFFFF]";
+const inputCls = "w-full rounded-xl bg-[#FDF2F2] border border-[#F0D5D5] px-3 py-2.5 text-sm focus:outline-none focus:border-[#C87883] text-[#2D1E1E]";
 const goalOptions = [
   { value: 'loss', label: 'Weight Loss' },
   { value: 'maintenance', label: 'Weight Maintenance' },
@@ -54,14 +54,14 @@ export default function ProfileForm() {
     setSaving(false);
   }
 
-  if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#2563EB] animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#C87883] animate-spin" /></div>;
 
   return (
     <div className="px-5 space-y-4">
-      <div className="rounded-3xl bg-white/5 border border-[#1E293B] p-5 space-y-4">
+      <div className="rounded-3xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-5 space-y-4">
         <div className="flex items-center gap-2 mb-1">
-          <User size={18} className="text-[#2563EB]" />
-          <h2 className="text-base font-bold text-[#FFFFFF]">Personal Information</h2>
+          <User size={18} className="text-[#C87883]" />
+          <h2 className="text-base font-bold text-[#2D1E1E] font-heading">Personal Information</h2>
         </div>
         <Field label="Name"><input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className={inputCls} /></Field>
         <div className="grid grid-cols-2 gap-3">
@@ -69,7 +69,7 @@ export default function ProfileForm() {
           <Field label="Gender">
             <div className="flex gap-2">
               {['male', 'female'].map((g) => (
-                <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize ${form.gender === g ? 'bg-[#2563EB] text-white' : 'bg-[#0A1628] text-[#C7D2FE]'}`}>{g}</button>
+                <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize ${form.gender === g ? 'bg-[#A85A66] text-white' : 'bg-[#F5E0E0] text-[#8A6A6A]'}`}>{g}</button>
               ))}
             </div>
           </Field>
@@ -90,15 +90,15 @@ export default function ProfileForm() {
           </select>
         </Field>
       </div>
-      <div className="rounded-3xl bg-white/5 border border-[#1E293B] p-5 space-y-4">
-        <h2 className="text-base font-bold text-[#FFFFFF]">Daily Goals</h2>
+      <div className="rounded-3xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-5 space-y-4">
+        <h2 className="text-base font-bold text-[#2D1E1E] font-heading">Daily Goals</h2>
         <div className="grid grid-cols-1 gap-3">
           <Field label="Daily Step Goal"><input type="number" value={form.daily_step_goal} onChange={(e) => setForm({ ...form, daily_step_goal: e.target.value })} className={inputCls} /></Field>
           <Field label="Daily Calorie Goal (kcal)"><input type="number" value={form.daily_calorie_goal} onChange={(e) => setForm({ ...form, daily_calorie_goal: e.target.value })} placeholder="Auto-calculated if empty" className={inputCls} /></Field>
           <Field label="Weekly Activity Goal (minutes)"><input type="number" value={form.weekly_activity_goal} onChange={(e) => setForm({ ...form, weekly_activity_goal: e.target.value })} className={inputCls} /></Field>
         </div>
       </div>
-      <button onClick={save} disabled={saving} className="w-full rounded-full bg-[#3B82F6] text-[#FFFFFF] py-3.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50">
+      <button onClick={save} disabled={saving} className="w-full rounded-full bg-gradient-to-r from-[#E89AA4] to-[#C87883] text-white py-3.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-rose-300/50">
         {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />} {saved ? 'Profile Saved!' : 'Save Profile'}
       </button>
     </div>
@@ -106,5 +106,5 @@ export default function ProfileForm() {
 }
 
 function Field({ label, children }) {
-  return (<div><label className="text-xs font-medium text-[#C7D2FE] mb-1.5 block">{label}</label>{children}</div>);
+  return (<div><label className="text-xs font-medium text-[#8A6A6A] mb-1.5 block">{label}</label>{children}</div>);
 }

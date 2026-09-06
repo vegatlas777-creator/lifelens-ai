@@ -105,37 +105,36 @@ export default function CommentSection({ postId, user, isPremium }) {
     setImagePreview(URL.createObjectURL(file));
   }
 
-  // Build nested comment tree
   const topLevel = comments.filter((c) => !c.parent_comment_id);
   const repliesOf = (id) => comments.filter((c) => c.parent_comment_id === id);
 
-  if (loading) return <div className="flex justify-center py-8"><Loader2 size={24} className="text-[#2563EB] animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><Loader2 size={24} className="text-[#C87883] animate-spin" /></div>;
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold text-[#FFFFFF] px-1">{comments.length} Comments</h3>
+      <h3 className="text-sm font-bold text-[#2D1E1E] px-1 font-heading">{comments.length} Comments</h3>
 
       {/* New comment form */}
-      <div className="rounded-3xl bg-white/5 border border-[#1E293B] p-4 space-y-2">
-        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment..." rows={2} className="w-full rounded-xl bg-[#0A1628] border border-[#1E293B] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#FFFFFF] resize-none" />
+      <div className="rounded-3xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 space-y-2">
+        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment..." rows={2} className="w-full rounded-xl bg-[#FDF2F2] border border-[#F0D5D5] px-3 py-2.5 text-sm focus:outline-none focus:border-[#C87883] text-[#2D1E1E] resize-none" />
         {imagePreview && (
           <div className="relative rounded-xl overflow-hidden">
             <img src={imagePreview} alt="preview" className="w-full h-32 object-cover" />
-            <button onClick={() => { setImagePreview(null); setImageFile(null); }} className="absolute top-2 right-2 p-1.5 rounded-full bg-black/50 text-white"><X size={14} /></button>
+            <button onClick={() => { setImagePreview(null); setImageFile(null); }} className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white"><X size={14} /></button>
           </div>
         )}
         <div className="flex items-center gap-2">
           {isPremium ? (
-            <label className="flex items-center gap-1 px-2.5 py-2 rounded-full bg-[#0A1628] border border-[#1E293B] text-xs text-[#C7D2FE] cursor-pointer">
+            <label className="flex items-center gap-1 px-2.5 py-2 rounded-full bg-[#FDF2F2] border border-[#F0D5D5] text-xs text-[#8A6A6A] cursor-pointer">
               <ImagePlus size={14} />
               <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
             </label>
           ) : (
-            <Link to="/pricing" className="px-2.5 py-2 rounded-full bg-[#0A1628] border border-[#1E293B] text-xs text-[#94A3B8]">
-              <Crown size={14} className="text-[#2563EB]" />
+            <Link to="/pricing" className="px-2.5 py-2 rounded-full bg-[#FDF2F2] border border-[#F0D5D5] text-xs text-[#B59A9A]">
+              <Crown size={14} className="text-[#C87883]" />
             </Link>
           )}
-          <button onClick={addComment} disabled={!newComment.trim() || submitting} className="flex-1 rounded-full bg-[#3B82F6] text-[#FFFFFF] py-2.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50">
+          <button onClick={addComment} disabled={!newComment.trim() || submitting} className="flex-1 rounded-full bg-gradient-to-r from-[#E89AA4] to-[#C87883] text-white py-2.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-rose-300/50">
             {submitting ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />} Comment
           </button>
         </div>
@@ -143,8 +142,8 @@ export default function CommentSection({ postId, user, isPremium }) {
 
       {/* Comments list */}
       {topLevel.length === 0 && (
-        <div className="rounded-2xl border border-dashed border-[#1E293B] p-8 text-center">
-          <p className="text-sm text-[#C7D2FE]">No comments yet. Be the first to share!</p>
+        <div className="rounded-2xl border border-dashed border-[#F0D5D5] p-8 text-center">
+          <p className="text-sm text-[#8A6A6A]">No comments yet. Be the first to share!</p>
         </div>
       )}
       {topLevel.map((c) => (
@@ -154,8 +153,8 @@ export default function CommentSection({ postId, user, isPremium }) {
           ))}
           {replyingTo === c.id && (
             <div className="mt-2 flex items-center gap-2">
-              <input value={replyText} onChange={(e) => setReplyText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addReply(c.id)} placeholder="Write a reply..." className="flex-1 rounded-full bg-[#0A1628] border border-[#1E293B] px-3 py-2 text-xs focus:outline-none focus:border-[#2563EB] text-[#FFFFFF]" />
-              <button onClick={() => addReply(c.id)} className="p-2 rounded-full bg-[#3B82F6]"><Send size={14} className="text-[#FFFFFF]" /></button>
+              <input value={replyText} onChange={(e) => setReplyText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addReply(c.id)} placeholder="Write a reply..." className="flex-1 rounded-full bg-[#FDF2F2] border border-[#F0D5D5] px-3 py-2 text-xs focus:outline-none focus:border-[#C87883] text-[#2D1E1E]" />
+              <button onClick={() => addReply(c.id)} className="p-2 rounded-full bg-[#C87883]"><Send size={14} className="text-white" /></button>
             </div>
           )}
         </CommentItem>
@@ -169,22 +168,22 @@ function CommentItem({ comment, userId, onLike, onReply, onReport, isReply, chil
   const likeCount = comment.liked_by?.length || 0;
   return (
     <div className={isReply ? 'ml-8' : ''}>
-      <div className={`rounded-2xl ${isReply ? 'bg-[#0A1628]' : 'bg-white/5 border border-[#1E293B]'} p-3`}>
+      <div className={`rounded-2xl ${isReply ? 'bg-[#FDF2F2] border border-[#F0D5D5]' : 'bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50'} p-3`}>
         <div className="flex items-center gap-2 mb-1">
-          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#3B82F6] to-[#2563EB] flex items-center justify-center text-white text-[10px] font-bold">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#E89AA4] to-[#C87883] flex items-center justify-center text-white text-[10px] font-bold">
             {comment.author_name?.[0]?.toUpperCase() || 'U'}
           </div>
-          <p className="text-xs font-semibold text-[#FFFFFF]">{comment.author_name || 'Member'}</p>
-          <p className="text-[10px] text-[#94A3B8]">{timeAgo(comment.created_date)}</p>
+          <p className="text-xs font-semibold text-[#2D1E1E]">{comment.author_name || 'Member'}</p>
+          <p className="text-[10px] text-[#B59A9A]">{timeAgo(comment.created_date)}</p>
         </div>
-        <p className="text-sm text-[#FFFFFF] leading-relaxed">{comment.content}</p>
+        <p className="text-sm text-[#2D1E1E] leading-relaxed">{comment.content}</p>
         {comment.image_url && <img src={comment.image_url} alt="" className="mt-2 rounded-xl w-full h-32 object-cover" />}
         <div className="flex items-center gap-1 mt-2">
-          <button onClick={() => onLike(comment)} className={`flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium ${liked ? 'text-rose-500' : 'text-[#C7D2FE]'}`}>
+          <button onClick={() => onLike(comment)} className={`flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium ${liked ? 'text-rose-500' : 'text-[#8A6A6A]'}`}>
             <Heart size={12} fill={liked ? 'currentColor' : 'none'} /> {likeCount > 0 && likeCount}
           </button>
-          {!isReply && <button onClick={onReply} className="flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium text-[#C7D2FE]"><Reply size={12} /> Reply</button>}
-          <button onClick={() => onReport(comment.id)} className="ml-auto px-2 py-1 rounded-full text-[11px] text-[#94A3B8]"><Flag size={12} /></button>
+          {!isReply && <button onClick={onReply} className="flex items-center gap-1 px-2 py-1 rounded-full text-[11px] font-medium text-[#8A6A6A]"><Reply size={12} /> Reply</button>}
+          <button onClick={() => onReport(comment.id)} className="ml-auto px-2 py-1 rounded-full text-[11px] text-[#B59A9A]"><Flag size={12} /></button>
         </div>
         {children}
       </div>
