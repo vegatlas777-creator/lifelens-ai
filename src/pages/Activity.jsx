@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Activity as ActivityIcon, Footprints, MapPin, Timer, Flame, Watch, Smartphone, TrendingUp, Target, ArrowRight } from 'lucide-react';
+import { Activity as ActivityIcon, Footprints, MapPin, Timer, Flame, Watch, Smartphone, TrendingUp, Target } from 'lucide-react';
 import { getTodayStr, getLast7Days } from '@/lib/dateUtils';
 import { useAuth } from '@/lib/AuthContext';
 
@@ -82,8 +82,8 @@ export default function Activity() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#0A1628]">
-        <div className="w-8 h-8 border-4 border-[#1E293B] border-t-[#2563EB] rounded-full animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#FDF2F2]">
+        <div className="w-8 h-8 border-4 border-[#F0D5D5] border-t-[#C87883] rounded-full animate-spin" />
       </div>
     );
   }
@@ -94,16 +94,16 @@ export default function Activity() {
   const stepsBelowAvg = avgSteps - steps;
 
   return (
-    <div className="min-h-screen bg-[#0A1628] pb-4">
+    <div className="min-h-screen bg-[#FDF2F2] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#FFFFFF]">Activity Tracking</h1>
-        <p className="text-sm text-[#C7D2FE]">Steps, distance & active minutes</p>
+        <h1 className="text-2xl font-bold text-[#2D1E1E] font-heading">Activity Tracking</h1>
+        <p className="text-sm text-[#8A6A6A]">Steps, distance & active minutes</p>
       </div>
 
       <div className="px-5 mt-2">
         {/* Connections */}
-        <div className="rounded-2xl bg-white/5 border border-[#1E293B] p-4 mb-4">
-          <p className="text-xs font-medium text-[#C7D2FE] mb-3">CONNECTED DEVICES</p>
+        <div className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 mb-4">
+          <p className="text-xs font-medium text-[#8A6A6A] mb-3">CONNECTED DEVICES</p>
           <div className="space-y-2">
             <ConnectRow icon={Watch} name="Apple Health" connected={connected.apple} onToggle={() => connectService('apple')} />
             <ConnectRow icon={Smartphone} name="Google Health Connect" connected={connected.google} onToggle={() => connectService('google')} />
@@ -112,19 +112,19 @@ export default function Activity() {
         </div>
 
         {/* Steps ring */}
-        <div className="relative overflow-hidden rounded-3xl">
+        <div className="relative overflow-hidden rounded-3xl border border-[#F0D5D5] shadow-sm shadow-rose-200/50">
           <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFFFF]/85 to-[#FFFFFF]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#C87883]/90 to-[#A85A66]/75" />
           <div className="relative p-6 text-white">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm opacity-80 font-medium">Today's Steps</p>
-                <p className="text-4xl font-bold mt-1">{steps.toLocaleString()}</p>
-                <p className="text-xs opacity-70 mt-1">of {STEP_GOAL.toLocaleString()} goal</p>
+                <p className="text-4xl font-bold mt-1 font-heading">{steps.toLocaleString()}</p>
+                <p className="text-xs opacity-80 mt-1">of {STEP_GOAL.toLocaleString()} goal</p>
               </div>
               <div className="relative w-24 h-24">
                 <svg className="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="8" className="opacity-20" />
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="8" className="opacity-30" />
                   <circle cx="50" cy="50" r="42" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round"
                     strokeDasharray={`${2 * Math.PI * 42}`}
                     strokeDashoffset={`${2 * Math.PI * 42 * (1 - stepProgress / 100)}`}
@@ -137,7 +137,7 @@ export default function Activity() {
               </div>
             </div>
             {stepsBelowAvg > 0 && (
-              <div className="mt-4 pt-4 border-t border-white/20">
+              <div className="mt-4 pt-4 border-t border-white/25">
                 <p className="text-xs opacity-90">📊 You are {stepsBelowAvg.toLocaleString()} steps below your daily average.</p>
               </div>
             )}
@@ -146,35 +146,35 @@ export default function Activity() {
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <StatBox icon={MapPin} value={`${(todayLog?.walking_distance_km || 0).toFixed(2)}`} label="Walked (km)" color="text-blue-500" />
-          <StatBox icon={MapPin} value={`${(todayLog?.running_distance_km || 0).toFixed(2)}`} label="Run (km)" color="text-rose-500" />
-          <StatBox icon={Timer} value={todayLog?.active_minutes || 0} label="Active min" color="text-blue-500" />
-          <StatBox icon={Flame} value={todayLog?.calories_burned_activity || 0} label="Burned" color="text-blue-500" />
+          <StatBox icon={MapPin} value={`${(todayLog?.walking_distance_km || 0).toFixed(2)}`} label="Walked (km)" color="text-[#C87883]" />
+          <StatBox icon={MapPin} value={`${(todayLog?.running_distance_km || 0).toFixed(2)}`} label="Run (km)" color="text-[#A85A66]" />
+          <StatBox icon={Timer} value={todayLog?.active_minutes || 0} label="Active min" color="text-[#C87883]" />
+          <StatBox icon={Flame} value={todayLog?.calories_burned_activity || 0} label="Burned" color="text-[#A85A66]" />
         </div>
 
         {/* Quick log */}
         <div className="mt-5">
-          <h3 className="text-sm font-semibold mb-3 text-[#FFFFFF]">Quick Log Activity</h3>
+          <h3 className="text-sm font-semibold mb-3 text-[#2D1E1E]">Quick Log Activity</h3>
           <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => addActivity('walking', 20)} className="rounded-2xl bg-white/5 border border-[#1E293B] p-4 hover:border-[#2563EB] transition-colors text-left">
-              <Footprints size={20} className="text-blue-500 mb-1" />
-              <p className="text-sm font-semibold text-[#FFFFFF]">20-min Walk</p>
-              <p className="text-xs text-[#C7D2FE]">~{Math.round(20 * 110 * 0.04)} kcal</p>
+            <button onClick={() => addActivity('walking', 20)} className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 hover:border-[#C87883] transition-colors text-left">
+              <Footprints size={20} className="text-[#C87883] mb-1" />
+              <p className="text-sm font-semibold text-[#2D1E1E]">20-min Walk</p>
+              <p className="text-xs text-[#8A6A6A]">~{Math.round(20 * 110 * 0.04)} kcal</p>
             </button>
-            <button onClick={() => addActivity('running', 20)} className="rounded-2xl bg-white/5 border border-[#1E293B] p-4 hover:border-[#2563EB] transition-colors text-left">
-              <ActivityIcon size={20} className="text-rose-500 mb-1" />
-              <p className="text-sm font-semibold text-[#FFFFFF]">20-min Run</p>
-              <p className="text-xs text-[#C7D2FE]">~200 kcal</p>
+            <button onClick={() => addActivity('running', 20)} className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4 hover:border-[#C87883] transition-colors text-left">
+              <ActivityIcon size={20} className="text-[#A85A66] mb-1" />
+              <p className="text-sm font-semibold text-[#2D1E1E]">20-min Run</p>
+              <p className="text-xs text-[#8A6A6A]">~200 kcal</p>
             </button>
           </div>
         </div>
 
         {/* Weekly chart */}
         <div className="mt-6">
-          <h3 className="text-sm font-semibold mb-3 flex items-center gap-2 text-[#FFFFFF]">
-            <TrendingUp size={16} className="text-[#2563EB]" /> Weekly Steps
+          <h3 className="text-sm font-semibold mb-3 flex items-center gap-2 text-[#2D1E1E]">
+            <TrendingUp size={16} className="text-[#A85A66]" /> Weekly Steps
           </h3>
-          <div className="rounded-2xl bg-white/5 border border-[#1E293B] p-4">
+          <div className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-4">
             <div className="flex items-end justify-between gap-2 h-32">
               {weeklySteps.map((d) => {
                 const maxSteps = Math.max(...weeklySteps.map((w) => w.steps), STEP_GOAL, 1);
@@ -182,29 +182,29 @@ export default function Activity() {
                 return (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1.5">
                     <div className="w-full flex items-end justify-center h-full">
-                      <div className="w-6 rounded-t-lg bg-gradient-to-t from-[#2563EB] to-[#3B82F6] transition-all duration-500" style={{ height: `${Math.max(heightPct, 4)}%` }} />
+                      <div className="w-6 rounded-t-lg bg-gradient-to-t from-[#A85A66] to-[#E89AA4] transition-all duration-500" style={{ height: `${Math.max(heightPct, 4)}%` }} />
                     </div>
-                    <span className="text-[9px] text-[#C7D2FE]">{d.label}</span>
+                    <span className="text-[9px] text-[#8A6A6A]">{d.label}</span>
                   </div>
                 );
               })}
             </div>
-            <div className="mt-3 pt-3 border-t border-[#1E293B] flex justify-between text-xs">
-              <span className="text-[#C7D2FE]">Daily avg: <strong className="text-[#FFFFFF]">{avgSteps.toLocaleString()}</strong></span>
-              <span className="text-[#C7D2FE]">Goal: <strong className="text-[#FFFFFF]">{STEP_GOAL.toLocaleString()}</strong></span>
+            <div className="mt-3 pt-3 border-t border-[#F0D5D5] flex justify-between text-xs">
+              <span className="text-[#8A6A6A]">Daily avg: <strong className="text-[#2D1E1E]">{avgSteps.toLocaleString()}</strong></span>
+              <span className="text-[#8A6A6A]">Goal: <strong className="text-[#2D1E1E]">{STEP_GOAL.toLocaleString()}</strong></span>
             </div>
           </div>
         </div>
 
         {/* AI recommendation */}
-        <div className="mt-5 rounded-2xl bg-[#1E293B]/40 border border-[#1E293B] p-4">
+        <div className="mt-5 rounded-2xl bg-[#F9E8E8] border border-[#F0D5D5] p-4">
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-[#2563EB]/20 text-[#2563EB]">
+            <div className="p-2 rounded-xl bg-[#E89AA4]/30 text-[#A85A66]">
               <Target size={18} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#FFFFFF]">AI Recommendation</p>
-              <p className="text-xs text-[#C7D2FE] mt-1">
+              <p className="text-sm font-semibold text-[#2D1E1E]">AI Recommendation</p>
+              <p className="text-xs text-[#8A6A6A] mt-1">
                 {stepsBelowAvg > 0
                   ? `A 20-minute walk today could burn approximately ${Math.round(20 * 110 * 0.04)} calories and add ~2,200 steps to close your gap.`
                   : `Great job! You've exceeded your daily average. Keep up the momentum! 💪`}
@@ -214,7 +214,7 @@ export default function Activity() {
         </div>
 
         <div className="mt-6">
-          <p className="text-[11px] text-[#94A3B8] text-center leading-relaxed">
+          <p className="text-[11px] text-[#B59A9A] text-center leading-relaxed">
             ⚠️ Activity and calorie estimates are approximations. Not medical advice.
           </p>
         </div>
@@ -227,10 +227,10 @@ function ConnectRow({ icon: Icon, name, connected, onToggle }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl bg-[#1E293B]"><Icon size={18} className="text-[#3B82F6]" /></div>
-        <span className="text-sm font-medium text-[#FFFFFF]">{name}</span>
+        <div className="p-2 rounded-xl bg-[#F5E0E0]"><Icon size={18} className="text-[#C87883]" /></div>
+        <span className="text-sm font-medium text-[#2D1E1E]">{name}</span>
       </div>
-      <button onClick={onToggle} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${connected ? 'bg-[#2563EB] text-white' : 'bg-[#0A1628] text-[#C7D2FE]'}`}>
+      <button onClick={onToggle} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${connected ? 'bg-[#A85A66] text-white' : 'bg-[#F5E0E0] text-[#8A6A6A]'}`}>
         {connected ? 'Connected' : 'Connect'}
       </button>
     </div>
@@ -239,10 +239,10 @@ function ConnectRow({ icon: Icon, name, connected, onToggle }) {
 
 function StatBox({ icon: Icon, value, label, color }) {
   return (
-    <div className="rounded-2xl bg-white/5 border border-[#1E293B] p-3 text-center">
+    <div className="rounded-2xl bg-white border border-[#F0D5D5] shadow-sm shadow-rose-200/50 p-3 text-center">
       <Icon size={18} className={`${color} mx-auto mb-1`} />
-      <p className="text-lg font-bold text-[#FFFFFF]">{value}</p>
-      <p className="text-[10px] text-[#C7D2FE]">{label}</p>
+      <p className="text-lg font-bold text-[#2D1E1E]">{value}</p>
+      <p className="text-[10px] text-[#8A6A6A]">{label}</p>
     </div>
   );
 }

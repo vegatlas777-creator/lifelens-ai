@@ -12,7 +12,6 @@ const navItems = [
   { to: '/profile', label: 'Profile', icon: User },
 ];
 
-// Shown in the mobile bottom bar — the 5 most-used destinations for easy thumb reach.
 const mobileNavItems = [
   { to: '/', label: 'Home', icon: Home },
   { to: '/calories', label: 'Calories', icon: UtensilsCrossed },
@@ -24,14 +23,14 @@ const mobileNavItems = [
 export default function Layout() {
   const location = useLocation();
   return (
-    <div className="min-h-screen bg-[#0A1628]">
+    <div className="min-h-screen bg-[#FDF2F2]">
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 flex-col border-r border-white/10 bg-[#0F1B2E] z-40">
+      <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 flex-col border-r border-[#F0D5D5] bg-[#F9E8E8] z-40">
         <div className="px-6 py-8 flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#E89AA4] to-[#C87883] flex items-center justify-center shadow-lg shadow-rose-300/50">
             <Leaf size={20} className="text-white" />
           </div>
-          <span className="text-sm font-bold text-white leading-tight">3 in 1<br />Healthy Choice</span>
+          <span className="text-sm font-bold text-[#2D1E1E] leading-tight font-heading">3 in 1<br />Healthy Choice</span>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-1">
           {navItems.map(({ to, label, icon: Icon }) => {
@@ -42,8 +41,8 @@ export default function Layout() {
                 to={to}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all text-sm font-medium ${
                   isActive
-                    ? 'bg-gradient-to-r from-sky-400/20 to-blue-500/10 text-sky-300 border border-sky-400/20'
-                    : 'text-white/50 hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'bg-gradient-to-r from-[#E89AA4]/25 to-[#C87883]/10 text-[#A85A66] border border-[#E89AA4]/30'
+                    : 'text-[#8A6A6A] hover:text-[#A85A66] hover:bg-white/60 border border-transparent'
                 }`}
               >
                 <Icon size={18} strokeWidth={2.2} />
@@ -52,8 +51,8 @@ export default function Layout() {
             );
           })}
         </nav>
-        <div className="px-6 py-5 border-t border-white/10">
-          <p className="text-[10px] text-white/30 leading-relaxed">⚠️ Estimates are approximations, not medical advice.</p>
+        <div className="px-6 py-5 border-t border-[#F0D5D5]">
+          <p className="text-[10px] text-[#B59A9A] leading-relaxed">⚠️ Estimates are approximations, not medical advice.</p>
         </div>
       </aside>
 
@@ -62,8 +61,8 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      {/* Mobile bottom nav — 5 key destinations, large touch targets */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#0F1B2E]/95 backdrop-blur-xl border-t border-white/10 z-50 safe-area-bottom">
+      {/* Mobile bottom nav */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#F9E8E8]/95 backdrop-blur-xl border-t border-[#F0D5D5] z-50 safe-area-bottom">
         <div className="max-w-md mx-auto flex items-stretch justify-around px-2 py-1.5">
           {mobileNavItems.map(({ to, label, icon: Icon }) => {
             const isActive = to === '/' ? location.pathname === '/' : location.pathname.startsWith(to);
@@ -73,10 +72,10 @@ export default function Layout() {
                 to={to}
                 className="flex flex-col items-center justify-center gap-1 py-1.5 px-2 rounded-2xl transition-all min-w-[56px]"
               >
-                <div className={`p-2 rounded-2xl transition-all ${isActive ? 'bg-gradient-to-br from-sky-400 to-blue-600 text-white shadow-lg shadow-blue-500/30' : 'text-white/45'}`}>
+                <div className={`p-2 rounded-2xl transition-all ${isActive ? 'bg-gradient-to-br from-[#E89AA4] to-[#C87883] text-white shadow-lg shadow-rose-300/50' : 'text-[#B59A9A]'}`}>
                   <Icon size={22} strokeWidth={2.2} />
                 </div>
-                <span className={`text-[10px] font-medium ${isActive ? 'text-sky-300' : 'text-white/45'}`}>{label}</span>
+                <span className={`text-[10px] font-medium ${isActive ? 'text-[#A85A66]' : 'text-[#B59A9A]'}`}>{label}</span>
               </NavLink>
             );
           })}
