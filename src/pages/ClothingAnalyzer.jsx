@@ -4,6 +4,7 @@ import { Camera, Upload, Sparkles, Leaf, Shield, HeartPulse, Wind, Zap, Activity
 import { Link } from 'react-router-dom';
 import { useUsage } from '@/hooks/useUsage';
 import UsageBanner from '@/components/UsageBanner';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function ClothingAnalyzer() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -14,9 +15,11 @@ export default function ClothingAnalyzer() {
   const [limitReached, setLimitReached] = useState(false);
   const fileRef = useRef(null);
   const { material, consume } = useUsage();
+  const { guard } = useAuth();
 
   async function handleFile(file) {
     if (!file) return;
+    if (!guard()) return;
     setError(null);
     setAnalysis(null);
     setLimitReached(false);

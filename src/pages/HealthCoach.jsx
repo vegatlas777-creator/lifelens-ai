@@ -4,12 +4,14 @@ import { Send, Loader2, Sparkles, Trash2, Crown, ArrowRight } from 'lucide-react
 import { Link } from 'react-router-dom';
 import { getSubscriptionStatus } from '@/lib/subscription';
 import { getTodayStr } from '@/lib/dateUtils';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function HealthCoach() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [subStatus, setSubStatus] = useState({ isPremium: false, loading: true });
+  const { guard } = useAuth();
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export default function HealthCoach() {
 
   async function send() {
     if (!input.trim() || loading) return;
+    if (!guard()) return;
     const userMsg = input.trim();
     setInput('');
     setMessages((prev) => [...prev, { id: 'temp-u', role: 'user', content: userMsg }]);

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getTodayStr } from '@/lib/dateUtils';
 import { useUsage } from '@/hooks/useUsage';
 import UsageBanner from '@/components/UsageBanner';
+import { useAuth } from '@/lib/AuthContext';
 
 const mealTypes = [
   { value: 'breakfast', label: 'Breakfast' },
@@ -27,6 +28,7 @@ export default function CalorieCounter() {
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
   const { calorie, consume } = useUsage();
+  const { guard } = useAuth();
   const [limitReached, setLimitReached] = useState(false);
 
   useEffect(() => { loadEntries(); }, []);
@@ -41,6 +43,7 @@ export default function CalorieCounter() {
 
   async function handlePhoto(file) {
     if (!file) return;
+    if (!guard()) return;
     setError(null); setResult(null); setLimitReached(false);
     const check = await consume('calorie_analysis');
     if (!check.allowed) {
@@ -64,6 +67,7 @@ export default function CalorieCounter() {
 
   async function analyzeTextOrVoice(description) {
     if (!description.trim()) return;
+    if (!guard()) return;
     setError(null); setResult(null); setLimitReached(false);
     const check = await consume('calorie_analysis');
     if (!check.allowed) {
@@ -83,6 +87,7 @@ export default function CalorieCounter() {
   }
 
   async function startRecording() {
+    if (!guard()) return;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const recorder = new MediaRecorder(stream);
@@ -119,6 +124,7 @@ export default function CalorieCounter() {
 
   async function saveEntry() {
     if (!result) return;
+    if (!guard()) return;
     try {
       await base44.entities.FoodEntry.create({
         meal_type: mealType,

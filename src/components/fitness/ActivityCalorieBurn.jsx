@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Footprints, Activity, Bike, Mountain, Waves, Music, PersonStanding, Dumbbell, Leaf, Loader2, Calculator, ArrowRight, Clock } from 'lucide-react';
+import { useAuth } from '@/lib/AuthContext';
 
 const activities = [
   { name: 'Walking', icon: Footprints, color: 'text-blue-500', bg: 'bg-blue-50' },
@@ -29,6 +30,7 @@ const inputCls = "w-full rounded-xl bg-[#0A1628] border border-[#1E293B] px-3 py
 
 export default function ActivityCalorieBurn() {
   const [form, setForm] = useState({ age: '', weight: '', height: '', gender: 'male', intensity: 'moderate' });
+  const { guard } = useAuth();
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
@@ -37,6 +39,7 @@ export default function ActivityCalorieBurn() {
 
   async function calculate() {
     const { age, weight, height, gender, intensity } = form;
+    if (!guard()) return;
     if (!age || !weight || !height) {
       setError('Please fill in all fields to get personalized estimates.');
       return;

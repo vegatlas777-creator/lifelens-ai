@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Activity as ActivityIcon, Footprints, MapPin, Timer, Flame, Watch, Smartphone, TrendingUp, Target, ArrowRight } from 'lucide-react';
 import { getTodayStr, getLast7Days } from '@/lib/dateUtils';
+import { useAuth } from '@/lib/AuthContext';
 
 const STEP_GOAL = 10000;
 
@@ -10,6 +11,7 @@ export default function Activity() {
   const [weeklySteps, setWeeklySteps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [connected, setConnected] = useState({ apple: false, google: false, phone: true });
+  const { guard } = useAuth();
 
   useEffect(() => {
     loadData();
@@ -59,6 +61,7 @@ export default function Activity() {
   }
 
   async function addActivity(type, minutes) {
+    if (!guard()) return;
     if (!todayLog) return;
     let updates = { ...todayLog };
     if (type === 'walking') {

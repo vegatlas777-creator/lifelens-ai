@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, ImagePlus, X, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { CATEGORIES } from '@/lib/communityData';
+import { useAuth } from '@/lib/AuthContext';
 
 const inputCls = "w-full rounded-xl bg-[#0A1628] border border-[#1E293B] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#FFFFFF]";
 
@@ -13,6 +14,7 @@ export default function PostForm({ user, isPremium, onCreated, onCancel }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [saving, setSaving] = useState(false);
+  const { guard } = useAuth();
 
   async function handleFile(e) {
     const file = e.target.files?.[0];
@@ -23,6 +25,7 @@ export default function PostForm({ user, isPremium, onCreated, onCancel }) {
 
   async function submit() {
     if (!title.trim() || !content.trim() || saving) return;
+    if (!guard()) return;
     setSaving(true);
     try {
       let image_url = null;

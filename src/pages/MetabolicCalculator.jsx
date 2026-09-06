@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Calculator, Activity, Target, Loader2, TrendingDown, Minus, TrendingUp, ArrowRight } from 'lucide-react';
 import { activityLevels } from '@/lib/workoutData';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function MetabolicCalculator() {
   const [form, setForm] = useState({ age: '', gender: 'male', height_cm: '', weight_kg: '', activity_level: 'moderate' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [existingProfile, setExistingProfile] = useState(null);
+  const { guard } = useAuth();
 
   useEffect(() => { loadProfile(); }, []);
 
@@ -35,6 +37,7 @@ export default function MetabolicCalculator() {
   }
 
   async function save(goal) {
+    if (!guard()) return;
     setLoading(true);
     try {
       const a = parseFloat(form.age), h = parseFloat(form.height_cm), w = parseFloat(form.weight_kg);

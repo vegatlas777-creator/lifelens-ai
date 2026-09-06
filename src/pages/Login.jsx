@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { LogIn, Mail, Lock, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
 import GoogleIcon from "@/components/GoogleIcon";
+import { useAuth } from "@/lib/AuthContext";
 
 export default function Login() {
+  const { enterGuest } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -120,6 +122,15 @@ export default function Login() {
           )}
         </Button>
       </form>
+
+      <div className="mt-6 text-center">
+        <button
+          onClick={() => { enterGuest(); window.location.href = "/"; }}
+          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Browse as guest →
+        </button>
+      </div>
     </AuthLayout>
   );
 }

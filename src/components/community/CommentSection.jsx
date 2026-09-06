@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, Heart, Reply, Flag, Send, ImagePlus, X, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { timeAgo } from '@/lib/communityData';
+import { useAuth } from '@/lib/AuthContext';
 
 export default function CommentSection({ postId, user, isPremium }) {
   const [comments, setComments] = useState([]);
@@ -13,6 +14,7 @@ export default function CommentSection({ postId, user, isPremium }) {
   const [submitting, setSubmitting] = useState(false);
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyText, setReplyText] = useState('');
+  const { guard } = useAuth();
 
   useEffect(() => { load(); }, [postId]);
 
@@ -26,6 +28,7 @@ export default function CommentSection({ postId, user, isPremium }) {
 
   async function addComment() {
     if (!newComment.trim() || submitting) return;
+    if (!guard()) return;
     setSubmitting(true);
     try {
       let image_url = null;
@@ -52,6 +55,7 @@ export default function CommentSection({ postId, user, isPremium }) {
 
   async function addReply(parentId) {
     if (!replyText.trim()) return;
+    if (!guard()) return;
     try {
       await base44.entities.Comment.create({
         post_id: postId,
@@ -69,6 +73,7 @@ export default function CommentSection({ postId, user, isPremium }) {
   }
 
   async function toggleLike(comment) {
+    if (!guard()) return;
     const liked = comment.liked_by?.includes(user?.id);
     try {
       await base44.entities.Comment.updateMany(

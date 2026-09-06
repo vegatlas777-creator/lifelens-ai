@@ -25,6 +25,7 @@ import ThankYou from '@/pages/ThankYou';
 import PremiumProfile from '@/pages/PremiumProfile';
 import Community from '@/pages/Community';
 import PostDetail from '@/pages/PostDetail';
+import GuestGate from '@/components/GuestGate';
 import { Navigate } from 'react-router-dom';
 // Add page imports here
 
@@ -53,6 +54,8 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
+    <>
+    <GuestGate />
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -78,6 +81,7 @@ const AuthenticatedApp = () => {
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
+    </>
   );
 };
 

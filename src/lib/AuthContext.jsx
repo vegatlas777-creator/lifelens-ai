@@ -13,6 +13,8 @@ export const AuthProvider = ({ children }) => {
   const [authError, setAuthError] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [appPublicSettings, setAppPublicSettings] = useState(null); // Contains only { id, public_settings }
+  const [isGuest, setIsGuest] = useState(() => sessionStorage.getItem('guestMode') === 'true');
+  const [guestGateOpen, setGuestGateOpen] = useState(false);
 
   useEffect(() => {
     checkAppState();
@@ -96,6 +98,8 @@ export const AuthProvider = ({ children }) => {
       const currentUser = await base44.auth.me();
       setUser(currentUser);
       setIsAuthenticated(true);
+      sessionStorage.removeItem('guestMode');
+      setIsGuest(false);
       setIsLoadingAuth(false);
       setAuthChecked(true);
     } catch (error) {
@@ -132,6 +136,29 @@ export const AuthProvider = ({ children }) => {
     base44.auth.redirectToLogin(window.location.href);
   };
 
+  const enterGuest = () => {
+    sessionStorage.setItem('guestMode', 'true');
+    setIsGuest(true);
+  };
+
+  const exitGuest = () => {
+    sessionStorage.removeItem('guestMode');
+    setIsGuest(false);
+    setGuestGateOpen(false);
+  };
+
+  const showGuestGate = () => setGuestGateOpen(true);
+  const closeGuestGate = () => setGuestGateOpen(false);
+
+  const guard = (fn) => {
+    if (isGuest) {
+      setGuestGateOpen(true);
+      return false;
+    }
+    if (fn) fn();
+    return true;
+  };
+
   return (
     <AuthContext.Provider value={{ 
       user, 
@@ -144,7 +171,14 @@ export const AuthProvider = ({ children }) => {
       logout,
       navigateToLogin,
       checkUserAuth,
-      checkAppState
+      checkAppState,
+      isGuest,
+      guestGateOpen,
+      enterGuest,
+      exitGuest,
+      showGuestGate,
+      closeGuestGate,
+      guard
     }}>
       {children}
     </AuthContext.Provider>
