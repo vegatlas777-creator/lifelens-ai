@@ -161,10 +161,10 @@ export default function CalorieCounter() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FDFBF8] pb-4">
+    <div className="min-h-screen bg-[#F0F9FF] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#1A1A1A]">Calorie Counter</h1>
-        <p className="text-sm text-[#666]">Log meals by photo, voice, or text</p>
+        <h1 className="text-2xl font-bold text-[#0F172A]">Calorie Counter</h1>
+        <p className="text-sm text-[#64748B]">Log meals by photo, voice, or text</p>
       </div>
 
       <div className="px-5 mt-2">
@@ -175,7 +175,7 @@ export default function CalorieCounter() {
         {/* Today summary */}
         <div className="relative overflow-hidden rounded-3xl">
           <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/80 to-[#1A1A1A]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/80 to-[#0F172A]/40" />
           <div className="relative p-5 text-white">
             <p className="text-sm opacity-80 font-medium">Today's Intake</p>
             <p className="text-4xl font-bold mt-1">{Math.round(todayTotals.calories)} <span className="text-base font-normal opacity-70">kcal</span></p>
@@ -201,7 +201,7 @@ export default function CalorieCounter() {
         {mode === 'photo' && (imagePreview || loading) && (
           <div className="mt-4">
             {imagePreview && (
-              <div className="relative rounded-3xl overflow-hidden border border-[#F5EFE6]">
+              <div className="relative rounded-3xl overflow-hidden border border-[#DBEAFE]">
                 <img src={imagePreview} alt="food" className="w-full h-48 object-cover" />
                 {!loading && <button onClick={resetAll} className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur"><X size={18} /></button>}
               </div>
@@ -210,14 +210,14 @@ export default function CalorieCounter() {
         )}
 
         {mode === 'voice' && (
-          <div className="mt-4 flex flex-col items-center gap-3 py-8 rounded-3xl bg-white border border-[#F5EFE6]">
+          <div className="mt-4 flex flex-col items-center gap-3 py-8 rounded-3xl bg-white border border-[#DBEAFE]">
             <button
               onClick={recording ? stopRecording : startRecording}
-              className={`p-6 rounded-full transition-all ${recording ? 'bg-red-500 text-white animate-pulse' : 'bg-[#FFD5A8] text-[#1A1A1A]'}`}
+              className={`p-6 rounded-full transition-all ${recording ? 'bg-red-500 text-white animate-pulse' : 'bg-[#BFDBFE] text-[#0F172A]'}`}
             >
               <Mic size={28} />
             </button>
-            <p className="text-sm text-[#666]">{recording ? 'Tap to stop recording' : 'Tap to describe your meal'}</p>
+            <p className="text-sm text-[#64748B]">{recording ? 'Tap to stop recording' : 'Tap to describe your meal'}</p>
           </div>
         )}
 
@@ -227,12 +227,12 @@ export default function CalorieCounter() {
               value={textDesc}
               onChange={(e) => setTextDesc(e.target.value)}
               placeholder="Describe what you ate... e.g., 'A bowl of oatmeal with banana and honey'"
-              className="w-full rounded-2xl bg-white border border-[#F5EFE6] p-4 text-sm resize-none focus:outline-none focus:border-[#FF9F43] min-h-24"
+              className="w-full rounded-2xl bg-white border border-[#DBEAFE] p-4 text-sm resize-none focus:outline-none focus:border-[#2563EB] min-h-24"
             />
             <button
               onClick={() => analyzeTextOrVoice(textDesc)}
               disabled={!textDesc.trim() || loading}
-              className="w-full rounded-full bg-[#FFD5A8] text-[#1A1A1A] py-3 font-semibold text-sm disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full rounded-full bg-[#BFDBFE] text-[#0F172A] py-3 font-semibold text-sm disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading ? <><Loader2 size={16} className="animate-spin" /> Analyzing...</> : <>Estimate Nutrition <ArrowRight size={16} /></>}
             </button>
@@ -241,8 +241,8 @@ export default function CalorieCounter() {
 
         {loading && !result && (
           <div className="flex flex-col items-center gap-3 mt-6 py-8">
-            <Loader2 size={32} className="text-[#FF9F43] animate-spin" />
-            <p className="text-sm text-[#666]">Estimating nutrition with AI...</p>
+            <Loader2 size={32} className="text-[#2563EB] animate-spin" />
+            <p className="text-sm text-[#64748B]">Estimating nutrition with AI...</p>
           </div>
         )}
 
@@ -254,11 +254,11 @@ export default function CalorieCounter() {
 
         {limitReached && (
           <div className="mt-4 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 p-5 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#FDDDBD] flex items-center justify-center mx-auto mb-3">
-              <Crown size={24} className="text-[#E8821E]" />
+            <div className="w-12 h-12 rounded-full bg-[#E0F2FE] flex items-center justify-center mx-auto mb-3">
+              <Crown size={24} className="text-[#1D4ED8]" />
             </div>
-            <p className="text-sm font-semibold text-[#1A1A1A]">Weekly Limit Reached</p>
-            <p className="text-xs text-[#666] mt-1 leading-relaxed">
+            <p className="text-sm font-semibold text-[#0F172A]">Weekly Limit Reached</p>
+            <p className="text-xs text-[#64748B] mt-1 leading-relaxed">
               You have used all 5 free calorie analyses for this week. Upgrade to Premium for unlimited calorie analysis, unlimited food photo uploads, personalized AI coaching, and advanced progress tracking.
             </p>
             <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold">
@@ -269,8 +269,8 @@ export default function CalorieCounter() {
 
         {result && (
           <div className="mt-5 space-y-4">
-            <div className="rounded-3xl bg-white border border-[#F5EFE6] p-5">
-              <p className="font-semibold text-[#1A1A1A]">{result.description}</p>
+            <div className="rounded-3xl bg-white border border-[#DBEAFE] p-5">
+              <p className="font-semibold text-[#0F172A]">{result.description}</p>
               <div className="grid grid-cols-2 gap-3 mt-4">
                 <ResultStat label="Calories" value={`${result.calories}`} unit="kcal" icon={Flame} />
                 <ResultStat label="Protein" value={`${result.protein}`} unit="g" />
@@ -281,13 +281,13 @@ export default function CalorieCounter() {
             </div>
 
             <div>
-              <p className="text-xs font-medium text-[#666] mb-2 px-1">Save as</p>
+              <p className="text-xs font-medium text-[#64748B] mb-2 px-1">Save as</p>
               <div className="flex gap-2 overflow-x-auto">
                 {mealTypes.map((m) => (
                   <button
                     key={m.value}
                     onClick={() => setMealType(m.value)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${mealType === m.value ? 'bg-[#FF9F43] text-white' : 'bg-white border border-[#F5EFE6] text-[#666]'}`}
+                    className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${mealType === m.value ? 'bg-[#2563EB] text-white' : 'bg-white border border-[#DBEAFE] text-[#64748B]'}`}
                   >
                     {m.label}
                   </button>
@@ -296,30 +296,30 @@ export default function CalorieCounter() {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={resetAll} className="flex-1 rounded-full border border-[#F5EFE6] bg-white py-3 font-medium text-sm text-[#1A1A1A]">Cancel</button>
-              <button onClick={saveEntry} className="flex-1 rounded-full bg-[#FFD5A8] text-[#1A1A1A] py-3 font-medium text-sm">Save to Diary</button>
+              <button onClick={resetAll} className="flex-1 rounded-full border border-[#DBEAFE] bg-white py-3 font-medium text-sm text-[#0F172A]">Cancel</button>
+              <button onClick={saveEntry} className="flex-1 rounded-full bg-[#BFDBFE] text-[#0F172A] py-3 font-medium text-sm">Save to Diary</button>
             </div>
           </div>
         )}
 
         <div className="mt-8">
-          <h3 className="font-semibold text-sm mb-3 text-[#1A1A1A]">Today's Diary</h3>
+          <h3 className="font-semibold text-sm mb-3 text-[#0F172A]">Today's Diary</h3>
           {entries.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-[#FDDDBD] p-8 text-center">
-              <p className="text-sm text-[#666]">No meals logged yet today.</p>
+            <div className="rounded-2xl border border-dashed border-[#E0F2FE] p-8 text-center">
+              <p className="text-sm text-[#64748B]">No meals logged yet today.</p>
             </div>
           ) : (
             <div className="space-y-2">
               {entries.map((e) => (
-                <div key={e.id} className="rounded-2xl bg-white border border-[#F5EFE6] p-3 flex items-center gap-3">
+                <div key={e.id} className="rounded-2xl bg-white border border-[#DBEAFE] p-3 flex items-center gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] uppercase tracking-wide bg-[#FDDDBD] text-[#E8821E] px-2 py-0.5 rounded-full font-medium">{e.meal_type}</span>
-                      <span className="text-sm font-medium truncate text-[#1A1A1A]">{e.description}</span>
+                      <span className="text-[10px] uppercase tracking-wide bg-[#E0F2FE] text-[#1D4ED8] px-2 py-0.5 rounded-full font-medium">{e.meal_type}</span>
+                      <span className="text-sm font-medium truncate text-[#0F172A]">{e.description}</span>
                     </div>
-                    <p className="text-xs text-[#666] mt-1">{Math.round(e.calories)} kcal · P{Math.round(e.protein)}g · C{Math.round(e.carbs)}g · F{Math.round(e.fats)}g</p>
+                    <p className="text-xs text-[#64748B] mt-1">{Math.round(e.calories)} kcal · P{Math.round(e.protein)}g · C{Math.round(e.carbs)}g · F{Math.round(e.fats)}g</p>
                   </div>
-                  <button onClick={() => deleteEntry(e.id)} className="p-2 text-[#999] hover:text-red-500">
+                  <button onClick={() => deleteEntry(e.id)} className="p-2 text-[#94A3B8] hover:text-red-500">
                     <Trash2 size={16} />
                   </button>
                 </div>
@@ -329,7 +329,7 @@ export default function CalorieCounter() {
         </div>
 
         <div className="mt-6">
-          <p className="text-[11px] text-[#999] text-center leading-relaxed">
+          <p className="text-[11px] text-[#94A3B8] text-center leading-relaxed">
             ⚠️ Calorie and nutrition estimates are AI-generated approximations and may not be exact. Not medical advice.
           </p>
         </div>
@@ -340,11 +340,11 @@ export default function CalorieCounter() {
 
 function ModeButton({ icon: Icon, label, onClick }) {
   return (
-    <button onClick={onClick} className="rounded-2xl bg-white border border-[#F5EFE6] p-4 flex flex-col items-center gap-2 hover:border-[#FF9F43] transition-colors">
-      <div className="p-2.5 rounded-xl bg-[#FDDDBD]">
-        <Icon size={20} className="text-[#E8821E]" />
+    <button onClick={onClick} className="rounded-2xl bg-white border border-[#DBEAFE] p-4 flex flex-col items-center gap-2 hover:border-[#2563EB] transition-colors">
+      <div className="p-2.5 rounded-xl bg-[#E0F2FE]">
+        <Icon size={20} className="text-[#1D4ED8]" />
       </div>
-      <span className="text-xs font-medium text-[#1A1A1A]">{label}</span>
+      <span className="text-xs font-medium text-[#0F172A]">{label}</span>
     </button>
   );
 }
@@ -360,12 +360,12 @@ function MacroPill({ label, value, unit }) {
 
 function ResultStat({ label, value, unit, icon: Icon }) {
   return (
-    <div className="rounded-xl bg-[#FDF6EE] p-3">
+    <div className="rounded-xl bg-[#EFF6FF] p-3">
       <div className="flex items-center gap-1.5 mb-1">
-        {Icon && <Icon size={12} className="text-[#FF9F43]" />}
-        <span className="text-xs text-[#666]">{label}</span>
+        {Icon && <Icon size={12} className="text-[#2563EB]" />}
+        <span className="text-xs text-[#64748B]">{label}</span>
       </div>
-      <p className="text-xl font-bold text-[#1A1A1A]">{value} <span className="text-xs font-normal text-[#999]">{unit}</span></p>
+      <p className="text-xl font-bold text-[#0F172A]">{value} <span className="text-xs font-normal text-[#94A3B8]">{unit}</span></p>
     </div>
   );
 }

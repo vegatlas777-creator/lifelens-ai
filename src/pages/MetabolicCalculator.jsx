@@ -53,15 +53,15 @@ export default function MetabolicCalculator() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFBF8] pb-4">
+    <div className="min-h-screen bg-[#F0F9FF] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#1A1A1A]">Metabolic Calculator</h1>
-        <p className="text-sm text-[#666]">BMR, TDEE & calorie targets</p>
+        <h1 className="text-2xl font-bold text-[#0F172A]">Metabolic Calculator</h1>
+        <p className="text-sm text-[#64748B]">BMR, TDEE & calorie targets</p>
       </div>
 
       <div className="px-5 mt-2">
         {/* Form */}
-        <div className="rounded-3xl bg-white border border-[#F5EFE6] p-5 space-y-4">
+        <div className="rounded-3xl bg-white border border-[#DBEAFE] p-5 space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <Field label="Age">
               <input type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} placeholder="30" className={inputCls} />
@@ -69,7 +69,7 @@ export default function MetabolicCalculator() {
             <Field label="Gender">
               <div className="flex gap-2">
                 {['male', 'female'].map((g) => (
-                  <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize transition-colors ${form.gender === g ? 'bg-[#FF9F43] text-white' : 'bg-[#FDF6EE] text-[#666]'}`}>{g}</button>
+                  <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize transition-colors ${form.gender === g ? 'bg-[#2563EB] text-white' : 'bg-[#EFF6FF] text-[#64748B]'}`}>{g}</button>
                 ))}
               </div>
             </Field>
@@ -87,7 +87,7 @@ export default function MetabolicCalculator() {
               {activityLevels.map((l) => (<option key={l.value} value={l.value}>{l.label} — {l.desc}</option>))}
             </select>
           </Field>
-          <button onClick={calculate} className="w-full rounded-full bg-[#FFD5A8] text-[#1A1A1A] py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#FFC58A] transition-colors">
+          <button onClick={calculate} className="w-full rounded-full bg-[#BFDBFE] text-[#0F172A] py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#93C5FD] transition-colors">
             <Calculator size={16} /> Calculate <ArrowRight size={16} />
           </button>
         </div>
@@ -108,7 +108,7 @@ export default function MetabolicCalculator() {
               </div>
               <div className="relative overflow-hidden rounded-3xl">
                 <img src="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?w=400&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#FF9F43]/90 to-[#E8821E]/90" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#2563EB]/90 to-[#1D4ED8]/90" />
                 <div className="relative p-4 text-white">
                   <Target size={20} className="opacity-80 mb-2" />
                   <p className="text-xs opacity-80">TDEE</p>
@@ -118,26 +118,26 @@ export default function MetabolicCalculator() {
               </div>
             </div>
 
-            <div className="rounded-3xl bg-white border border-[#F5EFE6] p-5">
-              <p className="text-sm font-semibold mb-3 text-[#1A1A1A]">Calorie Targets by Goal</p>
+            <div className="rounded-3xl bg-white border border-[#DBEAFE] p-5">
+              <p className="text-sm font-semibold mb-3 text-[#0F172A]">Calorie Targets by Goal</p>
               <div className="space-y-3">
                 <GoalRow icon={TrendingDown} label="Weight Loss" calories={result.loss} active={result.goal === 'loss'} onClick={() => save('loss')} color="text-blue-500" saving={loading} />
-                <GoalRow icon={Minus} label="Maintenance" calories={result.maintenance} active={result.goal === 'maintenance'} onClick={() => save('maintenance')} color="text-[#FF9F43]" saving={loading} />
-                <GoalRow icon={TrendingUp} label="Weight Gain" calories={result.gain} active={result.goal === 'gain'} onClick={() => save('gain')} color="text-amber-500" saving={loading} />
+                <GoalRow icon={Minus} label="Maintenance" calories={result.maintenance} active={result.goal === 'maintenance'} onClick={() => save('maintenance')} color="text-[#2563EB]" saving={loading} />
+                <GoalRow icon={TrendingUp} label="Weight Gain" calories={result.gain} active={result.goal === 'gain'} onClick={() => save('gain')} color="text-blue-500" saving={loading} />
               </div>
-              <p className="text-xs text-[#666] mt-3">Tap a goal to set it as your daily target on the dashboard.</p>
+              <p className="text-xs text-[#64748B] mt-3">Tap a goal to set it as your daily target on the dashboard.</p>
             </div>
 
-            <div className="rounded-2xl bg-[#FDDDBD]/40 border border-[#FDDDBD] p-4">
-              <p className="text-xs text-[#666] leading-relaxed">
-                <strong className="text-[#1A1A1A]">BMR</strong> is the energy your body needs at complete rest. <strong className="text-[#1A1A1A]">TDEE</strong> multiplies BMR by your activity level to estimate total daily calorie burn. A deficit/surplus of ~500 kcal/day typically results in ~0.5 kg change per week.
+            <div className="rounded-2xl bg-[#E0F2FE]/40 border border-[#E0F2FE] p-4">
+              <p className="text-xs text-[#64748B] leading-relaxed">
+                <strong className="text-[#0F172A]">BMR</strong> is the energy your body needs at complete rest. <strong className="text-[#0F172A]">TDEE</strong> multiplies BMR by your activity level to estimate total daily calorie burn. A deficit/surplus of ~500 kcal/day typically results in ~0.5 kg change per week.
               </p>
             </div>
           </div>
         )}
 
         <div className="mt-6">
-          <p className="text-[11px] text-[#999] text-center leading-relaxed">
+          <p className="text-[11px] text-[#94A3B8] text-center leading-relaxed">
             ⚠️ BMR and TDEE are estimates based on the Mifflin-St Jeor equation. Not medical advice.
           </p>
         </div>
@@ -146,12 +146,12 @@ export default function MetabolicCalculator() {
   );
 }
 
-const inputCls = "w-full rounded-xl bg-[#FDF6EE] border border-[#F5EFE6] px-3 py-2.5 text-sm focus:outline-none focus:border-[#FF9F43] text-[#1A1A1A]";
+const inputCls = "w-full rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#0F172A]";
 
 function Field({ label, children }) {
   return (
     <div>
-      <label className="text-xs font-medium text-[#666] mb-1.5 block">{label}</label>
+      <label className="text-xs font-medium text-[#64748B] mb-1.5 block">{label}</label>
       {children}
     </div>
   );
@@ -159,11 +159,11 @@ function Field({ label, children }) {
 
 function GoalRow({ icon: Icon, label, calories, active, onClick, color, saving }) {
   return (
-    <button onClick={onClick} disabled={saving} className={`w-full flex items-center gap-3 rounded-2xl p-3 transition-colors ${active ? 'bg-[#FDDDBD]/40 border border-[#FF9F43]/30' : 'border border-[#F5EFE6]'}`}>
+    <button onClick={onClick} disabled={saving} className={`w-full flex items-center gap-3 rounded-2xl p-3 transition-colors ${active ? 'bg-[#E0F2FE]/40 border border-[#2563EB]/30' : 'border border-[#DBEAFE]'}`}>
       <Icon size={18} className={color} />
-      <span className="text-sm font-medium flex-1 text-left text-[#1A1A1A]">{label}</span>
-      <span className="font-bold text-[#1A1A1A]">{calories} kcal</span>
-      {saving && <Loader2 size={14} className="animate-spin text-[#666]" />}
+      <span className="text-sm font-medium flex-1 text-left text-[#0F172A]">{label}</span>
+      <span className="font-bold text-[#0F172A]">{calories} kcal</span>
+      {saving && <Loader2 size={14} className="animate-spin text-[#64748B]" />}
     </button>
   );
 }

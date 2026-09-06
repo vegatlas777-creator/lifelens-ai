@@ -35,7 +35,7 @@ export default function Pricing() {
   }
 
   return (
-    <div className="pb-4 min-h-screen bg-[#FDFBF8]">
+    <div className="pb-4 min-h-screen bg-[#F0F9FF]">
       {/* Hero with background images */}
       <div className="relative overflow-hidden">
         {/* Background image collage */}
@@ -48,7 +48,7 @@ export default function Pricing() {
           <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&q=70" alt="" className="w-full h-full object-cover" />
         </div>
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-900/80 via-orange-800/85 to-red-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/80 via-blue-800/85 to-indigo-900/90" />
         <div className="relative px-5 pt-14 pb-8 text-center text-white">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/25 backdrop-blur mb-3">
             <Crown size={14} />
@@ -62,12 +62,12 @@ export default function Pricing() {
       <div className="px-5 -mt-4 relative">
         {subStatus.loading ? (
           <div className="flex justify-center py-8">
-            <Loader2 size={32} className="text-[#FF9F43] animate-spin" />
+            <Loader2 size={32} className="text-[#2563EB] animate-spin" />
           </div>
         ) : subStatus.isPremium ? (
-          <div className="rounded-3xl bg-white border-2 border-[#FF9F43] p-6 text-center shadow-lg">
-            <div className="w-14 h-14 rounded-full bg-[#FDDDBD] flex items-center justify-center mx-auto mb-3">
-              <Crown size={28} className="text-[#E8821E]" />
+          <div className="rounded-3xl bg-white border-2 border-[#2563EB] p-6 text-center shadow-lg">
+            <div className="w-14 h-14 rounded-full bg-[#E0F2FE] flex items-center justify-center mx-auto mb-3">
+              <Crown size={28} className="text-[#1D4ED8]" />
             </div>
             <h2 className="text-xl font-bold">You're Premium! 👑</h2>
             <p className="text-sm text-muted-foreground mt-1">You have full access to all premium features.</p>
@@ -112,9 +112,9 @@ export default function Pricing() {
             </div>
 
             {/* Promotional offers */}
-            <div className="mt-6 rounded-2xl bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-950/30 dark:to-orange-950/30 border border-amber-300/50 dark:border-amber-800/30 p-4">
+            <div className="mt-6 rounded-2xl bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-blue-950/30 dark:to-cyan-950/30 border border-blue-300/50 dark:border-blue-800/30 p-4">
               <p className="text-sm font-semibold flex items-center gap-2">
-                <Sparkles size={16} className="text-orange-500" /> Limited Time Offers
+                <Sparkles size={16} className="text-blue-500" /> Limited Time Offers
               </p>
               <ul className="mt-2 space-y-1.5">
                 <li className="text-xs text-muted-foreground">🎁 7-day free trial on all plans</li>
@@ -148,7 +148,7 @@ export default function Pricing() {
 
 function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, features, cta, loading, onClick, highlighted }) {
   return (
-    <div className={`rounded-3xl p-6 shadow-lg transition-all ${highlighted ? 'bg-white border-2 border-[#FF9F43] scale-[1.02]' : 'bg-white border border-[#F5EFE6]'}`}>
+    <div className={`rounded-3xl p-6 shadow-lg transition-all ${highlighted ? 'bg-white border-2 border-[#2563EB] scale-[1.02]' : 'bg-white border border-[#DBEAFE]'}`}>
       {badge && (
         <div className={`inline-block px-3 py-1 rounded-full text-white text-xs font-bold mb-3 ${badgeColor}`}>
           {badge}
@@ -176,7 +176,7 @@ function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, fea
       <button
       onClick={onClick}
       disabled={loading}
-      className="w-full mt-5 rounded-full bg-[#FFD5A8] text-[#1A1A1A] py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+      className="w-full mt-5 rounded-full bg-[#BFDBFE] text-[#0F172A] py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
       >
         {loading ? <Loader2 size={18} className="animate-spin" /> : <Crown size={18} />}
         {cta}

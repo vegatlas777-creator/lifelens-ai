@@ -61,17 +61,17 @@ export default function PostDetail() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#FDFBF8]">
-        <Loader2 size={28} className="text-[#FF9F43] animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#F0F9FF]">
+        <Loader2 size={28} className="text-[#2563EB] animate-spin" />
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#FDFBF8] flex flex-col items-center justify-center px-5">
-        <p className="text-sm text-[#666]">Post not found.</p>
-        <Link to="/community" className="mt-3 px-4 py-2 rounded-full bg-[#FFD5A8] text-[#1A1A1A] text-sm font-semibold">Back to Community</Link>
+      <div className="min-h-screen bg-[#F0F9FF] flex flex-col items-center justify-center px-5">
+        <p className="text-sm text-[#64748B]">Post not found.</p>
+        <Link to="/community" className="mt-3 px-4 py-2 rounded-full bg-[#BFDBFE] text-[#0F172A] text-sm font-semibold">Back to Community</Link>
       </div>
     );
   }
@@ -82,41 +82,41 @@ export default function PostDetail() {
   const likeCount = post.liked_by?.length || 0;
 
   return (
-    <div className="min-h-screen bg-[#FDFBF8] pb-4">
+    <div className="min-h-screen bg-[#F0F9FF] pb-4">
       {/* Header */}
-      <div className="px-5 pt-12 pb-3 flex items-center gap-3 border-b border-[#F5EFE6]">
-        <button onClick={() => navigate('/community')} className="p-1.5 rounded-full hover:bg-[#FDF6EE]"><ArrowLeft size={20} className="text-[#1A1A1A]" /></button>
-        <h1 className="text-lg font-bold text-[#1A1A1A]">Discussion</h1>
+      <div className="px-5 pt-12 pb-3 flex items-center gap-3 border-b border-[#DBEAFE]">
+        <button onClick={() => navigate('/community')} className="p-1.5 rounded-full hover:bg-[#EFF6FF]"><ArrowLeft size={20} className="text-[#0F172A]" /></button>
+        <h1 className="text-lg font-bold text-[#0F172A]">Discussion</h1>
       </div>
 
       {/* Post */}
       <div className="px-5 mt-4">
-        <div className="rounded-3xl bg-white border border-[#F5EFE6] overflow-hidden">
+        <div className="rounded-3xl bg-white border border-[#DBEAFE] overflow-hidden">
           <div className="p-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FFD5A8] to-[#FF9F43] flex items-center justify-center text-white text-sm font-bold">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#BFDBFE] to-[#2563EB] flex items-center justify-center text-white text-sm font-bold">
                 {post.author_name?.[0]?.toUpperCase() || 'U'}
               </div>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-[#1A1A1A]">{post.author_name || 'Member'}</p>
-                <p className="text-[10px] text-[#999]">{timeAgo(post.created_date)}</p>
+                <p className="text-sm font-semibold text-[#0F172A]">{post.author_name || 'Member'}</p>
+                <p className="text-[10px] text-[#94A3B8]">{timeAgo(post.created_date)}</p>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-[#FDF6EE] text-[10px] font-medium text-[#666]">{cat.emoji} {cat.label}</span>
+              <span className="px-2.5 py-1 rounded-full bg-[#EFF6FF] text-[10px] font-medium text-[#64748B]">{cat.emoji} {cat.label}</span>
             </div>
-            <h2 className="text-lg font-bold text-[#1A1A1A] mb-2">{post.title}</h2>
-            <p className="text-sm text-[#666] leading-relaxed whitespace-pre-wrap">{post.content}</p>
+            <h2 className="text-lg font-bold text-[#0F172A] mb-2">{post.title}</h2>
+            <p className="text-sm text-[#64748B] leading-relaxed whitespace-pre-wrap">{post.content}</p>
           </div>
           {post.image_url && (
             <img src={post.image_url} alt={post.title} className="w-full max-h-96 object-cover" />
           )}
-          <div className="flex items-center gap-1 px-3 py-2 border-t border-[#F5EFE6]">
-            <button onClick={toggleLike} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${liked ? 'text-rose-500 bg-rose-50' : 'text-[#666] hover:bg-[#FDF6EE]'}`}>
+          <div className="flex items-center gap-1 px-3 py-2 border-t border-[#DBEAFE]">
+            <button onClick={toggleLike} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${liked ? 'text-rose-500 bg-rose-50' : 'text-[#64748B] hover:bg-[#EFF6FF]'}`}>
               <Heart size={16} fill={liked ? 'currentColor' : 'none'} /> {likeCount > 0 && likeCount}
             </button>
-            <button onClick={toggleFollow} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${following ? 'text-[#FF9F43] bg-[#FDDDBD]/30' : 'text-[#666] hover:bg-[#FDF6EE]'}`}>
+            <button onClick={toggleFollow} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${following ? 'text-[#2563EB] bg-[#E0F2FE]/30' : 'text-[#64748B] hover:bg-[#EFF6FF]'}`}>
               {following ? <BellOff size={16} /> : <Bell size={16} />} {following ? 'Following' : 'Follow'}
             </button>
-            <button onClick={reportPost} className="ml-auto px-3 py-2 rounded-full text-sm text-[#999] hover:bg-[#FDF6EE]">
+            <button onClick={reportPost} className="ml-auto px-3 py-2 rounded-full text-sm text-[#94A3B8] hover:bg-[#EFF6FF]">
               <Flag size={16} />
             </button>
           </div>
@@ -126,9 +126,9 @@ export default function PostDetail() {
       {/* Premium tip */}
       {isPremium && (
         <div className="px-5 mt-4">
-          <div className="rounded-2xl bg-[#FDDDBD]/30 border border-[#FDDDBD] p-3 flex items-center gap-2">
+          <div className="rounded-2xl bg-[#E0F2FE]/30 border border-[#E0F2FE] p-3 flex items-center gap-2">
             <Crown size={14} className="text-[#E8821E]" />
-            <p className="text-xs text-[#666]">You can add photos to your comments!</p>
+            <p className="text-xs text-[#64748B]">You can add photos to your comments!</p>
           </div>
         </div>
       )}
@@ -139,7 +139,7 @@ export default function PostDetail() {
       </div>
 
       <div className="px-5 mt-5">
-        <p className="text-[11px] text-[#999] text-center leading-relaxed">
+        <p className="text-[11px] text-[#94A3B8] text-center leading-relaxed">
           ⚠️ Community content is user-generated and not medical advice. Be respectful and follow community guidelines.
         </p>
       </div>

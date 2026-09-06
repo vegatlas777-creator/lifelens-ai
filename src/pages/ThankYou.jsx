@@ -11,7 +11,7 @@ export default function ThankYou() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-500">
       <div className="bg-card rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
         {status === 'processing' ? (
           <>
