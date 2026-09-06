@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { User, Moon, Sun, LogOut, Activity, Flame, Dumbbell, ChevronRight, Crown } from 'lucide-react';
+import { User, LogOut, Activity, Flame, Dumbbell, ChevronRight, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getTodayStr } from '@/lib/dateUtils';
 import { getSubscriptionStatus } from '@/lib/subscription';
@@ -9,12 +9,10 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [todayStats, setTodayStats] = useState({ calories: 0, burned: 0, workouts: 0 });
-  const [dark, setDark] = useState(false);
   const [subStatus, setSubStatus] = useState({ isPremium: false, loading: true });
 
   useEffect(() => {
     loadData();
-    setDark(document.documentElement.classList.contains('dark'));
   }, []);
 
   async function loadData() {
@@ -36,13 +34,6 @@ export default function Profile() {
       if (profiles.length) setProfile(profiles[0]);
       setSubStatus(sub);
     } catch (e) { console.error(e); }
-  }
-
-  function toggleDark() {
-    const newDark = !dark;
-    setDark(newDark);
-    if (newDark) document.documentElement.classList.add('dark');
-    else document.documentElement.classList.remove('dark');
   }
 
   return (
@@ -124,15 +115,6 @@ export default function Profile() {
 
         {/* Settings */}
         <div className="mt-4 rounded-2xl bg-white/5 border border-[#1E293B] divide-y divide-[#1E293B]">
-          <button onClick={toggleDark} className="w-full flex items-center gap-3 p-4 hover:bg-[#0A1628] transition-colors">
-            <div className="p-2 rounded-xl bg-[#1E293B]">
-              {dark ? <Moon size={18} className="text-[#3B82F6]" /> : <Sun size={18} className="text-[#3B82F6]" />}
-            </div>
-            <span className="flex-1 text-left text-sm font-medium text-[#FFFFFF]">Dark Mode</span>
-            <div className={`w-10 h-6 rounded-full transition-colors ${dark ? 'bg-[#2563EB]' : 'bg-[#1E293B]'}`}>
-              <div className={`w-5 h-5 rounded-full bg-white/5 transition-transform mt-0.5 ${dark ? 'translate-x-4' : 'translate-x-0.5'}`} />
-            </div>
-          </button>
           <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#0A1628] transition-colors">
             <div className="p-2 rounded-xl bg-[#1E293B]"><Activity size={18} className="text-[#3B82F6]" /></div>
             <span className="flex-1 text-left text-sm font-medium text-[#FFFFFF]">Metabolic Calculator</span>
