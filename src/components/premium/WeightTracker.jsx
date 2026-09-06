@@ -37,18 +37,18 @@ export default function WeightTracker() {
   const first = entries[entries.length - 1];
   const diff = latest && first ? +(latest.weight_kg - first.weight_kg).toFixed(1) : 0;
   const DiffIcon = diff < 0 ? TrendingDown : diff > 0 ? TrendingUp : Minus;
-  const diffColor = diff < 0 ? 'text-emerald-500' : diff > 0 ? 'text-rose-500' : 'text-[#64748B]';
+  const diffColor = diff < 0 ? 'text-emerald-500' : diff > 0 ? 'text-rose-500' : 'text-[#C7D2FE]';
 
   if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#2563EB] animate-spin" /></div>;
 
   return (
     <div className="px-5 space-y-4">
       {/* Add weight */}
-      <div className="rounded-3xl bg-white border border-[#DBEAFE] p-5">
-        <h3 className="text-sm font-bold text-[#0F172A] mb-3">Log New Weight</h3>
-        <input type="number" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight in kg" className="w-full rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#0F172A] mb-2" />
-        <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes (optional)" className="w-full rounded-xl bg-[#EFF6FF] border border-[#DBEAFE] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#0F172A] mb-3" />
-        <button onClick={addEntry} disabled={adding || !weight} className="w-full rounded-full bg-[#BFDBFE] text-[#0F172A] py-3 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50">
+      <div className="rounded-3xl bg-white/5 border border-[#1E293B] p-5">
+        <h3 className="text-sm font-bold text-[#FFFFFF] mb-3">Log New Weight</h3>
+        <input type="number" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight in kg" className="w-full rounded-xl bg-[#0A1628] border border-[#1E293B] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#FFFFFF] mb-2" />
+        <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes (optional)" className="w-full rounded-xl bg-[#0A1628] border border-[#1E293B] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2563EB] text-[#FFFFFF] mb-3" />
+        <button onClick={addEntry} disabled={adding || !weight} className="w-full rounded-full bg-[#3B82F6] text-[#FFFFFF] py-3 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50">
           {adding ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />} Add Weight Entry
         </button>
       </div>
@@ -64,14 +64,14 @@ export default function WeightTracker() {
 
       {/* Chart */}
       {chartData.length > 1 && (
-        <div className="rounded-3xl bg-white border border-[#DBEAFE] p-5">
-          <h3 className="text-sm font-bold text-[#0F172A] mb-3">Weight Progress</h3>
+        <div className="rounded-3xl bg-white/5 border border-[#1E293B] p-5">
+          <h3 className="text-sm font-bold text-[#FFFFFF] mb-3">Weight Progress</h3>
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>
                 <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#94A3B8' }} interval="preserveStartEnd" />
                 <YAxis tick={{ fontSize: 9, fill: '#94A3B8' }} domain={['auto', 'auto']} />
-                <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #DBEAFE', fontSize: 12 }} />
+                <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #1E293B', fontSize: 12 }} />
                 <Line type="monotone" dataKey="weight" stroke="#2563EB" strokeWidth={2.5} dot={{ r: 3, fill: '#2563EB' }} />
               </LineChart>
             </ResponsiveContainer>
@@ -81,14 +81,14 @@ export default function WeightTracker() {
 
       {/* History */}
       {entries.length > 0 && (
-        <div className="rounded-3xl bg-white border border-[#DBEAFE] p-5">
-          <h3 className="text-sm font-bold text-[#0F172A] mb-3">History</h3>
+        <div className="rounded-3xl bg-white/5 border border-[#1E293B] p-5">
+          <h3 className="text-sm font-bold text-[#FFFFFF] mb-3">History</h3>
           <div className="space-y-2">
             {entries.map((e, i) => (
-              <div key={e.id || i} className="flex items-center justify-between py-2 border-b border-[#DBEAFE] last:border-0">
+              <div key={e.id || i} className="flex items-center justify-between py-2 border-b border-[#1E293B] last:border-0">
                 <div>
-                  <p className="text-sm font-medium text-[#0F172A]">{e.weight_kg} kg</p>
-                  <p className="text-xs text-[#64748B]">{formatDate(e.entry_date)}{e.notes ? ` · ${e.notes}` : ''}</p>
+                  <p className="text-sm font-medium text-[#FFFFFF]">{e.weight_kg} kg</p>
+                  <p className="text-xs text-[#C7D2FE]">{formatDate(e.entry_date)}{e.notes ? ` · ${e.notes}` : ''}</p>
                 </div>
               </div>
             ))}
@@ -97,8 +97,8 @@ export default function WeightTracker() {
       )}
 
       {entries.length === 0 && (
-        <div className="rounded-2xl border border-dashed border-[#E0F2FE] p-8 text-center">
-          <p className="text-sm text-[#64748B]">No weight entries yet. Add your first entry above!</p>
+        <div className="rounded-2xl border border-dashed border-[#1E293B] p-8 text-center">
+          <p className="text-sm text-[#C7D2FE]">No weight entries yet. Add your first entry above!</p>
         </div>
       )}
     </div>
@@ -107,9 +107,9 @@ export default function WeightTracker() {
 
 function StatCard({ label, value, icon: Icon, color }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#DBEAFE] p-3 text-center">
-      <p className="text-[10px] text-[#64748B] mb-1">{label}</p>
-      <p className={`text-base font-bold ${color || 'text-[#0F172A]'} flex items-center justify-center gap-1`}>
+    <div className="rounded-2xl bg-white/5 border border-[#1E293B] p-3 text-center">
+      <p className="text-[10px] text-[#C7D2FE] mb-1">{label}</p>
+      <p className={`text-base font-bold ${color || 'text-[#FFFFFF]'} flex items-center justify-center gap-1`}>
         {Icon && <Icon size={12} />} {value}
       </p>
     </div>

@@ -9,7 +9,7 @@ export default function PostCard({ post, userId, onLike, onReport, commentCount 
   const likeCount = post.liked_by?.length || 0;
 
   return (
-    <div className="rounded-3xl bg-white border border-[#F5EFE6] overflow-hidden">
+    <div className="rounded-3xl bg-white/5 border border-[#F5EFE6] overflow-hidden">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FFD5A8] to-[#FF9F43] flex items-center justify-center text-white text-xs font-bold">

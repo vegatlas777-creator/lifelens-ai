@@ -35,7 +35,7 @@ export default function Pricing() {
   }
 
   return (
-    <div className="pb-4 min-h-screen bg-[#F0F9FF]">
+    <div className="pb-4 min-h-screen bg-[#0A1628]">
       {/* Hero with background images */}
       <div className="relative overflow-hidden">
         {/* Background image collage */}
@@ -65,9 +65,9 @@ export default function Pricing() {
             <Loader2 size={32} className="text-[#2563EB] animate-spin" />
           </div>
         ) : subStatus.isPremium ? (
-          <div className="rounded-3xl bg-white border-2 border-[#2563EB] p-6 text-center shadow-lg">
-            <div className="w-14 h-14 rounded-full bg-[#E0F2FE] flex items-center justify-center mx-auto mb-3">
-              <Crown size={28} className="text-[#1D4ED8]" />
+          <div className="rounded-3xl bg-white/5 border-2 border-[#2563EB] p-6 text-center shadow-lg">
+            <div className="w-14 h-14 rounded-full bg-[#1E293B] flex items-center justify-center mx-auto mb-3">
+              <Crown size={28} className="text-[#3B82F6]" />
             </div>
             <h2 className="text-xl font-bold">You're Premium! 👑</h2>
             <p className="text-sm text-muted-foreground mt-1">You have full access to all premium features.</p>
@@ -83,7 +83,7 @@ export default function Pricing() {
             {/* Annual plan (best value) */}
             <PlanCard
               badge="BEST VALUE — Save 17%"
-              badgeColor="bg-red-500"
+              badgeColor="bg-red-500/100"
               name="Premium Annual"
               price="$50"
               altPrice="€45"
@@ -148,7 +148,7 @@ export default function Pricing() {
 
 function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, features, cta, loading, onClick, highlighted }) {
   return (
-    <div className={`rounded-3xl p-6 shadow-lg transition-all ${highlighted ? 'bg-white border-2 border-[#2563EB] scale-[1.02]' : 'bg-white border border-[#DBEAFE]'}`}>
+    <div className={`rounded-3xl p-6 shadow-lg transition-all ${highlighted ? 'bg-white/5 border-2 border-[#2563EB] scale-[1.02]' : 'bg-white/5 border border-[#1E293B]'}`}>
       {badge && (
         <div className={`inline-block px-3 py-1 rounded-full text-white text-xs font-bold mb-3 ${badgeColor}`}>
           {badge}
@@ -176,7 +176,7 @@ function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, fea
       <button
       onClick={onClick}
       disabled={loading}
-      className="w-full mt-5 rounded-full bg-[#BFDBFE] text-[#0F172A] py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+      className="w-full mt-5 rounded-full bg-[#3B82F6] text-[#FFFFFF] py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
       >
         {loading ? <Loader2 size={18} className="animate-spin" /> : <Crown size={18} />}
         {cta}

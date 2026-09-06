@@ -92,16 +92,16 @@ export default function Community() {
   });
 
   return (
-    <div className="min-h-screen bg-[#F0F9FF] pb-4">
+    <div className="min-h-screen bg-[#0A1628] pb-4">
       {/* Header */}
       <div className="px-5 pt-12 pb-3">
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-[#E0F2FE] flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-[#1E293B] flex items-center justify-center">
             <Users size={20} className="text-[#E8821E]" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-[#0F172A]">Community</h1>
-            <p className="text-[11px] text-[#64748B]">Connect, share & grow together</p>
+            <h1 className="text-xl font-bold text-[#FFFFFF]">Community</h1>
+            <p className="text-[11px] text-[#C7D2FE]">Connect, share & grow together</p>
           </div>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function Community() {
       {/* Daily topic */}
       {dailyTopic && (
         <div className="px-5 mt-2">
-          <div className="rounded-2xl bg-gradient-to-r from-[#BFDBFE] to-[#2563EB] p-4 text-white">
+          <div className="rounded-2xl bg-gradient-to-r from-[#3B82F6] to-[#2563EB] p-4 text-white">
             <p className="text-[10px] font-semibold opacity-90 uppercase">Daily Discussion Topic</p>
             <p className="text-base font-bold mt-0.5">{dailyTopic.emoji} {dailyTopic.label}</p>
             <p className="text-xs opacity-90 mt-1">Share your thoughts on today's topic!</p>
@@ -119,9 +119,9 @@ export default function Community() {
 
       {/* Search */}
       <div className="px-5 mt-3">
-        <div className="flex items-center gap-2 rounded-full bg-white border border-[#DBEAFE] px-4 py-2.5">
+        <div className="flex items-center gap-2 rounded-full bg-white/5 border border-[#1E293B] px-4 py-2.5">
           <Search size={16} className="text-[#94A3B8]" />
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search discussions..." className="flex-1 bg-transparent text-sm focus:outline-none text-[#0F172A]" />
+          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search discussions..." className="flex-1 bg-transparent text-sm focus:outline-none text-[#FFFFFF]" />
           {search && <button onClick={() => setSearch('')}><X size={14} className="text-[#94A3B8]" /></button>}
         </div>
       </div>
@@ -129,9 +129,9 @@ export default function Community() {
       {/* Category filter */}
       <div className="mt-3 px-5">
         <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
-          <button onClick={() => setActiveCat('all')} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${activeCat === 'all' ? 'bg-[#2563EB] text-white' : 'bg-white border border-[#DBEAFE] text-[#64748B]'}`}>All</button>
+          <button onClick={() => setActiveCat('all')} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${activeCat === 'all' ? 'bg-[#2563EB] text-white' : 'bg-white/5 border border-[#1E293B] text-[#C7D2FE]'}`}>All</button>
           {CATEGORIES.map((c) => (
-            <button key={c.value} onClick={() => setActiveCat(c.value)} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${activeCat === c.value ? 'bg-[#2563EB] text-white' : 'bg-white border border-[#DBEAFE] text-[#64748B]'}`}>{c.emoji} {c.label}</button>
+            <button key={c.value} onClick={() => setActiveCat(c.value)} className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${activeCat === c.value ? 'bg-[#2563EB] text-white' : 'bg-white/5 border border-[#1E293B] text-[#C7D2FE]'}`}>{c.emoji} {c.label}</button>
           ))}
         </div>
       </div>
@@ -139,7 +139,7 @@ export default function Community() {
       {/* Create post button */}
       <div className="px-5 mt-3">
         {!showForm ? (
-          <button onClick={() => setShowForm(true)} className="w-full rounded-full bg-[#BFDBFE] text-[#0F172A] py-3 font-semibold text-sm flex items-center justify-center gap-2">
+          <button onClick={() => setShowForm(true)} className="w-full rounded-full bg-[#3B82F6] text-[#FFFFFF] py-3 font-semibold text-sm flex items-center justify-center gap-2">
             <Plus size={16} /> Start a Discussion
           </button>
         ) : (
@@ -149,7 +149,7 @@ export default function Community() {
 
       {/* Guidelines link */}
       <div className="px-5 mt-3 flex items-center justify-between">
-        <button onClick={() => setShowGuidelines(true)} className="flex items-center gap-1 text-xs text-[#64748B]">
+        <button onClick={() => setShowGuidelines(true)} className="flex items-center gap-1 text-xs text-[#C7D2FE]">
           <Shield size={13} /> Community Guidelines
         </button>
         <span className="text-xs text-[#94A3B8]">{filtered.length} posts</span>
@@ -160,8 +160,8 @@ export default function Community() {
         {loading ? (
           <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#2563EB] animate-spin" /></div>
         ) : filtered.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-[#E0F2FE] p-8 text-center">
-            <p className="text-sm text-[#64748B]">No discussions yet. {search ? 'Try a different search.' : 'Be the first to post!'}</p>
+          <div className="rounded-2xl border border-dashed border-[#1E293B] p-8 text-center">
+            <p className="text-sm text-[#C7D2FE]">No discussions yet. {search ? 'Try a different search.' : 'Be the first to post!'}</p>
           </div>
         ) : (
           filtered.map((p) => (
@@ -173,12 +173,12 @@ export default function Community() {
       {/* Guidelines modal */}
       {showGuidelines && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40" onClick={() => setShowGuidelines(false)}>
-          <div className="w-full max-w-md bg-white rounded-t-3xl p-5 max-h-[70vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="w-full max-w-md bg-white/5 rounded-t-3xl p-5 max-h-[70vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-base font-bold text-[#0F172A] flex items-center gap-2"><Shield size={18} className="text-[#2563EB]" /> Community Guidelines</h2>
-              <button onClick={() => setShowGuidelines(false)}><X size={18} className="text-[#64748B]" /></button>
+              <h2 className="text-base font-bold text-[#FFFFFF] flex items-center gap-2"><Shield size={18} className="text-[#2563EB]" /> Community Guidelines</h2>
+              <button onClick={() => setShowGuidelines(false)}><X size={18} className="text-[#C7D2FE]" /></button>
             </div>
-            <div className="space-y-3 text-sm text-[#64748B]">
+            <div className="space-y-3 text-sm text-[#C7D2FE]">
               <Guideline text="Be kind and respectful to all members." />
               <Guideline text="Share evidence-based health information." />
               <Guideline text="No spam, self-promotion, or inappropriate content." />

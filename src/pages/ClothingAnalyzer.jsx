@@ -68,10 +68,10 @@ export default function ClothingAnalyzer() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F0F9FF] pb-4">
+    <div className="min-h-screen bg-[#0A1628] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#0F172A]">Sports Clothing Analyzer</h1>
-        <p className="text-sm text-[#64748B]">AI-powered sports gear performance scan</p>
+        <h1 className="text-2xl font-bold text-[#FFFFFF]">Sports Clothing Analyzer</h1>
+        <p className="text-sm text-[#C7D2FE]">AI-powered sports gear performance scan</p>
       </div>
 
       <div className="px-5 mt-2">
@@ -82,13 +82,13 @@ export default function ClothingAnalyzer() {
         {!imagePreview && (
           <button
             onClick={() => fileRef.current?.click()}
-            className="w-full rounded-3xl border-2 border-dashed border-[#E0F2FE] bg-white hover:border-[#2563EB] transition-colors p-10 flex flex-col items-center gap-3"
+            className="w-full rounded-3xl border-2 border-dashed border-[#1E293B] bg-white/5 hover:border-[#2563EB] transition-colors p-10 flex flex-col items-center gap-3"
           >
-            <div className="p-4 rounded-2xl bg-[#E0F2FE]">
-              <Camera size={32} className="text-[#1D4ED8]" />
+            <div className="p-4 rounded-2xl bg-[#1E293B]">
+              <Camera size={32} className="text-[#3B82F6]" />
             </div>
-            <p className="font-semibold text-[#0F172A]">Scan Sports Gear</p>
-            <p className="text-sm text-[#64748B] text-center max-w-xs">Upload a photo of any sports clothing item — our AI evaluates how well it performs for your sport.</p>
+            <p className="font-semibold text-[#FFFFFF]">Scan Sports Gear</p>
+            <p className="text-sm text-[#C7D2FE] text-center max-w-xs">Upload a photo of any sports clothing item — our AI evaluates how well it performs for your sport.</p>
           </button>
         )}
 
@@ -101,10 +101,10 @@ export default function ClothingAnalyzer() {
         />
 
         {imagePreview && (
-          <div className="relative rounded-3xl overflow-hidden border border-[#DBEAFE]">
+          <div className="relative rounded-3xl overflow-hidden border border-[#1E293B]">
             <img src={imagePreview} alt="sports clothing" className="w-full h-56 object-cover" />
             {!loading && (
-              <button onClick={reset} className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur">
+              <button onClick={reset} className="absolute top-3 right-3 p-2 rounded-full bg-white/10 backdrop-blur">
                 <X size={18} />
               </button>
             )}
@@ -114,23 +114,23 @@ export default function ClothingAnalyzer() {
         {loading && (
           <div className="flex flex-col items-center gap-3 mt-6 py-8">
             <Loader2 size={32} className="text-[#2563EB] animate-spin" />
-            <p className="text-sm text-[#64748B]">Analyzing sports gear with AI...</p>
+            <p className="text-sm text-[#C7D2FE]">Analyzing sports gear with AI...</p>
           </div>
         )}
 
         {error && (
-          <div className="mt-4 rounded-2xl bg-red-50 border border-red-200 p-4">
-            <p className="text-sm text-red-600">{error}</p>
+          <div className="mt-4 rounded-2xl bg-red-500/10 border border-red-500/30 p-4">
+            <p className="text-sm text-red-400">{error}</p>
           </div>
         )}
 
         {limitReached && (
-          <div className="mt-4 rounded-3xl bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-200 p-5 text-center">
-            <div className="w-12 h-12 rounded-full bg-[#E0F2FE] flex items-center justify-center mx-auto mb-3">
-              <Crown size={24} className="text-[#1D4ED8]" />
+          <div className="mt-4 rounded-3xl bg-gradient-to-br from-sky-500/10 to-blue-500/10 border border-sky-200 p-5 text-center">
+            <div className="w-12 h-12 rounded-full bg-[#1E293B] flex items-center justify-center mx-auto mb-3">
+              <Crown size={24} className="text-[#3B82F6]" />
             </div>
-            <p className="text-sm font-semibold text-[#0F172A]">Weekly Limit Reached</p>
-            <p className="text-xs text-[#64748B] mt-1 leading-relaxed">
+            <p className="text-sm font-semibold text-[#FFFFFF]">Weekly Limit Reached</p>
+            <p className="text-xs text-[#C7D2FE] mt-1 leading-relaxed">
               You have used all 5 free material checks for this week. Upgrade to Premium for unlimited sports gear checks, unlimited calorie analysis, personalized AI coaching, and advanced progress tracking.
             </p>
             <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 text-white text-sm font-semibold">
@@ -163,23 +163,23 @@ export default function ClothingAnalyzer() {
             </div>
 
             {/* Summary */}
-            <div className="rounded-2xl bg-white border border-[#DBEAFE] p-4 flex items-start gap-3">
-              <div className="p-2 rounded-xl bg-[#E0F2FE] text-[#1D4ED8] shrink-0">
+            <div className="rounded-2xl bg-white/5 border border-[#1E293B] p-4 flex items-start gap-3">
+              <div className="p-2 rounded-xl bg-[#1E293B] text-[#3B82F6] shrink-0">
                 <Target size={20} />
               </div>
               <div>
-                <p className="font-semibold text-sm text-[#0F172A]">Performance Summary</p>
-                <p className="text-xs text-[#64748B] mt-0.5 leading-relaxed">{analysis.summary}</p>
+                <p className="font-semibold text-sm text-[#FFFFFF]">Performance Summary</p>
+                <p className="text-xs text-[#C7D2FE] mt-0.5 leading-relaxed">{analysis.summary}</p>
               </div>
             </div>
 
             {/* Recommended sports */}
             {analysis.recommended_sports?.length > 0 && (
               <div>
-                <h3 className="font-semibold text-sm mb-2 px-1 text-[#0F172A]">Recommended Sports</h3>
+                <h3 className="font-semibold text-sm mb-2 px-1 text-[#FFFFFF]">Recommended Sports</h3>
                 <div className="flex flex-wrap gap-2">
                   {analysis.recommended_sports.map((sport, i) => (
-                    <span key={i} className="px-3 py-1.5 rounded-full bg-[#E0F2FE] text-[#1D4ED8] text-xs font-medium border border-[#BFDBFE]">
+                    <span key={i} className="px-3 py-1.5 rounded-full bg-[#1E293B] text-[#3B82F6] text-xs font-medium border border-[#3B82F6]">
                       {sport}
                     </span>
                   ))}
@@ -190,27 +190,27 @@ export default function ClothingAnalyzer() {
             {/* Materials */}
             {analysis.materials?.length > 0 && (
               <div>
-                <h3 className="font-semibold text-sm mb-2 px-1 text-[#0F172A]">Materials Detected</h3>
+                <h3 className="font-semibold text-sm mb-2 px-1 text-[#FFFFFF]">Materials Detected</h3>
                 <div className="space-y-3">
                   {analysis.materials.map((mat, i) => (
-                    <div key={i} className="rounded-2xl bg-white border border-[#DBEAFE] p-4">
-                      <p className="font-semibold text-[#0F172A]">{mat.name}</p>
+                    <div key={i} className="rounded-2xl bg-white/5 border border-[#1E293B] p-4">
+                      <p className="font-semibold text-[#FFFFFF]">{mat.name}</p>
                       <div className="mt-2 grid grid-cols-2 gap-3">
                         <div>
-                          <p className="text-xs font-medium text-emerald-600 mb-1">Pros for Sport</p>
+                          <p className="text-xs font-medium text-emerald-400 mb-1">Pros for Sport</p>
                           <ul className="space-y-1">
                             {mat.advantages?.map((a, j) => (
-                              <li key={j} className="text-xs text-[#64748B] flex gap-1">
+                              <li key={j} className="text-xs text-[#C7D2FE] flex gap-1">
                                 <span className="text-emerald-500">+</span> {a}
                               </li>
                             ))}
                           </ul>
                         </div>
                         <div>
-                          <p className="text-xs font-medium text-rose-600 mb-1">Cons for Sport</p>
+                          <p className="text-xs font-medium text-rose-400 mb-1">Cons for Sport</p>
                           <ul className="space-y-1">
                             {mat.disadvantages?.map((d, j) => (
-                              <li key={j} className="text-xs text-[#64748B] flex gap-1">
+                              <li key={j} className="text-xs text-[#C7D2FE] flex gap-1">
                                 <span className="text-rose-500">−</span> {d}
                               </li>
                             ))}
@@ -226,14 +226,14 @@ export default function ClothingAnalyzer() {
             {/* Alternatives */}
             {analysis.alternatives?.length > 0 && (
               <div>
-                <h3 className="font-semibold text-sm mb-2 px-1 flex items-center gap-2 text-[#0F172A]">
+                <h3 className="font-semibold text-sm mb-2 px-1 flex items-center gap-2 text-[#FFFFFF]">
                   <Recycle size={16} className="text-[#2563EB]" /> Better Sports Alternatives
                 </h3>
                 <div className="space-y-2">
                   {analysis.alternatives.map((alt, i) => (
-                    <div key={i} className="rounded-2xl bg-[#E0F2FE]/40 border border-[#E0F2FE] p-3">
-                      <p className="font-medium text-sm text-[#0F172A]">{alt.name}</p>
-                      <p className="text-xs text-[#64748B] mt-0.5">{alt.reason}</p>
+                    <div key={i} className="rounded-2xl bg-[#1E293B]/40 border border-[#1E293B] p-3">
+                      <p className="font-medium text-sm text-[#FFFFFF]">{alt.name}</p>
+                      <p className="text-xs text-[#C7D2FE] mt-0.5">{alt.reason}</p>
                     </div>
                   ))}
                 </div>
@@ -242,7 +242,7 @@ export default function ClothingAnalyzer() {
 
             <button
               onClick={() => fileRef.current?.click()}
-              className="w-full rounded-full bg-[#BFDBFE] text-[#0F172A] py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#93C5FD] transition-colors"
+              className="w-full rounded-full bg-[#3B82F6] text-[#FFFFFF] py-3 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-[#93C5FD] transition-colors"
             >
               <Upload size={16} /> Analyze Another Item <ArrowRight size={16} />
             </button>
@@ -262,16 +262,16 @@ export default function ClothingAnalyzer() {
 function ScoreCard({ icon: Icon, label, score, color }) {
   const pct = (score / 10) * 100;
   return (
-    <div className="rounded-2xl bg-white border border-[#DBEAFE] p-4">
+    <div className="rounded-2xl bg-white/5 border border-[#1E293B] p-4">
       <div className="flex items-center gap-2 mb-2">
         <Icon size={16} className={color} />
-        <span className="text-xs text-[#64748B] font-medium">{label}</span>
+        <span className="text-xs text-[#C7D2FE] font-medium">{label}</span>
       </div>
       <div className="flex items-baseline gap-1 mb-2">
-        <span className="text-2xl font-bold text-[#0F172A]">{score ?? '-'}</span>
+        <span className="text-2xl font-bold text-[#FFFFFF]">{score ?? '-'}</span>
         <span className="text-xs text-[#94A3B8]">/10</span>
       </div>
-      <div className="w-full h-1.5 rounded-full bg-[#DBEAFE] overflow-hidden">
+      <div className="w-full h-1.5 rounded-full bg-[#1E293B] overflow-hidden">
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, backgroundColor: `hsl(${pct * 1.2}, 60%, 50%)` }} />
       </div>
     </div>
