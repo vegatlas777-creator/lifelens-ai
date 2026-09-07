@@ -55,8 +55,8 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F5F0FF]">
-        <div className="w-10 h-10 border-4 border-purple-200 border-t-[#7C3AED] rounded-full animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#FFF0F5]">
+        <div className="w-10 h-10 border-4 border-pink-200 border-t-[#FF149C] rounded-full animate-spin" />
       </div>
     );
   }
@@ -66,11 +66,11 @@ export default function Home() {
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
 
   return (
-    <div className="min-h-screen bg-[#F5F0FF] text-[#2E1065] pb-6">
+    <div className="min-h-screen bg-[#FFF0F5] text-[#4A0E2E] pb-6">
       {/* Top bar */}
       <div className="px-5 pt-10 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5 lg:hidden">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#9333EA] to-[#7C3AED] flex items-center justify-center shadow-lg shadow-purple-300/60">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF69B4] to-[#FF149C] flex items-center justify-center shadow-lg shadow-pink-300/60">
             <Leaf size={20} className="text-white" />
           </div>
           <span className="text-base font-bold tracking-tight font-heading">3 in 1 Healthy Choice</span>
@@ -79,10 +79,10 @@ export default function Home() {
           <h2 className="text-xl font-bold tracking-tight font-heading">Dashboard</h2>
         </div>
         <div className="flex items-center gap-2.5">
-          <button className="w-10 h-10 rounded-full bg-white shadow-sm shadow-purple-200/70 border border-[#D4C2F5] flex items-center justify-center text-[#7E5BA8] hover:bg-[#EDE5FF] transition-colors">
+          <button className="w-10 h-10 rounded-full bg-white shadow-sm shadow-pink-200/70 border border-[#FFC0D6] flex items-center justify-center text-[#B0407A] hover:bg-[#FFD9E6] transition-colors">
             <Bell size={17} />
           </button>
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#9333EA] to-[#7C3AED] flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-purple-300/60">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF69B4] to-[#FF149C] flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-pink-300/60">
             {firstName[0]?.toUpperCase()}
           </div>
         </div>
@@ -90,13 +90,13 @@ export default function Home() {
 
       {/* Compact hero */}
       <div className="px-5 mt-1">
-        <div className="relative rounded-3xl overflow-hidden border border-[#D4C2F5] shadow-lg shadow-purple-300/40">
+        <div className="relative rounded-3xl overflow-hidden border border-[#FFC0D6] shadow-lg shadow-pink-300/40">
           <img
             src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80"
             alt="Woman stretching"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/90 via-[#7C3AED]/65 to-[#5B21B6]/55" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#FF149C]/90 via-[#FF149C]/65 to-[#E91E63]/55" />
           <div className="relative p-5 min-h-[170px] flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -126,11 +126,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex items-center gap-2 mt-3"
-            >
+              className="flex items-center gap-2 mt-3">
               <Link
                 to="/coach"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#6D28D9] text-xs font-bold shadow-md hover:scale-[1.03] transition-transform"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#E91E63] text-xs font-bold shadow-md hover:scale-[1.03] transition-transform"
               >
                 Chat with AI Coach <ArrowRight size={14} />
               </Link>
@@ -149,16 +148,16 @@ export default function Home() {
 
       {/* Today's metrics — 2x2 */}
       <div className="px-5 mt-4 grid grid-cols-2 gap-3">
-        <MetricCard icon={<Footprints size={18} className="text-[#6D28D9]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
-        <MetricCard icon={<Flame size={18} className="text-[#7C3AED]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
-        <MetricCard icon={<Zap size={18} className="text-[#5B21B6]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
-        <MetricCard icon={<ActivityIcon size={18} className="text-[#9333EA]" />} label="Active Min" value={`${activeMinutes}`} sub="minutes" />
+        <MetricCard icon={<Footprints size={18} className="text-[#E91E63]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
+        <MetricCard icon={<Flame size={18} className="text-[#FF149C]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
+        <MetricCard icon={<Zap size={18} className="text-[#C2185B]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
+        <MetricCard icon={<ActivityIcon size={18} className="text-[#FF69B4]" />} label="Active Min" value={`${activeMinutes}`} sub="minutes" />
       </div>
 
       {/* Quick access — feature grid */}
       <div className="px-5 mt-5">
         <div className="flex items-center gap-2 mb-3">
-          <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#9333EA] to-[#7C3AED]" />
+          <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#FF69B4] to-[#FF149C]" />
           <h2 className="text-base font-bold tracking-tight font-heading">Explore</h2>
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -174,7 +173,7 @@ export default function Home() {
       {/* Premium strip */}
       {!subStatus.isPremium && (
         <div className="px-5 mt-4">
-          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#7C3AED] to-[#5B21B6] p-3.5 text-white shadow-lg shadow-purple-300/50">
+          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#FF149C] to-[#E91E63] p-3.5 text-white shadow-lg shadow-pink-300/50">
             <div className="p-2 rounded-xl bg-white/25 backdrop-blur"><Crown size={18} /></div>
             <div className="flex-1">
               <p className="text-sm font-bold font-heading">Go Premium</p>
@@ -194,23 +193,23 @@ function MetricCard({ icon, label, value, sub }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl bg-white border border-[#D4C2F5] p-3.5 shadow-sm shadow-purple-200/60"
+      className="rounded-2xl bg-white border border-[#FFC0D6] p-3.5 shadow-sm shadow-pink-200/60"
     >
-      <div className="w-9 h-9 rounded-xl bg-[#EDE5FF] flex items-center justify-center mb-2.5">
+      <div className="w-9 h-9 rounded-xl bg-[#FFD9E6] flex items-center justify-center mb-2.5">
         {icon}
       </div>
       <p className="text-2xl font-bold tracking-tight leading-none font-heading">{value}</p>
-      <p className="text-xs text-[#7E5BA8] mt-1 font-semibold">{label}</p>
-      <p className="text-[10px] text-[#A78BD9] mt-0.5">{sub}</p>
+      <p className="text-xs text-[#B0407A] mt-1 font-semibold">{label}</p>
+      <p className="text-[10px] text-[#D67A9E] mt-0.5">{sub}</p>
     </motion.div>
   );
 }
 
 function FeatureTile({ to, title, desc, image }) {
   return (
-    <Link to={to} className="group relative rounded-2xl overflow-hidden border border-[#D4C2F5] block h-32 shadow-sm shadow-purple-200/60 hover:shadow-md hover:shadow-purple-300/60 transition-shadow">
+    <Link to={to} className="group relative rounded-2xl overflow-hidden border border-[#FFC0D6] block h-32 shadow-sm shadow-pink-200/60 hover:shadow-md hover:shadow-pink-300/60 transition-shadow">
       <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#2E1065]/85 via-[#5B21B6]/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#4A0E2E]/85 via-[#E91E63]/40 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-3">
         <p className="text-sm font-bold text-white font-heading leading-tight">{title}</p>
         <p className="text-[10px] text-white/80 mt-0.5">{desc}</p>

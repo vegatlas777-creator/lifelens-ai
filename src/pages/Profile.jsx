@@ -37,16 +37,16 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F0FF] pb-4">
+    <div className="min-h-screen bg-[#FFF0F5] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#2E1065] font-heading">Profile</h1>
+        <h1 className="text-2xl font-bold text-[#4A0E2E] font-heading">Profile</h1>
       </div>
 
       <div className="px-5 mt-2">
         {/* User card */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#D4C2F5] shadow-sm shadow-purple-200/60">
+        <div className="relative overflow-hidden rounded-3xl border border-[#FFC0D6] shadow-sm shadow-pink-200/60">
           <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/90 to-[#5B21B6]/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FF149C]/90 to-[#E91E63]/75" />
           <div className="relative p-6 flex items-center gap-4 text-white">
             <div className="w-16 h-16 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-2xl font-bold">
               {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
@@ -65,34 +65,34 @@ export default function Profile() {
 
         {/* Today's stats */}
         <div className="grid grid-cols-3 gap-3 mt-4">
-          <StatBox icon={Flame} value={Math.round(todayStats.calories)} label="kcal eaten" color="text-[#7C3AED]" />
-          <StatBox icon={Activity} value={todayStats.burned} label="kcal burned" color="text-[#6D28D9]" />
-          <StatBox icon={Dumbbell} value={todayStats.workouts} label="workouts" color="text-[#7C3AED]" />
+          <StatBox icon={Flame} value={Math.round(todayStats.calories)} label="kcal eaten" color="text-[#FF149C]" />
+          <StatBox icon={Activity} value={todayStats.burned} label="kcal burned" color="text-[#E91E63]" />
+          <StatBox icon={Dumbbell} value={todayStats.workouts} label="workouts" color="text-[#FF149C]" />
         </div>
 
         {/* Subscription card */}
         <div className="mt-4">
           {subStatus.isPremium ? (
-            <div className="rounded-2xl bg-white border border-[#9333EA]/40 shadow-sm shadow-purple-200/60 p-4 flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#EDE5FF]">
-                <Crown size={20} className="text-[#7C3AED]" />
+            <div className="rounded-2xl bg-white border border-[#FF69B4]/40 shadow-sm shadow-pink-200/60 p-4 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-[#FFD9E6]">
+                <Crown size={20} className="text-[#FF149C]" />
               </div>
               <div className="flex-1">
-                <p className="font-semibold text-sm text-[#2E1065]">Premium Active</p>
-                <p className="text-xs text-[#7E5BA8]">{subStatus.subscription?.billing_cycle === 'annual' ? 'Annual plan' : 'Monthly plan'}</p>
+                <p className="font-semibold text-sm text-[#4A0E2E]">Premium Active</p>
+                <p className="text-xs text-[#B0407A]">{subStatus.subscription?.billing_cycle === 'annual' ? 'Annual plan' : 'Monthly plan'}</p>
               </div>
             </div>
           ) : (
-            <Link to="/pricing" className="relative overflow-hidden rounded-2xl block border border-[#D4C2F5] shadow-sm shadow-purple-200/60">
+            <Link to="/pricing" className="relative overflow-hidden rounded-2xl block border border-[#FFC0D6] shadow-sm shadow-pink-200/60">
               <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/90 to-[#5B21B6]/75" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#FF149C]/90 to-[#E91E63]/75" />
               <div className="relative p-4 flex items-center gap-3 text-white">
                 <div className="p-2.5 rounded-xl bg-white/25 backdrop-blur">
                   <Crown size={20} />
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-sm">Upgrade to Premium</p>
-                  <p className="text-xs opacity-90">7-day free trial · $5/mo</p>
+                  <p className="text-xs opacity-9">7-day free trial · $5/mo</p>
                 </div>
                 <ChevronRight size={18} />
               </div>
@@ -102,8 +102,8 @@ export default function Profile() {
 
         {/* Metabolic info */}
         {profile && (
-          <div className="mt-4 rounded-2xl bg-white border border-[#D4C2F5] shadow-sm shadow-purple-200/60 p-4">
-            <p className="text-xs font-medium text-[#7E5BA8] mb-3">METABOLIC PROFILE</p>
+          <div className="mt-4 rounded-2xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-4">
+            <p className="text-xs font-medium text-[#B0407A] mb-3">METABOLIC PROFILE</p>
             <div className="grid grid-cols-2 gap-y-3">
               <Info label="BMR" value={`${profile.bmr} kcal`} />
               <Info label="TDEE" value={`${profile.tdee} kcal`} />
@@ -114,24 +114,24 @@ export default function Profile() {
         )}
 
         {/* Settings */}
-        <div className="mt-4 rounded-2xl bg-white border border-[#D4C2F5] shadow-sm shadow-purple-200/60 divide-y divide-[#D4C2F5]">
-          <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#F5F0FF] transition-colors">
-            <div className="p-2 rounded-xl bg-[#EDE5FF]"><Activity size={18} className="text-[#7C3AED]" /></div>
-            <span className="flex-1 text-left text-sm font-medium text-[#2E1065]">Metabolic Calculator</span>
-            <ChevronRight size={18} className="text-[#A78BD9]" />
+        <div className="mt-4 rounded-2xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 divide-y divide-[#FFC0D6]">
+          <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#FFF0F5] transition-colors">
+            <div className="p-2 rounded-xl bg-[#FFD9E6]"><Activity size={18} className="text-[#FF149C]" /></div>
+            <span className="flex-1 text-left text-sm font-medium text-[#4A0E2E]">Metabolic Calculator</span>
+            <ChevronRight size={18} className="text-[#D67A9E]" />
           </Link>
-          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#F5F0FF] transition-colors">
-            <div className="p-2 rounded-xl bg-[#EDE5FF]"><Activity size={18} className="text-[#7C3AED]" /></div>
+          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#FFF0F5] transition-colors">
+            <div className="p-2 rounded-xl bg-[#FFD9E6]"><Activity size={18} className="text-[#FF149C]" /></div>
             <div className="flex-1 text-left">
-              <p className="text-sm font-medium text-[#2E1065]">Premium Profile & Progress</p>
-              <p className="text-[10px] text-[#7E5BA8]">Track weight, measurements & goals</p>
+              <p className="text-sm font-medium text-[#4A0E2E]">Premium Profile & Progress</p>
+              <p className="text-[10px] text-[#B0407A]">Track weight, measurements & goals</p>
             </div>
-            <ChevronRight size={18} className="text-[#A78BD9]" />
+            <ChevronRight size={18} className="text-[#D67A9E]" />
           </Link>
-          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#F5F0FF] transition-colors">
-            <div className="p-2 rounded-xl bg-[#EDE5FF]"><Crown size={18} className="text-[#7C3AED]" /></div>
-            <span className="flex-1 text-left text-sm font-medium text-[#2E1065]">Subscription & Pricing</span>
-            <ChevronRight size={18} className="text-[#A78BD9]" />
+          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#FFF0F5] transition-colors">
+            <div className="p-2 rounded-xl bg-[#FFD9E6]"><Crown size={18} className="text-[#FF149C]" /></div>
+            <span className="flex-1 text-left text-sm font-medium text-[#4A0E2E]">Subscription & Pricing</span>
+            <ChevronRight size={18} className="text-[#D67A9E]" />
           </Link>
         </div>
 
@@ -144,8 +144,8 @@ export default function Profile() {
         </button>
 
         <div className="mt-6 text-center">
-          <p className="text-xs text-[#7E5BA8]">3 in 1 Healthy Choice · v2.0</p>
-          <p className="text-[10px] text-[#A78BD9] mt-1">All estimates are approximations and not medical advice.</p>
+          <p className="text-xs text-[#B0407A]">3 in 1 Healthy Choice · v2.0</p>
+          <p className="text-[10px] text-[#D67A9E] mt-1">All estimates are approximations and not medical advice.</p>
         </div>
       </div>
     </div>
@@ -154,10 +154,10 @@ export default function Profile() {
 
 function StatBox({ icon: Icon, value, label, color }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#D4C2F5] shadow-sm shadow-purple-200/60 p-3 text-center">
+    <div className="rounded-2xl bg-white border border-[#FFC0D6] shadow-sm shadow-pink-200/60 p-3 text-center">
       <Icon size={18} className={`${color} mx-auto mb-1`} />
-      <p className="text-lg font-bold text-[#2E1065]">{value}</p>
-      <p className="text-[10px] text-[#7E5BA8]">{label}</p>
+      <p className="text-lg font-bold text-[#4A0E2E]">{value}</p>
+      <p className="text-[10px] text-[#B0407A]">{label}</p>
     </div>
   );
 }
@@ -165,8 +165,8 @@ function StatBox({ icon: Icon, value, label, color }) {
 function Info({ label, value }) {
   return (
     <div>
-      <p className="text-xs text-[#7E5BA8]">{label}</p>
-      <p className="font-semibold text-sm text-[#2E1065]">{value}</p>
+      <p className="text-xs text-[#B0407A]">{label}</p>
+      <p className="font-semibold text-sm text-[#4A0E2E]">{value}</p>
     </div>
   );
 }
