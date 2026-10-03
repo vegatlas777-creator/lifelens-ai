@@ -92,7 +92,7 @@ export default function Community() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FFF8DC] pb-4">
+    <div className="min-h-screen pb-4" style={{ backgroundColor: '#F6F1E8' }}>
       {/* Header */}
       <div className="px-5 pt-12 pb-3">
         <BackButton />
