@@ -46,7 +46,7 @@ export default function Profile() {
         {/* User card */}
         <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
           <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E20]/90 to-[#14573B]/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="relative p-6 flex items-center gap-4 text-white">
             <div className="w-16 h-16 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-2xl font-bold">
               {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
@@ -85,7 +85,7 @@ export default function Profile() {
           ) : (
             <Link to="/pricing" className="relative overflow-hidden rounded-2xl block border border-[#E0E0E0] shadow-sm shadow-black/5">
               <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E20]/90 to-[#14573B]/75" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="relative p-4 flex items-center gap-3 text-white">
                 <div className="p-2.5 rounded-xl bg-white/25 backdrop-blur">
                   <Crown size={20} />

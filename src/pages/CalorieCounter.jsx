@@ -181,7 +181,7 @@ export default function CalorieCounter() {
         {/* Today summary */}
         <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
           <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E20]/90 to-[#14573B]/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="relative p-5 text-white">
             <p className="text-sm opacity-80 font-medium">Today's Intake</p>
             <p className="text-4xl font-bold mt-1 font-heading">{Math.round(todayTotals.calories)} <span className="text-base font-normal opacity-80">kcal</span></p>
