@@ -56,7 +56,7 @@ export default function MetabolicCalculator() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] pb-4">
+    <div className="min-h-screen bg-[#F3F7F5] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Metabolic Calculator</h1>
         <p className="text-sm text-[#737373]">BMR, TDEE & calorie targets</p>
@@ -72,7 +72,7 @@ export default function MetabolicCalculator() {
             <Field label="Gender">
               <div className="flex gap-2">
                 {['male', 'female'].map((g) => (
-                  <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize transition-colors ${form.gender === g ? 'bg-[#404040] text-white' : 'bg-[#EBEBEB] text-[#737373]'}`}>{g}</button>
+                  <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize transition-colors ${form.gender === g ? 'bg-[#2D9F6A] text-white' : 'bg-[#E6F4EC] text-[#737373]'}`}>{g}</button>
                 ))}
               </div>
             </Field>
@@ -90,7 +90,7 @@ export default function MetabolicCalculator() {
               {activityLevels.map((l) => (<option key={l.value} value={l.value}>{l.label} — {l.desc}</option>))}
             </select>
           </Field>
-          <button onClick={calculate} className="w-full rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10">
+          <button onClick={calculate} className="w-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10">
             <Calculator size={16} /> Calculate <ArrowRight size={16} />
           </button>
         </div>
@@ -101,7 +101,7 @@ export default function MetabolicCalculator() {
             <div className="grid grid-cols-2 gap-3">
               <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
                 <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#171717]/90 to-[#9D174D]/85" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#2D9F6A]/90 to-[#14573B]/85" />
                 <div className="relative p-4 text-white">
                   <Activity size={20} className="opacity-80 mb-2" />
                   <p className="text-xs opacity-80">BMR</p>
@@ -111,7 +111,7 @@ export default function MetabolicCalculator() {
               </div>
               <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
                 <img src="https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?w=400&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/90 to-[#404040]/85" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0B2E20]/90 to-[#14573B]/85" />
                 <div className="relative p-4 text-white">
                   <Target size={20} className="opacity-80 mb-2" />
                   <p className="text-xs opacity-80">TDEE</p>
@@ -125,13 +125,13 @@ export default function MetabolicCalculator() {
               <p className="text-sm font-semibold mb-3 text-[#0A0A0A]">Calorie Targets by Goal</p>
               <div className="space-y-3">
                 <GoalRow icon={TrendingDown} label="Weight Loss" calories={result.loss} active={result.goal === 'loss'} onClick={() => save('loss')} color="text-[#0A0A0A]" saving={loading} />
-                <GoalRow icon={Minus} label="Maintenance" calories={result.maintenance} active={result.goal === 'maintenance'} onClick={() => save('maintenance')} color="text-[#404040]" saving={loading} />
+                <GoalRow icon={Minus} label="Maintenance" calories={result.maintenance} active={result.goal === 'maintenance'} onClick={() => save('maintenance')} color="text-[#1F7A4F]" saving={loading} />
                 <GoalRow icon={TrendingUp} label="Weight Gain" calories={result.gain} active={result.goal === 'gain'} onClick={() => save('gain')} color="text-[#0A0A0A]" saving={loading} />
               </div>
               <p className="text-xs text-[#737373] mt-3">Tap a goal to set it as your daily target on the dashboard.</p>
             </div>
 
-            <div className="rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-4">
+            <div className="rounded-2xl bg-[#E6F4EC] border border-[#E0E0E0] p-4">
               <p className="text-xs text-[#737373] leading-relaxed">
                 <strong className="text-[#0A0A0A]">BMR</strong> is the energy your body needs at complete rest. <strong className="text-[#0A0A0A]">TDEE</strong> multiplies BMR by your activity level to estimate total daily calorie burn. A deficit/surplus of ~500 kcal/day typically results in ~0.5 kg change per week.
               </p>
@@ -149,7 +149,7 @@ export default function MetabolicCalculator() {
   );
 }
 
-const inputCls = "w-full rounded-xl bg-[#F2F2F2] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#0A0A0A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 
 function Field({ label, children }) {
   return (
@@ -162,11 +162,11 @@ function Field({ label, children }) {
 
 function GoalRow({ icon: Icon, label, calories, active, onClick, color, saving }) {
   return (
-    <button onClick={onClick} disabled={saving} className={`w-full flex items-center gap-3 rounded-2xl p-3 transition-colors ${active ? 'bg-[#EBEBEB] border border-[#171717]/50' : 'border border-[#E0E0E0] bg-white'}`}>
+    <button onClick={onClick} disabled={saving} className={`w-full flex items-center gap-3 rounded-2xl p-3 transition-colors ${active ? 'bg-[#E6F4EC] border border-[#2D9F6A]/50' : 'border border-[#E0E0E0] bg-white'}`}>
       <Icon size={18} className={color} />
       <span className="text-sm font-medium flex-1 text-left text-[#0A0A0A]">{label}</span>
       <span className="font-bold text-[#0A0A0A]">{calories} kcal</span>
-      {saving && <Loader2 size={14} className="animate-spin text-[#0A0A0A]" />}
+      {saving && <Loader2 size={14} className="animate-spin text-[#2D9F6A]" />}
     </button>
   );
 }

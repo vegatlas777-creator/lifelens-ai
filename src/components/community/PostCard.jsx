@@ -12,14 +12,14 @@ export default function PostCard({ post, userId, onLike, onReport, commentCount 
     <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 overflow-hidden">
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#171717] to-[#0A0A0A] flex items-center justify-center text-white text-xs font-bold">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center text-white text-xs font-bold">
             {post.author_name?.[0]?.toUpperCase() || 'U'}
           </div>
           <div className="flex-1">
             <p className="text-sm font-semibold text-[#0A0A0A] leading-tight">{post.author_name || 'Member'}</p>
             <p className="text-[10px] text-[#A3A3A3]">{timeAgo(post.created_date)}</p>
           </div>
-          <span className="px-2 py-0.5 rounded-full bg-[#EBEBEB] text-[10px] font-medium text-[#404040]">{cat.emoji} {cat.label}</span>
+          <span className="px-2 py-0.5 rounded-full bg-[#E6F4EC] text-[10px] font-medium text-[#1F7A4F]">{cat.emoji} {cat.label}</span>
         </div>
         <Link to={`/community/${post.id}`}>
           <h3 className="text-sm font-bold text-[#0A0A0A] mb-1 font-heading">{post.title}</h3>
@@ -32,13 +32,13 @@ export default function PostCard({ post, userId, onLike, onReport, commentCount 
         </Link>
       )}
       <div className="flex items-center gap-1 px-3 py-2 border-t border-[#E0E0E0]">
-        <button onClick={() => onLike(post)} className={`flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium transition-colors ${liked ? 'text-red-500 bg-red-50' : 'text-[#737373] hover:bg-[#EBEBEB]'}`}>
+        <button onClick={() => onLike(post)} className={`flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium transition-colors ${liked ? 'text-red-500 bg-red-50' : 'text-[#737373] hover:bg-[#E6F4EC]'}`}>
           <Heart size={14} fill={liked ? 'currentColor' : 'none'} /> {likeCount > 0 && likeCount}
         </button>
-        <Link to={`/community/${post.id}`} className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium text-[#737373] hover:bg-[#EBEBEB]">
+        <Link to={`/community/${post.id}`} className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-medium text-[#737373] hover:bg-[#E6F4EC]">
           <MessageCircle size={14} /> {commentCount !== undefined ? commentCount : ''}
         </Link>
-        <button onClick={() => onReport(post.id, 'post')} className="ml-auto px-2.5 py-1.5 rounded-full text-xs font-medium text-[#A3A3A3] hover:bg-[#EBEBEB]">
+        <button onClick={() => onReport(post.id, 'post')} className="ml-auto px-2.5 py-1.5 rounded-full text-xs font-medium text-[#A3A3A3] hover:bg-[#E6F4EC]">
           <Flag size={14} />
         </button>
       </div>

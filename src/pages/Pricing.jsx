@@ -34,7 +34,7 @@ export default function Pricing() {
   }
 
   return (
-    <div className="pb-4 min-h-screen bg-[#F2F2F2]">
+    <div className="pb-4 min-h-screen bg-[#F3F7F5]">
       {/* Hero with background images */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-0.5">
@@ -45,7 +45,7 @@ export default function Pricing() {
           <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=70" alt="" className="w-full h-full object-cover" />
           <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&q=70" alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/85 via-[#404040]/85 to-[#171717]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B2E20]/85 via-[#14573B]/85 to-[#0F3D2A]/90" />
         <div className="relative px-5 pt-14 pb-8 text-center text-white">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/25 backdrop-blur mb-3">
             <Crown size={14} />
@@ -59,12 +59,12 @@ export default function Pricing() {
       <div className="px-5 -mt-4 relative">
         {subStatus.loading ? (
           <div className="flex justify-center py-8">
-            <Loader2 size={32} className="text-[#0A0A0A] animate-spin" />
+            <Loader2 size={32} className="text-[#2D9F6A] animate-spin" />
           </div>
         ) : subStatus.isPremium ? (
-          <div className="rounded-3xl bg-white border-2 border-[#171717] shadow-lg shadow-black/10 p-6 text-center">
-            <div className="w-14 h-14 rounded-full bg-[#EBEBEB] flex items-center justify-center mx-auto mb-3">
-              <Crown size={28} className="text-[#0A0A0A]" />
+          <div className="rounded-3xl bg-white border-2 border-[#2D9F6A] shadow-lg shadow-black/10 p-6 text-center">
+            <div className="w-14 h-14 rounded-full bg-[#E6F4EC] flex items-center justify-center mx-auto mb-3">
+              <Crown size={28} className="text-[#2D9F6A]" />
             </div>
             <h2 className="text-xl font-bold text-[#0A0A0A] font-heading">You're Premium! 👑</h2>
             <p className="text-sm text-[#737373] mt-1">You have full access to all premium features.</p>
@@ -80,7 +80,7 @@ export default function Pricing() {
             {/* Annual plan */}
             <PlanCard
               badge="BEST VALUE — Save 17%"
-              badgeColor="bg-[#171717]"
+              badgeColor="bg-[#2D9F6A]"
               name="Premium Annual"
               price="$50"
               altPrice="€45"
@@ -109,9 +109,9 @@ export default function Pricing() {
             </div>
 
             {/* Promotional offers */}
-            <div className="mt-6 rounded-2xl bg-gradient-to-r from-[#EBEBEB] to-[#E0E0E0] border border-[#E0E0E0] p-4">
+            <div className="mt-6 rounded-2xl bg-gradient-to-r from-[#E6F4EC] to-[#D3EBDD] border border-[#E0E0E0] p-4">
               <p className="text-sm font-semibold flex items-center gap-2 text-[#0A0A0A]">
-                <Sparkles size={16} className="text-[#0A0A0A]" /> Limited Time Offers
+                <Sparkles size={16} className="text-[#2D9F6A]" /> Limited Time Offers
               </p>
               <ul className="mt-2 space-y-1.5">
                 <li className="text-xs text-[#737373]">🎁 7-day free trial on all plans</li>
@@ -128,7 +128,7 @@ export default function Pricing() {
           <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 space-y-2">
             {FREE_FEATURES.map((f, i) => (
               <div key={i} className="flex items-center gap-2">
-                <Check size={14} className="text-[#0A0A0A] flex-shrink-0" />
+                <Check size={14} className="text-[#2D9F6A] flex-shrink-0" />
                 <span className="text-sm text-[#525252]">{f}</span>
               </div>
             ))}
@@ -145,7 +145,7 @@ export default function Pricing() {
 
 function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, features, cta, loading, onClick, highlighted }) {
   return (
-    <div className={`rounded-3xl p-6 shadow-sm transition-all ${highlighted ? 'bg-white border-2 border-[#171717] scale-[1.02] shadow-black/10' : 'bg-white border border-[#E0E0E0] shadow-black/5'}`}>
+    <div className={`rounded-3xl p-6 shadow-sm transition-all ${highlighted ? 'bg-white border-2 border-[#2D9F6A] scale-[1.02] shadow-black/10' : 'bg-white border border-[#E0E0E0] shadow-black/5'}`}>
       {badge && (
         <div className={`inline-block px-3 py-1 rounded-full text-white text-xs font-bold mb-3 ${badgeColor}`}>
           {badge}
@@ -162,8 +162,8 @@ function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, fea
       <div className="mt-4 space-y-2 max-h-44 overflow-y-auto scrollbar-hide">
         {features.map((f, i) => (
           <div key={i} className="flex items-start gap-2">
-            <div className="w-4 h-4 rounded-full bg-[#EBEBEB] flex items-center justify-center flex-shrink-0 mt-0.5">
-              <Check size={10} className="text-[#0A0A0A]" />
+            <div className="w-4 h-4 rounded-full bg-[#E6F4EC] flex items-center justify-center flex-shrink-0 mt-0.5">
+              <Check size={10} className="text-[#2D9F6A]" />
             </div>
             <span className="text-sm text-[#0A0A0A]">{f}</span>
           </div>
@@ -173,7 +173,7 @@ function PlanCard({ badge, badgeColor, name, price, altPrice, period, trial, fea
       <button
         onClick={onClick}
         disabled={loading}
-        className="w-full mt-5 rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10"
+        className="w-full mt-5 rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3.5 font-semibold flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10"
       >
         {loading ? <Loader2 size={18} className="animate-spin" /> : <Crown size={18} />}
         {cta}

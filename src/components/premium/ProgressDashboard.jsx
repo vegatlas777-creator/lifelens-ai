@@ -59,7 +59,7 @@ export default function ProgressDashboard() {
     setReportLoading(false);
   }
 
-  if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#0A0A0A] animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#2D9F6A] animate-spin" /></div>;
   if (!data) return null;
 
   const { profile, weights, weeklyData, todayStats, streak } = data;
@@ -78,12 +78,12 @@ export default function ProgressDashboard() {
     <div className="px-5 space-y-4">
       {/* Streak + Overall completion */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-2xl bg-gradient-to-br from-[#171717] to-[#0A0A0A] p-4 text-white shadow-md shadow-black/10">
+        <div className="rounded-2xl bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] p-4 text-white shadow-md shadow-black/10">
           <div className="flex items-center gap-1.5 mb-1"><Zap size={16} /><span className="text-xs font-medium opacity-90">Current Streak</span></div>
           <p className="text-2xl font-bold font-heading">{streak} <span className="text-xs font-normal opacity-9">days</span></p>
         </div>
         <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4">
-          <div className="flex items-center gap-1.5 mb-1"><Target size={16} className="text-[#0A0A0A]" /><span className="text-xs font-medium text-[#737373]">Goal Completion</span></div>
+          <div className="flex items-center gap-1.5 mb-1"><Target size={16} className="text-[#2D9F6A]" /><span className="text-xs font-medium text-[#737373]">Goal Completion</span></div>
           <p className="text-2xl font-bold text-[#0A0A0A] font-heading">{overallPct}<span className="text-xs font-normal text-[#A3A3A3]">%</span></p>
         </div>
       </div>
@@ -92,23 +92,23 @@ export default function ProgressDashboard() {
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5">
         <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 font-heading">Today's Goals</h3>
         <div className="space-y-3">
-          <GoalBar icon={Footprints} label="Steps" value={todayStats.steps.toLocaleString()} goal={stepGoal.toLocaleString()} pct={stepGoalPct} color="#0A0A0A" />
-          <GoalBar icon={Flame} label="Calories Eaten" value={`${todayStats.consumed}`} goal={`${calorieGoal}`} pct={calorieGoalPct} color="#404040" />
-          <GoalBar icon={Dumbbell} label="Weekly Activity" value={`${totalWeeklyMinutes} min`} goal={`${weeklyGoal} min`} pct={weeklyGoalPct} color="#171717" />
+          <GoalBar icon={Footprints} label="Steps" value={todayStats.steps.toLocaleString()} goal={stepGoal.toLocaleString()} pct={stepGoalPct} color="#2D9F6A" />
+          <GoalBar icon={Flame} label="Calories Eaten" value={`${todayStats.consumed}`} goal={`${calorieGoal}`} pct={calorieGoalPct} color="#1F7A4F" />
+          <GoalBar icon={Dumbbell} label="Weekly Activity" value={`${totalWeeklyMinutes} min`} goal={`${weeklyGoal} min`} pct={weeklyGoalPct} color="#6CC79A" />
         </div>
       </div>
 
       {/* Weekly Summary */}
       <div className="grid grid-cols-3 gap-3">
         <SummaryCard icon={Footprints} label="Week Steps" value={weeklyData.reduce((s, d) => s + d.steps, 0).toLocaleString()} color="text-[#0A0A0A]" />
-        <SummaryCard icon={Flame} label="Week Burned" value={weeklyData.reduce((s, d) => s + d.burned, 0)} color="text-[#404040]" />
-        <SummaryCard icon={Award} label="Goal Days" value={`${stepGoalsMet}/7`} color="text-[#171717]" />
+        <SummaryCard icon={Flame} label="Week Burned" value={weeklyData.reduce((s, d) => s + d.burned, 0)} color="text-[#1F7A4F]" />
+        <SummaryCard icon={Award} label="Goal Days" value={`${stepGoalsMet}/7`} color="text-[#2D9F6A]" />
       </div>
 
       {/* Weight Progress Chart */}
       {weightChartData.length > 1 && (
         <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5">
-          <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><TrendingUp size={15} className="text-[#0A0A0A]" /> Weight Progress</h3>
+          <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><TrendingUp size={15} className="text-[#2D9F6A]" /> Weight Progress</h3>
           <div className="h-40">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={weightChartData}>
@@ -116,7 +116,7 @@ export default function ProgressDashboard() {
                 <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#A3A3A3' }} interval="preserveStartEnd" />
                 <YAxis tick={{ fontSize: 9, fill: '#A3A3A3' }} domain={['auto', 'auto']} />
                 <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #E0E0E0', fontSize: 12 }} />
-                <Line type="monotone" dataKey="weight" stroke="#0A0A0A" strokeWidth={2.5} dot={{ r: 3, fill: '#0A0A0A' }} />
+                <Line type="monotone" dataKey="weight" stroke="#2D9F6A" strokeWidth={2.5} dot={{ r: 3, fill: '#2D9F6A' }} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -125,7 +125,7 @@ export default function ProgressDashboard() {
 
       {/* Calories Chart */}
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5">
-        <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><Flame size={15} className="text-[#0A0A0A]" /> Calories: Consumed vs Burned</h3>
+        <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><Flame size={15} className="text-[#2D9F6A]" /> Calories: Consumed vs Burned</h3>
         <div className="h-40">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={weeklyData}>
@@ -134,8 +134,8 @@ export default function ProgressDashboard() {
               <YAxis tick={{ fontSize: 9, fill: '#A3A3A3' }} />
               <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #E0E0E0', fontSize: 12 }} />
               <Legend wrapperStyle={{ fontSize: 10 }} />
-              <Bar dataKey="consumed" fill="#0A0A0A" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="burned" fill="#171717" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="consumed" fill="#2D9F6A" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="burned" fill="#6CC79A" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -143,7 +143,7 @@ export default function ProgressDashboard() {
 
       {/* Steps Chart */}
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5">
-        <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><Footprints size={15} className="text-[#0A0A0A]" /> Daily Steps (7 days)</h3>
+        <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><Footprints size={15} className="text-[#2D9F6A]" /> Daily Steps (7 days)</h3>
         <div className="h-40">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={weeklyData}>
@@ -151,7 +151,7 @@ export default function ProgressDashboard() {
               <XAxis dataKey="date" tick={{ fontSize: 9, fill: '#A3A3A3' }} />
               <YAxis tick={{ fontSize: 9, fill: '#A3A3A3' }} />
               <Tooltip contentStyle={{ borderRadius: 12, border: '1px solid #E0E0E0', fontSize: 12 }} />
-              <Bar dataKey="steps" fill="#171717" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="steps" fill="#2D9F6A" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -159,10 +159,10 @@ export default function ProgressDashboard() {
 
       {/* AI Reports */}
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5">
-        <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><Sparkles size={15} className="text-[#0A0A0A]" /> AI Progress Reports</h3>
+        <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 flex items-center gap-2 font-heading"><Sparkles size={15} className="text-[#2D9F6A]" /> AI Progress Reports</h3>
         {aiReport ? (
           <div>
-            <div className="rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-4 mb-3">
+            <div className="rounded-2xl bg-[#E6F4EC] border border-[#E0E0E0] p-4 mb-3">
               <p className="text-[10px] font-semibold text-[#0A0A0A] uppercase mb-1">{reportType === 'monthly' ? 'Monthly' : 'Weekly'} Report</p>
               <p className="text-sm text-[#0A0A0A] whitespace-pre-wrap leading-relaxed">{aiReport}</p>
             </div>
@@ -170,10 +170,10 @@ export default function ProgressDashboard() {
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => generateReport('weekly')} disabled={reportLoading} className="rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-3 font-semibold text-xs flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10">
+            <button onClick={() => generateReport('weekly')} disabled={reportLoading} className="rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3 font-semibold text-xs flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10">
               {reportLoading && reportType === 'weekly' ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />} Weekly Report
             </button>
-            <button onClick={() => generateReport('monthly')} disabled={reportLoading} className="rounded-full bg-[#171717] text-white py-3 font-semibold text-xs flex items-center justify-center gap-2 disabled:opacity-50">
+            <button onClick={() => generateReport('monthly')} disabled={reportLoading} className="rounded-full bg-[#2D9F6A] text-white py-3 font-semibold text-xs flex items-center justify-center gap-2 disabled:opacity-50">
               {reportLoading && reportType === 'monthly' ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />} Monthly Report
             </button>
           </div>
@@ -193,7 +193,7 @@ function GoalBar({ icon: Icon, label, value, goal, pct, color }) {
         </div>
         <span className="text-xs text-[#A3A3A3]">{value} / {goal}</span>
       </div>
-      <div className="w-full h-2 rounded-full bg-[#EBEBEB] overflow-hidden">
+      <div className="w-full h-2 rounded-full bg-[#E6F4EC] overflow-hidden">
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, backgroundColor: color }} />
       </div>
     </div>

@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, Save, User } from 'lucide-react';
 import { activityLevels } from '@/lib/workoutData';
 
-const inputCls = "w-full rounded-xl bg-[#F2F2F2] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#0A0A0A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 const goalOptions = [
   { value: 'loss', label: 'Weight Loss' },
   { value: 'maintenance', label: 'Weight Maintenance' },
@@ -54,13 +54,13 @@ export default function ProfileForm() {
     setSaving(false);
   }
 
-  if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#0A0A0A] animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-8"><Loader2 size={28} className="text-[#2D9F6A] animate-spin" /></div>;
 
   return (
     <div className="px-5 space-y-4">
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5 space-y-4">
         <div className="flex items-center gap-2 mb-1">
-          <User size={18} className="text-[#0A0A0A]" />
+          <User size={18} className="text-[#2D9F6A]" />
           <h2 className="text-base font-bold text-[#0A0A0A] font-heading">Personal Information</h2>
         </div>
         <Field label="Name"><input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className={inputCls} /></Field>
@@ -69,7 +69,7 @@ export default function ProfileForm() {
           <Field label="Gender">
             <div className="flex gap-2">
               {['male', 'female'].map((g) => (
-                <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize ${form.gender === g ? 'bg-[#404040] text-white' : 'bg-[#EBEBEB] text-[#737373]'}`}>{g}</button>
+                <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize ${form.gender === g ? 'bg-[#2D9F6A] text-white' : 'bg-[#E6F4EC] text-[#737373]'}`}>{g}</button>
               ))}
             </div>
           </Field>
@@ -98,7 +98,7 @@ export default function ProfileForm() {
           <Field label="Weekly Activity Goal (minutes)"><input type="number" value={form.weekly_activity_goal} onChange={(e) => setForm({ ...form, weekly_activity_goal: e.target.value })} className={inputCls} /></Field>
         </div>
       </div>
-      <button onClick={save} disabled={saving} className="w-full rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-3.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10">
+      <button onClick={save} disabled={saving} className="w-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10">
         {saving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />} {saved ? 'Profile Saved!' : 'Save Profile'}
       </button>
     </div>

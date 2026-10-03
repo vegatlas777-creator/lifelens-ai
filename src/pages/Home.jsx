@@ -55,8 +55,8 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F2F2F2]">
-        <div className="w-10 h-10 border-4 border-neutral-300 border-t-[#0A0A0A] rounded-full animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#F3F7F5]">
+        <div className="w-10 h-10 border-4 border-neutral-300 border-t-[#2D9F6A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -66,11 +66,11 @@ export default function Home() {
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] text-[#0A0A0A] pb-6">
+    <div className="min-h-screen bg-[#F3F7F5] text-[#0A0A0A] pb-6">
       {/* Top bar */}
       <div className="px-5 pt-10 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5 lg:hidden">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#171717] to-[#0A0A0A] flex items-center justify-center shadow-lg shadow-black/10">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center shadow-lg shadow-black/10">
             <Leaf size={20} className="text-white" />
           </div>
           <span className="text-base font-bold tracking-tight font-heading">3 in 1 Healthy Choice</span>
@@ -79,10 +79,10 @@ export default function Home() {
           <h2 className="text-xl font-bold tracking-tight font-heading">Dashboard</h2>
         </div>
         <div className="flex items-center gap-2.5">
-          <button className="w-10 h-10 rounded-full bg-white shadow-sm shadow-black/5 border border-[#E0E0E0] flex items-center justify-center text-[#737373] hover:bg-[#EBEBEB] transition-colors">
+          <button className="w-10 h-10 rounded-full bg-white shadow-sm shadow-black/5 border border-[#E0E0E0] flex items-center justify-center text-[#737373] hover:bg-[#E6F4EC] transition-colors">
             <Bell size={17} />
           </button>
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#171717] to-[#0A0A0A] flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-black/10">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-black/10">
             {firstName[0]?.toUpperCase()}
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function Home() {
             alt="Woman stretching"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/90 via-[#0A0A0A]/65 to-[#404040]/55" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0B2E20]/90 via-[#0B2E20]/65 to-[#14573B]/55" />
           <div className="relative p-5 min-h-[170px] flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -129,7 +129,7 @@ export default function Home() {
               className="flex items-center gap-2 mt-3">
               <Link
                 to="/coach"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#404040] text-xs font-bold shadow-md hover:scale-[1.03] transition-transform"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#1F7A4F] text-xs font-bold shadow-md hover:scale-[1.03] transition-transform"
               >
                 Chat with AI Coach <ArrowRight size={14} />
               </Link>
@@ -148,16 +148,16 @@ export default function Home() {
 
       {/* Today's metrics — 2x2 */}
       <div className="px-5 mt-4 grid grid-cols-2 gap-3">
-        <MetricCard icon={<Footprints size={18} className="text-[#404040]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
-        <MetricCard icon={<Flame size={18} className="text-[#0A0A0A]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
-        <MetricCard icon={<Zap size={18} className="text-[#171717]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
-        <MetricCard icon={<ActivityIcon size={18} className="text-[#171717]" />} label="Active Min" value={`${activeMinutes}`} sub="minutes" />
+        <MetricCard icon={<Footprints size={18} className="text-[#1F7A4F]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
+        <MetricCard icon={<Flame size={18} className="text-[#2D9F6A]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
+        <MetricCard icon={<Zap size={18} className="text-[#2D9F6A]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
+        <MetricCard icon={<ActivityIcon size={18} className="text-[#2D9F6A]" />} label="Active Min" value={`${activeMinutes}`} sub="minutes" />
       </div>
 
       {/* Quick access — feature grid */}
       <div className="px-5 mt-5">
         <div className="flex items-center gap-2 mb-3">
-          <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#171717] to-[#0A0A0A]" />
+          <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#2D9F6A] to-[#1F8A58]" />
           <h2 className="text-base font-bold tracking-tight font-heading">Explore</h2>
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -173,7 +173,7 @@ export default function Home() {
       {/* Premium strip */}
       {!subStatus.isPremium && (
         <div className="px-5 mt-4">
-          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#0A0A0A] to-[#404040] p-3.5 text-white shadow-lg shadow-black/10">
+          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#0B2E20] to-[#14573B] p-3.5 text-white shadow-lg shadow-black/10">
             <div className="p-2 rounded-xl bg-white/25 backdrop-blur"><Crown size={18} /></div>
             <div className="flex-1">
               <p className="text-sm font-bold font-heading">Go Premium</p>
@@ -195,7 +195,7 @@ function MetricCard({ icon, label, value, sub }) {
       transition={{ duration: 0.4 }}
       className="rounded-2xl bg-white border border-[#E0E0E0] p-3.5 shadow-sm shadow-black/5"
     >
-      <div className="w-9 h-9 rounded-xl bg-[#EBEBEB] flex items-center justify-center mb-2.5">
+      <div className="w-9 h-9 rounded-xl bg-[#E6F4EC] flex items-center justify-center mb-2.5">
         {icon}
       </div>
       <p className="text-2xl font-bold tracking-tight leading-none font-heading">{value}</p>
@@ -209,7 +209,7 @@ function FeatureTile({ to, title, desc, image }) {
   return (
     <Link to={to} className="group relative rounded-2xl overflow-hidden border border-[#E0E0E0] block h-32 shadow-sm shadow-black/5 hover:shadow-md hover:shadow-black/15 transition-shadow">
       <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/85 via-[#404040]/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2E20]/85 via-[#14573B]/40 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-3">
         <p className="text-sm font-bold text-white font-heading leading-tight">{title}</p>
         <p className="text-[10px] text-white/80 mt-0.5">{desc}</p>

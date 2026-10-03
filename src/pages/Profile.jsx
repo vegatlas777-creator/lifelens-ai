@@ -37,7 +37,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] pb-4">
+    <div className="min-h-screen bg-[#F3F7F5] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Profile</h1>
       </div>
@@ -46,7 +46,7 @@ export default function Profile() {
         {/* User card */}
         <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
           <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 to-[#404040]/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E20]/90 to-[#14573B]/75" />
           <div className="relative p-6 flex items-center gap-4 text-white">
             <div className="w-16 h-16 rounded-full bg-white/25 backdrop-blur flex items-center justify-center text-2xl font-bold">
               {user?.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}
@@ -66,16 +66,16 @@ export default function Profile() {
         {/* Today's stats */}
         <div className="grid grid-cols-3 gap-3 mt-4">
           <StatBox icon={Flame} value={Math.round(todayStats.calories)} label="kcal eaten" color="text-[#0A0A0A]" />
-          <StatBox icon={Activity} value={todayStats.burned} label="kcal burned" color="text-[#404040]" />
+          <StatBox icon={Activity} value={todayStats.burned} label="kcal burned" color="text-[#1F7A4F]" />
           <StatBox icon={Dumbbell} value={todayStats.workouts} label="workouts" color="text-[#0A0A0A]" />
         </div>
 
         {/* Subscription card */}
         <div className="mt-4">
           {subStatus.isPremium ? (
-            <div className="rounded-2xl bg-white border border-[#171717]/40 shadow-sm shadow-black/5 p-4 flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#EBEBEB]">
-                <Crown size={20} className="text-[#0A0A0A]" />
+            <div className="rounded-2xl bg-white border border-[#2D9F6A]/40 shadow-sm shadow-black/5 p-4 flex items-center gap-3">
+              <div className="p-2.5 rounded-xl bg-[#E6F4EC]">
+                <Crown size={20} className="text-[#2D9F6A]" />
               </div>
               <div className="flex-1">
                 <p className="font-semibold text-sm text-[#0A0A0A]">Premium Active</p>
@@ -85,7 +85,7 @@ export default function Profile() {
           ) : (
             <Link to="/pricing" className="relative overflow-hidden rounded-2xl block border border-[#E0E0E0] shadow-sm shadow-black/5">
               <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=500&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 to-[#404040]/75" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E20]/90 to-[#14573B]/75" />
               <div className="relative p-4 flex items-center gap-3 text-white">
                 <div className="p-2.5 rounded-xl bg-white/25 backdrop-blur">
                   <Crown size={20} />
@@ -115,21 +115,21 @@ export default function Profile() {
 
         {/* Settings */}
         <div className="mt-4 rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 divide-y divide-[#E0E0E0]">
-          <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#F2F2F2] transition-colors">
-            <div className="p-2 rounded-xl bg-[#EBEBEB]"><Activity size={18} className="text-[#0A0A0A]" /></div>
+          <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#F3F7F5] transition-colors">
+            <div className="p-2 rounded-xl bg-[#E6F4EC]"><Activity size={18} className="text-[#2D9F6A]" /></div>
             <span className="flex-1 text-left text-sm font-medium text-[#0A0A0A]">Metabolic Calculator</span>
             <ChevronRight size={18} className="text-[#A3A3A3]" />
           </Link>
-          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#F2F2F2] transition-colors">
-            <div className="p-2 rounded-xl bg-[#EBEBEB]"><Activity size={18} className="text-[#0A0A0A]" /></div>
+          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#F3F7F5] transition-colors">
+            <div className="p-2 rounded-xl bg-[#E6F4EC]"><Activity size={18} className="text-[#2D9F6A]" /></div>
             <div className="flex-1 text-left">
               <p className="text-sm font-medium text-[#0A0A0A]">Premium Profile & Progress</p>
               <p className="text-[10px] text-[#737373]">Track weight, measurements & goals</p>
             </div>
             <ChevronRight size={18} className="text-[#A3A3A3]" />
           </Link>
-          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#F2F2F2] transition-colors">
-            <div className="p-2 rounded-xl bg-[#EBEBEB]"><Crown size={18} className="text-[#0A0A0A]" /></div>
+          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#F3F7F5] transition-colors">
+            <div className="p-2 rounded-xl bg-[#E6F4EC]"><Crown size={18} className="text-[#2D9F6A]" /></div>
             <span className="flex-1 text-left text-sm font-medium text-[#0A0A0A]">Subscription & Pricing</span>
             <ChevronRight size={18} className="text-[#A3A3A3]" />
           </Link>

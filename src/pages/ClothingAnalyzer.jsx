@@ -71,7 +71,7 @@ export default function ClothingAnalyzer() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] pb-4">
+    <div className="min-h-screen bg-[#F3F7F5] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Sports Clothing Analyzer</h1>
         <p className="text-sm text-[#737373]">AI-powered sports gear performance scan</p>
@@ -85,10 +85,10 @@ export default function ClothingAnalyzer() {
         {!imagePreview && (
           <button
             onClick={() => fileRef.current?.click()}
-            className="w-full rounded-3xl border-2 border-dashed border-[#E0E0E0] bg-white hover:border-[#0A0A0A] transition-colors p-10 flex flex-col items-center gap-3 shadow-sm shadow-black/5"
+            className="w-full rounded-3xl border-2 border-dashed border-[#E0E0E0] bg-white hover:border-[#2D9F6A] transition-colors p-10 flex flex-col items-center gap-3 shadow-sm shadow-black/5"
           >
-            <div className="p-4 rounded-2xl bg-[#EBEBEB]">
-              <Camera size={32} className="text-[#0A0A0A]" />
+            <div className="p-4 rounded-2xl bg-[#E6F4EC]">
+              <Camera size={32} className="text-[#2D9F6A]" />
             </div>
             <p className="font-semibold text-[#0A0A0A]">Scan Sports Gear</p>
             <p className="text-sm text-[#737373] text-center max-w-xs">Upload a photo of any sports clothing item — our AI evaluates how well it performs for your sport.</p>
@@ -108,7 +108,7 @@ export default function ClothingAnalyzer() {
             <img src={imagePreview} alt="sports clothing" className="w-full h-56 object-cover" />
             {!loading && (
               <button onClick={reset} className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur">
-                <X size={18} className="text-[#0A0A0A]" />
+                <X size={18} className="text-[#2D9F6A]" />
               </button>
             )}
           </div>
@@ -116,7 +116,7 @@ export default function ClothingAnalyzer() {
 
         {loading && (
           <div className="flex flex-col items-center gap-3 mt-6 py-8">
-            <Loader2 size={32} className="text-[#0A0A0A] animate-spin" />
+            <Loader2 size={32} className="text-[#2D9F6A] animate-spin" />
             <p className="text-sm text-[#737373]">Analyzing sports gear with AI...</p>
           </div>
         )}
@@ -128,15 +128,15 @@ export default function ClothingAnalyzer() {
         )}
 
         {limitReached && (
-          <div className="mt-4 rounded-3xl bg-gradient-to-br from-[#EBEBEB] to-[#E0E0E0] border border-[#171717]/40 p-5 text-center">
+          <div className="mt-4 rounded-3xl bg-gradient-to-br from-[#E6F4EC] to-[#D3EBDD] border border-[#2D9F6A]/40 p-5 text-center">
             <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mx-auto mb-3 shadow-sm shadow-black/5">
-              <Crown size={24} className="text-[#0A0A0A]" />
+              <Crown size={24} className="text-[#2D9F6A]" />
             </div>
             <p className="text-sm font-semibold text-[#0A0A0A]">Weekly Limit Reached</p>
             <p className="text-xs text-[#737373] mt-1 leading-relaxed">
               You have used all 5 free material checks for this week. Upgrade to Premium for unlimited sports gear checks, unlimited calorie analysis, personalized AI coaching, and advanced progress tracking.
             </p>
-            <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white text-sm font-semibold shadow-md shadow-black/10">
+            <Link to="/pricing" className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white text-sm font-semibold shadow-md shadow-black/10">
               <Crown size={16} /> Upgrade to Premium <ArrowRight size={16} />
             </Link>
           </div>
@@ -146,7 +146,7 @@ export default function ClothingAnalyzer() {
           <div className="mt-5 space-y-4">
             {/* Sport type badge */}
             {analysis.sport_type && (
-              <div className="rounded-2xl bg-gradient-to-r from-[#171717] to-[#0A0A0A] p-4 text-white shadow-md shadow-black/10">
+              <div className="rounded-2xl bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] p-4 text-white shadow-md shadow-black/10">
                 <div className="flex items-center gap-2 mb-1">
                   <Trophy size={18} />
                   <span className="text-xs font-medium uppercase tracking-wide opacity-90">Designed for</span>
@@ -159,15 +159,15 @@ export default function ClothingAnalyzer() {
             {/* Performance scores */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               <ScoreCard icon={Zap} label="Performance" score={analysis.performance_score} color="text-[#0A0A0A]" />
-              <ScoreCard icon={Wind} label="Breathability" score={analysis.breathability_score} color="text-[#404040]" />
+              <ScoreCard icon={Wind} label="Breathability" score={analysis.breathability_score} color="text-[#1F7A4F]" />
               <ScoreCard icon={HeartPulse} label="Comfort" score={analysis.comfort_score} color="text-[#0A0A0A]" />
-              <ScoreCard icon={Shield} label="Durability" score={analysis.durability_score} color="text-[#404040]" />
+              <ScoreCard icon={Shield} label="Durability" score={analysis.durability_score} color="text-[#1F7A4F]" />
               <ScoreCard icon={Activity} label="Fit & Support" score={analysis.fit_score} color="text-[#0A0A0A]" />
             </div>
 
             {/* Summary */}
             <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 flex items-start gap-3">
-              <div className="p-2 rounded-xl bg-[#EBEBEB] text-[#0A0A0A] shrink-0">
+              <div className="p-2 rounded-xl bg-[#E6F4EC] text-[#0A0A0A] shrink-0">
                 <Target size={20} />
               </div>
               <div>
@@ -182,7 +182,7 @@ export default function ClothingAnalyzer() {
                 <h3 className="font-semibold text-sm mb-2 px-1 text-[#0A0A0A]">Recommended Sports</h3>
                 <div className="flex flex-wrap gap-2">
                   {analysis.recommended_sports.map((sport, i) => (
-                    <span key={i} className="px-3 py-1.5 rounded-full bg-[#EBEBEB] text-[#404040] text-xs font-medium border border-[#171717]">
+                    <span key={i} className="px-3 py-1.5 rounded-full bg-[#E6F4EC] text-[#1F7A4F] text-xs font-medium border border-[#2D9F6A]">
                       {sport}
                     </span>
                   ))}
@@ -230,11 +230,11 @@ export default function ClothingAnalyzer() {
             {analysis.alternatives?.length > 0 && (
               <div>
                 <h3 className="font-semibold text-sm mb-2 px-1 flex items-center gap-2 text-[#0A0A0A]">
-                  <Recycle size={16} className="text-[#404040]" /> Better Sports Alternatives
+                  <Recycle size={16} className="text-[#1F7A4F]" /> Better Sports Alternatives
                 </h3>
                 <div className="space-y-2">
                   {analysis.alternatives.map((alt, i) => (
-                    <div key={i} className="rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-3">
+                    <div key={i} className="rounded-2xl bg-[#E6F4EC] border border-[#E0E0E0] p-3">
                       <p className="font-medium text-sm text-[#0A0A0A]">{alt.name}</p>
                       <p className="text-xs text-[#737373] mt-0.5">{alt.reason}</p>
                     </div>
@@ -245,7 +245,7 @@ export default function ClothingAnalyzer() {
 
             <button
               onClick={() => fileRef.current?.click()}
-              className="w-full rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10"
+              className="w-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10"
             >
               <Upload size={16} /> Analyze Another Item <ArrowRight size={16} />
             </button>
@@ -274,8 +274,8 @@ function ScoreCard({ icon: Icon, label, score, color }) {
         <span className="text-2xl font-bold text-[#0A0A0A]">{score ?? '-'}</span>
         <span className="text-xs text-[#A3A3A3]">/10</span>
       </div>
-      <div className="w-full h-1.5 rounded-full bg-[#EBEBEB] overflow-hidden">
-        <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, backgroundColor: '#171717' }} />
+      <div className="w-full h-1.5 rounded-full bg-[#E6F4EC] overflow-hidden">
+        <div className="h-full rounded-full transition-all duration-700" style={{ width: `${pct}%`, backgroundColor: '#2D9F6A' }} />
       </div>
     </div>
   );

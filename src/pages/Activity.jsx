@@ -82,8 +82,8 @@ export default function Activity() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F2F2F2]">
-        <div className="w-8 h-8 border-4 border-[#E0E0E0] border-t-[#0A0A0A] rounded-full animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#F3F7F5]">
+        <div className="w-8 h-8 border-4 border-[#E0E0E0] border-t-[#2D9F6A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -94,7 +94,7 @@ export default function Activity() {
   const stepsBelowAvg = avgSteps - steps;
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] pb-4">
+    <div className="min-h-screen bg-[#F3F7F5] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Activity Tracking</h1>
         <p className="text-sm text-[#737373]">Steps, distance & active minutes</p>
@@ -114,7 +114,7 @@ export default function Activity() {
         {/* Steps ring */}
         <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
           <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 to-[#404040]/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B2E20]/90 to-[#14573B]/75" />
           <div className="relative p-6 text-white">
             <div className="flex items-center justify-between">
               <div>
@@ -147,22 +147,22 @@ export default function Activity() {
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-3 mt-4">
           <StatBox icon={MapPin} value={`${(todayLog?.walking_distance_km || 0).toFixed(2)}`} label="Walked (km)" color="text-[#0A0A0A]" />
-          <StatBox icon={MapPin} value={`${(todayLog?.running_distance_km || 0).toFixed(2)}`} label="Run (km)" color="text-[#404040]" />
+          <StatBox icon={MapPin} value={`${(todayLog?.running_distance_km || 0).toFixed(2)}`} label="Run (km)" color="text-[#1F7A4F]" />
           <StatBox icon={Timer} value={todayLog?.active_minutes || 0} label="Active min" color="text-[#0A0A0A]" />
-          <StatBox icon={Flame} value={todayLog?.calories_burned_activity || 0} label="Burned" color="text-[#404040]" />
+          <StatBox icon={Flame} value={todayLog?.calories_burned_activity || 0} label="Burned" color="text-[#1F7A4F]" />
         </div>
 
         {/* Quick log */}
         <div className="mt-5">
           <h3 className="text-sm font-semibold mb-3 text-[#0A0A0A]">Quick Log Activity</h3>
           <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => addActivity('walking', 20)} className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 hover:border-[#0A0A0A] transition-colors text-left">
-              <Footprints size={20} className="text-[#0A0A0A] mb-1" />
+            <button onClick={() => addActivity('walking', 20)} className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 hover:border-[#2D9F6A] transition-colors text-left">
+              <Footprints size={20} className="text-[#2D9F6A] mb-1" />
               <p className="text-sm font-semibold text-[#0A0A0A]">20-min Walk</p>
               <p className="text-xs text-[#737373]">~{Math.round(20 * 110 * 0.04)} kcal</p>
             </button>
-            <button onClick={() => addActivity('running', 20)} className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 hover:border-[#0A0A0A] transition-colors text-left">
-              <ActivityIcon size={20} className="text-[#404040] mb-1" />
+            <button onClick={() => addActivity('running', 20)} className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 hover:border-[#2D9F6A] transition-colors text-left">
+              <ActivityIcon size={20} className="text-[#1F7A4F] mb-1" />
               <p className="text-sm font-semibold text-[#0A0A0A]">20-min Run</p>
               <p className="text-xs text-[#737373]">~200 kcal</p>
             </button>
@@ -172,7 +172,7 @@ export default function Activity() {
         {/* Weekly chart */}
         <div className="mt-6">
           <h3 className="text-sm font-semibold mb-3 flex items-center gap-2 text-[#0A0A0A]">
-            <TrendingUp size={16} className="text-[#404040]" /> Weekly Steps
+            <TrendingUp size={16} className="text-[#1F7A4F]" /> Weekly Steps
           </h3>
           <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4">
             <div className="flex items-end justify-between gap-2 h-32">
@@ -182,7 +182,7 @@ export default function Activity() {
                 return (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1.5">
                     <div className="w-full flex items-end justify-center h-full">
-                      <div className="w-6 rounded-t-lg bg-gradient-to-t from-[#404040] to-[#171717] transition-all duration-500" style={{ height: `${Math.max(heightPct, 4)}%` }} />
+                      <div className="w-6 rounded-t-lg bg-gradient-to-t from-[#1F8A58] to-[#6CC79A] transition-all duration-500" style={{ height: `${Math.max(heightPct, 4)}%` }} />
                     </div>
                     <span className="text-[9px] text-[#737373]">{d.label}</span>
                   </div>
@@ -197,9 +197,9 @@ export default function Activity() {
         </div>
 
         {/* AI recommendation */}
-        <div className="mt-5 rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-4">
+        <div className="mt-5 rounded-2xl bg-[#E6F4EC] border border-[#E0E0E0] p-4">
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-[#171717]/30 text-[#404040]">
+            <div className="p-2 rounded-xl bg-[#2D9F6A]/30 text-[#1F7A4F]">
               <Target size={18} />
             </div>
             <div>
@@ -227,10 +227,10 @@ function ConnectRow({ icon: Icon, name, connected, onToggle }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl bg-[#EBEBEB]"><Icon size={18} className="text-[#0A0A0A]" /></div>
+        <div className="p-2 rounded-xl bg-[#E6F4EC]"><Icon size={18} className="text-[#2D9F6A]" /></div>
         <span className="text-sm font-medium text-[#0A0A0A]">{name}</span>
       </div>
-      <button onClick={onToggle} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${connected ? 'bg-[#404040] text-white' : 'bg-[#EBEBEB] text-[#737373]'}`}>
+      <button onClick={onToggle} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${connected ? 'bg-[#2D9F6A] text-white' : 'bg-[#E6F4EC] text-[#737373]'}`}>
         {connected ? 'Connected' : 'Connect'}
       </button>
     </div>

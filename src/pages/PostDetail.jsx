@@ -61,17 +61,17 @@ export default function PostDetail() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F2F2F2]">
-        <Loader2 size={28} className="text-[#0A0A0A] animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#F3F7F5]">
+        <Loader2 size={28} className="text-[#2D9F6A] animate-spin" />
       </div>
     );
   }
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#F2F2F2] flex flex-col items-center justify-center px-5">
+      <div className="min-h-screen bg-[#F3F7F5] flex flex-col items-center justify-center px-5">
         <p className="text-sm text-[#737373]">Post not found.</p>
-        <Link to="/community" className="mt-3 px-4 py-2 rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white text-sm font-semibold">Back to Community</Link>
+        <Link to="/community" className="mt-3 px-4 py-2 rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white text-sm font-semibold">Back to Community</Link>
       </div>
     );
   }
@@ -82,10 +82,10 @@ export default function PostDetail() {
   const likeCount = post.liked_by?.length || 0;
 
   return (
-    <div className="min-h-screen bg-[#F2F2F2] pb-4">
+    <div className="min-h-screen bg-[#F3F7F5] pb-4">
       {/* Header */}
       <div className="px-5 pt-12 pb-3 flex items-center gap-3 border-b border-[#E0E0E0]">
-        <button onClick={() => navigate('/community')} className="p-1.5 rounded-full hover:bg-[#EBEBEB]"><ArrowLeft size={20} className="text-[#0A0A0A]" /></button>
+        <button onClick={() => navigate('/community')} className="p-1.5 rounded-full hover:bg-[#E6F4EC]"><ArrowLeft size={20} className="text-[#2D9F6A]" /></button>
         <h1 className="text-lg font-bold text-[#0A0A0A] font-heading">Discussion</h1>
       </div>
 
@@ -94,14 +94,14 @@ export default function PostDetail() {
         <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 overflow-hidden">
           <div className="p-4">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#171717] to-[#0A0A0A] flex items-center justify-center text-white text-sm font-bold">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center text-white text-sm font-bold">
                 {post.author_name?.[0]?.toUpperCase() || 'U'}
               </div>
               <div className="flex-1">
                 <p className="text-sm font-semibold text-[#0A0A0A]">{post.author_name || 'Member'}</p>
                 <p className="text-[10px] text-[#A3A3A3]">{timeAgo(post.created_date)}</p>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-[#EBEBEB] text-[10px] font-medium text-[#404040]">{cat.emoji} {cat.label}</span>
+              <span className="px-2.5 py-1 rounded-full bg-[#E6F4EC] text-[10px] font-medium text-[#1F7A4F]">{cat.emoji} {cat.label}</span>
             </div>
             <h2 className="text-lg font-bold text-[#0A0A0A] mb-2 font-heading">{post.title}</h2>
             <p className="text-sm text-[#525252] leading-relaxed whitespace-pre-wrap">{post.content}</p>
@@ -110,13 +110,13 @@ export default function PostDetail() {
             <img src={post.image_url} alt={post.title} className="w-full max-h-96 object-cover" />
           )}
           <div className="flex items-center gap-1 px-3 py-2 border-t border-[#E0E0E0]">
-            <button onClick={toggleLike} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${liked ? 'text-red-500 bg-red-50' : 'text-[#737373] hover:bg-[#EBEBEB]'}`}>
+            <button onClick={toggleLike} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${liked ? 'text-red-500 bg-red-50' : 'text-[#737373] hover:bg-[#E6F4EC]'}`}>
               <Heart size={16} fill={liked ? 'currentColor' : 'none'} /> {likeCount > 0 && likeCount}
             </button>
-            <button onClick={toggleFollow} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${following ? 'text-[#404040] bg-[#EBEBEB]' : 'text-[#737373] hover:bg-[#EBEBEB]'}`}>
+            <button onClick={toggleFollow} className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium ${following ? 'text-[#1F7A4F] bg-[#E6F4EC]' : 'text-[#737373] hover:bg-[#E6F4EC]'}`}>
               {following ? <BellOff size={16} /> : <Bell size={16} />} {following ? 'Following' : 'Follow'}
             </button>
-            <button onClick={reportPost} className="ml-auto px-3 py-2 rounded-full text-sm text-[#A3A3A3] hover:bg-[#EBEBEB]">
+            <button onClick={reportPost} className="ml-auto px-3 py-2 rounded-full text-sm text-[#A3A3A3] hover:bg-[#E6F4EC]">
               <Flag size={16} />
             </button>
           </div>
@@ -126,8 +126,8 @@ export default function PostDetail() {
       {/* Premium tip */}
       {isPremium && (
         <div className="px-5 mt-4">
-          <div className="rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-3 flex items-center gap-2">
-            <Crown size={14} className="text-[#0A0A0A]" />
+          <div className="rounded-2xl bg-[#E6F4EC] border border-[#E0E0E0] p-3 flex items-center gap-2">
+            <Crown size={14} className="text-[#2D9F6A]" />
             <p className="text-xs text-[#737373]">You can add photos to your comments!</p>
           </div>
         </div>

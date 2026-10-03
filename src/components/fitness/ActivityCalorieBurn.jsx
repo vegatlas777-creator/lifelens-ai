@@ -4,19 +4,19 @@ import { Footprints, Activity, Bike, Mountain, Waves, Music, PersonStanding, Dum
 import { useAuth } from '@/lib/AuthContext';
 
 const activities = [
-  { name: 'Walking', icon: Footprints, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Running', icon: Activity, color: 'text-[#404040]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Cycling', icon: Bike, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Hiking', icon: Mountain, color: 'text-[#404040]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Swimming', icon: Waves, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Dancing', icon: Music, color: 'text-[#404040]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Hip Hop', icon: Music, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Latin Dance', icon: Music, color: 'text-[#404040]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Street Dance', icon: Music, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Ballet', icon: PersonStanding, color: 'text-[#404040]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Aerobic Dance', icon: Music, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Strength Training', icon: Dumbbell, color: 'text-[#404040]', bg: 'bg-[#EBEBEB]' },
-  { name: 'Yoga', icon: Leaf, color: 'text-[#0A0A0A]', bg: 'bg-[#EBEBEB]' },
+  { name: 'Walking', icon: Footprints, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Running', icon: Activity, color: 'text-[#1F7A4F]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Cycling', icon: Bike, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Hiking', icon: Mountain, color: 'text-[#1F7A4F]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Swimming', icon: Waves, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Dancing', icon: Music, color: 'text-[#1F7A4F]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Hip Hop', icon: Music, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Latin Dance', icon: Music, color: 'text-[#1F7A4F]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Street Dance', icon: Music, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Ballet', icon: PersonStanding, color: 'text-[#1F7A4F]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Aerobic Dance', icon: Music, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Strength Training', icon: Dumbbell, color: 'text-[#1F7A4F]', bg: 'bg-[#E6F4EC]' },
+  { name: 'Yoga', icon: Leaf, color: 'text-[#0A0A0A]', bg: 'bg-[#E6F4EC]' },
 ];
 
 const intensityLevels = [
@@ -26,7 +26,7 @@ const intensityLevels = [
   { value: 'high', label: 'High Intensity', desc: 'Maximum effort' },
 ];
 
-const inputCls = "w-full rounded-xl bg-[#F2F2F2] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#0A0A0A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 
 export default function ActivityCalorieBurn() {
   const [form, setForm] = useState({ age: '', weight: '', height: '', gender: 'male', intensity: 'moderate' });
@@ -70,7 +70,7 @@ export default function ActivityCalorieBurn() {
             <label className="text-xs font-medium text-[#737373] mb-1.5 block">Gender</label>
             <div className="flex gap-2">
               {['male', 'female'].map((g) => (
-                <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize transition-colors ${form.gender === g ? 'bg-[#404040] text-white' : 'bg-[#EBEBEB] text-[#737373]'}`}>{g}</button>
+                <button key={g} onClick={() => setForm({ ...form, gender: g })} className={`flex-1 py-2.5 rounded-xl text-sm font-medium capitalize transition-colors ${form.gender === g ? 'bg-[#2D9F6A] text-white' : 'bg-[#E6F4EC] text-[#737373]'}`}>{g}</button>
               ))}
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function ActivityCalorieBurn() {
               <button
                 key={lvl.value}
                 onClick={() => setForm({ ...form, intensity: lvl.value })}
-                className={`rounded-xl p-2.5 text-left transition-colors ${form.intensity === lvl.value ? 'bg-[#404040] text-white' : 'bg-[#F2F2F2] border border-[#E0E0E0] text-[#737373]'}`}
+                className={`rounded-xl p-2.5 text-left transition-colors ${form.intensity === lvl.value ? 'bg-[#2D9F6A] text-white' : 'bg-[#F3F7F5] border border-[#E0E0E0] text-[#737373]'}`}
               >
                 <p className="text-sm font-medium">{lvl.label}</p>
                 <p className={`text-[10px] ${form.intensity === lvl.value ? 'text-white/80' : 'text-[#A3A3A3]'}`}>{lvl.desc}</p>
@@ -103,7 +103,7 @@ export default function ActivityCalorieBurn() {
         <button
           onClick={calculate}
           disabled={loading}
-          className="w-full rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10"
+          className="w-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10"
         >
           {loading ? <><Loader2 size={16} className="animate-spin" /> Generating Estimates...</> : <><Calculator size={16} /> Calculate Calorie Burn <ArrowRight size={16} /></>}
         </button>
@@ -117,7 +117,7 @@ export default function ActivityCalorieBurn() {
 
       {loading && (
         <div className="flex flex-col items-center gap-3 mt-6 py-8">
-          <Loader2 size={32} className="text-[#0A0A0A] animate-spin" />
+          <Loader2 size={32} className="text-[#2D9F6A] animate-spin" />
           <p className="text-sm text-[#737373]">AI is calculating personalized estimates...</p>
         </div>
       )}
@@ -149,7 +149,7 @@ export default function ActivityCalorieBurn() {
               );
             })}
           </div>
-          <div className="mt-5 rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-4">
+          <div className="mt-5 rounded-2xl bg-[#E6F4EC] border border-[#E0E0E0] p-4">
             <p className="text-xs text-[#737373] leading-relaxed">
               ⚠️ Calorie burn estimates vary depending on intensity, fitness level, body weight, and individual metabolism. These are approximations and not medical advice.
             </p>
@@ -162,7 +162,7 @@ export default function ActivityCalorieBurn() {
 
 function CalorieStat({ minutes, calories, highlighted }) {
   return (
-    <div className={`rounded-xl p-2.5 text-center ${highlighted ? 'bg-[#171717]/30' : 'bg-[#F2F2F2]'}`}>
+    <div className={`rounded-xl p-2.5 text-center ${highlighted ? 'bg-[#2D9F6A]/30' : 'bg-[#F3F7F5]'}`}>
       <div className="flex items-center justify-center gap-1 mb-1">
         <Clock size={10} className="text-[#A3A3A3]" />
         <p className="text-[10px] text-[#737373]">{minutes}</p>
