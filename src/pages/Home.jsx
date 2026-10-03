@@ -149,11 +149,10 @@ export default function Home() {
       <div className="px-5 mt-4">
         <div className="relative rounded-3xl overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1534438327276-1e6922c37634?w=1000&q=80"
+            src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1000&q=80"
             alt="People exercising in gym"
             className="absolute inset-0 w-full h-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8DC]/30 to-[#FFF8DC]/10" />
           <div className="relative grid grid-cols-2 gap-3 p-4">
             <MetricCard icon={<Footprints size={18} className="text-[#1F7A4F]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
             <MetricCard icon={<Flame size={18} className="text-[#2D9F6A]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
