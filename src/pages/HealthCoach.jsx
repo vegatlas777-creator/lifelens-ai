@@ -63,12 +63,12 @@ export default function HealthCoach() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-7rem)] bg-[#FFF8DC]">
-      <div className="px-5 pt-12 pb-4 border-b border-[#E0E0E0]">
+    <div className="flex flex-col h-[calc(100dvh-7rem)]" style={{ backgroundColor: '#F6F1E8' }}>
+      <div className="px-5 pt-12 pb-4 border-b border-[#E5DDD1]">
         <BackButton />
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5">
+            <div className="p-2.5 rounded-2xl bg-[#FFFDFC] border border-[#E5DDD1] shadow-sm shadow-black/5">
               <Sparkles size={22} className="text-[#2D9F6A]" />
             </div>
             <div>
@@ -94,14 +94,14 @@ export default function HealthCoach() {
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-3">
         {messages.map((m) => (
           <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[80%] rounded-3xl px-4 py-2.5 text-sm ${m.role === 'user' ? 'bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] text-white rounded-br-md shadow-md shadow-black/10' : 'bg-white border border-[#E0E0E0] text-[#0A0A0A] rounded-bl-md shadow-sm shadow-black/5'}`}>
+            <div className={`max-w-[80%] rounded-3xl px-4 py-2.5 text-sm ${m.role === 'user' ? 'bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] text-white rounded-br-md shadow-md shadow-black/10' : 'bg-[#FFFDFC] border border-[#E5DDD1] text-[#0A0A0A] rounded-bl-md shadow-sm shadow-black/5'}`}>
               <p className="whitespace-pre-wrap leading-relaxed">{m.content}</p>
             </div>
           </div>
         ))}
         {loading && (
           <div className="flex justify-start">
-            <div className="bg-white border border-[#E0E0E0] rounded-3xl rounded-bl-md px-4 py-3 flex items-center gap-2 shadow-sm shadow-black/5">
+            <div className="bg-[#FFFDFC] border border-[#E5DDD1] rounded-3xl rounded-bl-md px-4 py-3 flex items-center gap-2 shadow-sm shadow-black/5">
               <Loader2 size={14} className="animate-spin text-[#2D9F6A]" />
               <span className="text-xs text-[#737373]">Thinking...</span>
             </div>
@@ -110,14 +110,14 @@ export default function HealthCoach() {
         <div ref={scrollRef} />
       </div>
 
-      <div className="px-5 py-3 border-t border-[#E0E0E0] bg-[#FFF8DC]">
+      <div className="px-5 py-3 border-t border-[#E5DDD1]" style={{ backgroundColor: '#F6F1E8' }}>
         <div className="flex items-center gap-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && send()}
             placeholder="Ask about nutrition, workouts..."
-            className="flex-1 rounded-full bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 px-4 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]"
+            className="flex-1 rounded-full bg-[#FFFDFC] border border-[#E5DDD1] shadow-sm shadow-black/5 px-4 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]"
           />
           <button onClick={send} disabled={!input.trim() || loading} className="p-2.5 rounded-full bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] text-white shadow-md shadow-black/10 disabled:opacity-50">
             <Send size={18} />
