@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { CATEGORIES } from '@/lib/communityData';
 import { useAuth } from '@/lib/AuthContext';
 
-const inputCls = "w-full rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#0F172A] text-[#0F172A]";
+const inputCls = "w-full rounded-xl bg-[#F2F2F2] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#0A0A0A] text-[#0A0A0A]";
 
 export default function PostForm({ user, isPremium, onCreated, onCancel }) {
   const [title, setTitle] = useState('');
@@ -50,10 +50,10 @@ export default function PostForm({ user, isPremium, onCreated, onCancel }) {
   }
 
   return (
-    <div className="rounded-3xl bg-white border border-[#E2E8F0] shadow-sm shadow-pink-200/60 p-5 space-y-3">
+    <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5 space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-[#0F172A] font-heading">New Discussion</h2>
-        <button onClick={onCancel} className="p-1.5 rounded-full hover:bg-[#F1F5F9]"><X size={16} className="text-[#64748B]" /></button>
+        <h2 className="text-base font-bold text-[#0A0A0A] font-heading">New Discussion</h2>
+        <button onClick={onCancel} className="p-1.5 rounded-full hover:bg-[#EBEBEB]"><X size={16} className="text-[#737373]" /></button>
       </div>
       <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Post title..." className={inputCls} />
       <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Share your thoughts, questions, or progress..." rows={4} className={inputCls + ' resize-none'} />
@@ -68,16 +68,16 @@ export default function PostForm({ user, isPremium, onCreated, onCancel }) {
       )}
       <div className="flex items-center gap-2">
         {isPremium ? (
-          <label className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-medium text-[#64748B] cursor-pointer">
+          <label className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F2F2F2] border border-[#E0E0E0] text-xs font-medium text-[#737373] cursor-pointer">
             <ImagePlus size={14} /> Photo
             <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
           </label>
         ) : (
-          <Link to="/pricing" className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F8FAFC] border border-[#E2E8F0] text-xs font-medium text-[#94A3B8]">
-            <Crown size={14} className="text-[#0F172A]" /> Premium for photos
+          <Link to="/pricing" className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F2F2F2] border border-[#E0E0E0] text-xs font-medium text-[#A3A3A3]">
+            <Crown size={14} className="text-[#0A0A0A]" /> Premium for photos
           </Link>
         )}
-        <button onClick={submit} disabled={saving || !title.trim() || !content.trim()} className="flex-1 rounded-full bg-gradient-to-r from-[#1E293B] to-[#0F172A] text-white py-2.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-pink-300/50">
+        <button onClick={submit} disabled={saving || !title.trim() || !content.trim()} className="flex-1 rounded-full bg-gradient-to-r from-[#171717] to-[#0A0A0A] text-white py-2.5 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10">
           {saving ? <Loader2 size={16} className="animate-spin" /> : null} Post
         </button>
       </div>

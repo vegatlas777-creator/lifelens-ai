@@ -82,8 +82,8 @@ export default function Activity() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F8FAFC]">
-        <div className="w-8 h-8 border-4 border-[#E2E8F0] border-t-[#0F172A] rounded-full animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-[#F2F2F2]">
+        <div className="w-8 h-8 border-4 border-[#E0E0E0] border-t-[#0A0A0A] rounded-full animate-spin" />
       </div>
     );
   }
@@ -94,16 +94,16 @@ export default function Activity() {
   const stepsBelowAvg = avgSteps - steps;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-4">
+    <div className="min-h-screen bg-[#F2F2F2] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <h1 className="text-2xl font-bold text-[#0F172A] font-heading">Activity Tracking</h1>
-        <p className="text-sm text-[#64748B]">Steps, distance & active minutes</p>
+        <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Activity Tracking</h1>
+        <p className="text-sm text-[#737373]">Steps, distance & active minutes</p>
       </div>
 
       <div className="px-5 mt-2">
         {/* Connections */}
-        <div className="rounded-2xl bg-white border border-[#E2E8F0] shadow-sm shadow-pink-200/60 p-4 mb-4">
-          <p className="text-xs font-medium text-[#64748B] mb-3">CONNECTED DEVICES</p>
+        <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 mb-4">
+          <p className="text-xs font-medium text-[#737373] mb-3">CONNECTED DEVICES</p>
           <div className="space-y-2">
             <ConnectRow icon={Watch} name="Apple Health" connected={connected.apple} onToggle={() => connectService('apple')} />
             <ConnectRow icon={Smartphone} name="Google Health Connect" connected={connected.google} onToggle={() => connectService('google')} />
@@ -112,9 +112,9 @@ export default function Activity() {
         </div>
 
         {/* Steps ring */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#E2E8F0] shadow-sm shadow-pink-200/60">
+        <div className="relative overflow-hidden rounded-3xl border border-[#E0E0E0] shadow-sm shadow-black/5">
           <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/90 to-[#334155]/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 to-[#404040]/75" />
           <div className="relative p-6 text-white">
             <div className="flex items-center justify-between">
               <div>
@@ -146,35 +146,35 @@ export default function Activity() {
 
         {/* Stats grid */}
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <StatBox icon={MapPin} value={`${(todayLog?.walking_distance_km || 0).toFixed(2)}`} label="Walked (km)" color="text-[#0F172A]" />
-          <StatBox icon={MapPin} value={`${(todayLog?.running_distance_km || 0).toFixed(2)}`} label="Run (km)" color="text-[#334155]" />
-          <StatBox icon={Timer} value={todayLog?.active_minutes || 0} label="Active min" color="text-[#0F172A]" />
-          <StatBox icon={Flame} value={todayLog?.calories_burned_activity || 0} label="Burned" color="text-[#334155]" />
+          <StatBox icon={MapPin} value={`${(todayLog?.walking_distance_km || 0).toFixed(2)}`} label="Walked (km)" color="text-[#0A0A0A]" />
+          <StatBox icon={MapPin} value={`${(todayLog?.running_distance_km || 0).toFixed(2)}`} label="Run (km)" color="text-[#404040]" />
+          <StatBox icon={Timer} value={todayLog?.active_minutes || 0} label="Active min" color="text-[#0A0A0A]" />
+          <StatBox icon={Flame} value={todayLog?.calories_burned_activity || 0} label="Burned" color="text-[#404040]" />
         </div>
 
         {/* Quick log */}
         <div className="mt-5">
-          <h3 className="text-sm font-semibold mb-3 text-[#0F172A]">Quick Log Activity</h3>
+          <h3 className="text-sm font-semibold mb-3 text-[#0A0A0A]">Quick Log Activity</h3>
           <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => addActivity('walking', 20)} className="rounded-2xl bg-white border border-[#E2E8F0] shadow-sm shadow-pink-200/60 p-4 hover:border-[#0F172A] transition-colors text-left">
-              <Footprints size={20} className="text-[#0F172A] mb-1" />
-              <p className="text-sm font-semibold text-[#0F172A]">20-min Walk</p>
-              <p className="text-xs text-[#64748B]">~{Math.round(20 * 110 * 0.04)} kcal</p>
+            <button onClick={() => addActivity('walking', 20)} className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 hover:border-[#0A0A0A] transition-colors text-left">
+              <Footprints size={20} className="text-[#0A0A0A] mb-1" />
+              <p className="text-sm font-semibold text-[#0A0A0A]">20-min Walk</p>
+              <p className="text-xs text-[#737373]">~{Math.round(20 * 110 * 0.04)} kcal</p>
             </button>
-            <button onClick={() => addActivity('running', 20)} className="rounded-2xl bg-white border border-[#E2E8F0] shadow-sm shadow-pink-200/60 p-4 hover:border-[#0F172A] transition-colors text-left">
-              <ActivityIcon size={20} className="text-[#334155] mb-1" />
-              <p className="text-sm font-semibold text-[#0F172A]">20-min Run</p>
-              <p className="text-xs text-[#64748B]">~200 kcal</p>
+            <button onClick={() => addActivity('running', 20)} className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 hover:border-[#0A0A0A] transition-colors text-left">
+              <ActivityIcon size={20} className="text-[#404040] mb-1" />
+              <p className="text-sm font-semibold text-[#0A0A0A]">20-min Run</p>
+              <p className="text-xs text-[#737373]">~200 kcal</p>
             </button>
           </div>
         </div>
 
         {/* Weekly chart */}
         <div className="mt-6">
-          <h3 className="text-sm font-semibold mb-3 flex items-center gap-2 text-[#0F172A]">
-            <TrendingUp size={16} className="text-[#334155]" /> Weekly Steps
+          <h3 className="text-sm font-semibold mb-3 flex items-center gap-2 text-[#0A0A0A]">
+            <TrendingUp size={16} className="text-[#404040]" /> Weekly Steps
           </h3>
-          <div className="rounded-2xl bg-white border border-[#E2E8F0] shadow-sm shadow-pink-200/60 p-4">
+          <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4">
             <div className="flex items-end justify-between gap-2 h-32">
               {weeklySteps.map((d) => {
                 const maxSteps = Math.max(...weeklySteps.map((w) => w.steps), STEP_GOAL, 1);
@@ -182,29 +182,29 @@ export default function Activity() {
                 return (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-1.5">
                     <div className="w-full flex items-end justify-center h-full">
-                      <div className="w-6 rounded-t-lg bg-gradient-to-t from-[#334155] to-[#1E293B] transition-all duration-500" style={{ height: `${Math.max(heightPct, 4)}%` }} />
+                      <div className="w-6 rounded-t-lg bg-gradient-to-t from-[#404040] to-[#171717] transition-all duration-500" style={{ height: `${Math.max(heightPct, 4)}%` }} />
                     </div>
-                    <span className="text-[9px] text-[#64748B]">{d.label}</span>
+                    <span className="text-[9px] text-[#737373]">{d.label}</span>
                   </div>
                 );
               })}
             </div>
-            <div className="mt-3 pt-3 border-t border-[#E2E8F0] flex justify-between text-xs">
-              <span className="text-[#64748B]">Daily avg: <strong className="text-[#0F172A]">{avgSteps.toLocaleString()}</strong></span>
-              <span className="text-[#64748B]">Goal: <strong className="text-[#0F172A]">{STEP_GOAL.toLocaleString()}</strong></span>
+            <div className="mt-3 pt-3 border-t border-[#E0E0E0] flex justify-between text-xs">
+              <span className="text-[#737373]">Daily avg: <strong className="text-[#0A0A0A]">{avgSteps.toLocaleString()}</strong></span>
+              <span className="text-[#737373]">Goal: <strong className="text-[#0A0A0A]">{STEP_GOAL.toLocaleString()}</strong></span>
             </div>
           </div>
         </div>
 
         {/* AI recommendation */}
-        <div className="mt-5 rounded-2xl bg-[#F1F5F9] border border-[#E2E8F0] p-4">
+        <div className="mt-5 rounded-2xl bg-[#EBEBEB] border border-[#E0E0E0] p-4">
           <div className="flex items-start gap-3">
-            <div className="p-2 rounded-xl bg-[#1E293B]/30 text-[#334155]">
+            <div className="p-2 rounded-xl bg-[#171717]/30 text-[#404040]">
               <Target size={18} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#0F172A]">AI Recommendation</p>
-              <p className="text-xs text-[#64748B] mt-1">
+              <p className="text-sm font-semibold text-[#0A0A0A]">AI Recommendation</p>
+              <p className="text-xs text-[#737373] mt-1">
                 {stepsBelowAvg > 0
                   ? `A 20-minute walk today could burn approximately ${Math.round(20 * 110 * 0.04)} calories and add ~2,200 steps to close your gap.`
                   : `Great job! You've exceeded your daily average. Keep up the momentum! 💪`}
@@ -214,7 +214,7 @@ export default function Activity() {
         </div>
 
         <div className="mt-6">
-          <p className="text-[11px] text-[#94A3B8] text-center leading-relaxed">
+          <p className="text-[11px] text-[#A3A3A3] text-center leading-relaxed">
             ⚠️ Activity and calorie estimates are approximations. Not medical advice.
           </p>
         </div>
@@ -227,10 +227,10 @@ function ConnectRow({ icon: Icon, name, connected, onToggle }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-xl bg-[#F1F5F9]"><Icon size={18} className="text-[#0F172A]" /></div>
-        <span className="text-sm font-medium text-[#0F172A]">{name}</span>
+        <div className="p-2 rounded-xl bg-[#EBEBEB]"><Icon size={18} className="text-[#0A0A0A]" /></div>
+        <span className="text-sm font-medium text-[#0A0A0A]">{name}</span>
       </div>
-      <button onClick={onToggle} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${connected ? 'bg-[#334155] text-white' : 'bg-[#F1F5F9] text-[#64748B]'}`}>
+      <button onClick={onToggle} className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${connected ? 'bg-[#404040] text-white' : 'bg-[#EBEBEB] text-[#737373]'}`}>
         {connected ? 'Connected' : 'Connect'}
       </button>
     </div>
@@ -239,10 +239,10 @@ function ConnectRow({ icon: Icon, name, connected, onToggle }) {
 
 function StatBox({ icon: Icon, value, label, color }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#E2E8F0] shadow-sm shadow-pink-200/60 p-3 text-center">
+    <div className="rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-3 text-center">
       <Icon size={18} className={`${color} mx-auto mb-1`} />
-      <p className="text-lg font-bold text-[#0F172A]">{value}</p>
-      <p className="text-[10px] text-[#64748B]">{label}</p>
+      <p className="text-lg font-bold text-[#0A0A0A]">{value}</p>
+      <p className="text-[10px] text-[#737373]">{label}</p>
     </div>
   );
 }
