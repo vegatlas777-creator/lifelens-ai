@@ -208,7 +208,7 @@ function FeatureTile({ to, title, desc, image }) {
   return (
     <Link to={to} className="group relative rounded-2xl overflow-hidden border border-[#E0E0E0] block h-32 shadow-sm shadow-black/5 hover:shadow-md hover:shadow-black/15 transition-shadow">
       <img src={image} alt={title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2E20]/85 via-[#14573B]/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-3">
         <p className="text-sm font-bold text-white font-heading leading-tight">{title}</p>
         <p className="text-[10px] text-white/80 mt-0.5">{desc}</p>
