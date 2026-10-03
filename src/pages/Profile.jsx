@@ -58,7 +58,7 @@ export default function Profile() {
       <div className="px-5">
         <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15 border border-[#8B6F22]">
           <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute inset-0" style={{ background: 'rgba(168,132,46,0.10)' }} />
           <div className="relative p-6 flex items-center gap-4">
             {/* Avatar with gold ring */}
             <div className="relative flex-shrink-0">
