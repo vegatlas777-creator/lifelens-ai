@@ -56,23 +56,22 @@ export default function Profile() {
 
       {/* Premium header card */}
       <div className="px-5">
-        <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15" style={{ background: 'linear-gradient(135deg, #1B2333 0%, #243044 100%)' }}>
+        <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15" style={{ background: 'linear-gradient(135deg, #E8D091 0%, #D6B35A 100%)', border: '1px solid #B8902E' }}>
           <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(75,64,50,0.65) 0%, rgba(43,36,28,0.55) 100%)' }} />
           <div className="relative p-6 flex items-center gap-4">
             {/* Avatar with gold ring */}
             <div className="relative flex-shrink-0">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #D6B35A, #B8902E)', boxShadow: '0 0 0 3px rgba(214, 179, 90, 0.3), 0 8px 20px rgba(0,0,0,0.3)' }}>
+              <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg"
+                style={{ background: 'linear-gradient(135deg, #D6B35A, #B8902E)', color: '#1F1A14', boxShadow: '0 0 0 3px rgba(255,255,255,0.5), 0 8px 20px rgba(0,0,0,0.15)' }}>
                 {initial}
               </div>
             </div>
             {/* Identity block */}
             <div className="flex-1 min-w-0">
-              <p className="text-lg font-bold font-heading text-white truncate">{user?.full_name || 'User'}</p>
-              <p className="text-xs text-white/60 truncate mt-0.5">{user?.email}</p>
+              <p className="text-lg font-bold font-heading truncate" style={{ color: '#1F1A14' }}>{user?.full_name || 'User'}</p>
+              <p className="text-xs truncate mt-0.5" style={{ color: '#4B4032' }}>{user?.email}</p>
               <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold"
-                style={{ background: subStatus.isPremium ? 'rgba(214, 179, 90, 0.25)' : 'rgba(255,255,255,0.1)', color: subStatus.isPremium ? '#D6B35A' : 'rgba(255,255,255,0.7)', border: subStatus.isPremium ? '1px solid rgba(214,179,90,0.4)' : '1px solid rgba(255,255,255,0.15)' }}>
+                style={{ background: subStatus.isPremium ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.3)', color: '#1F1A14', border: '1px solid rgba(184,144,46,0.4)' }}>
                 {subStatus.isPremium ? (<><Crown size={11} /> PREMIUM</>) : 'FREE PLAN'}
               </div>
             </div>
