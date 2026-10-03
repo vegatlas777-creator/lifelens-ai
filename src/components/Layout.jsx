@@ -72,10 +72,10 @@ export default function Layout() {
                 to={to}
                 className="flex flex-col items-center justify-center gap-1 py-1.5 px-2 rounded-2xl transition-all min-w-[56px]"
               >
-                <div className={`p-2 rounded-2xl transition-all ${isActive ? 'bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] text-white shadow-lg shadow-black/10' : 'text-[#737373]'}`}>
+                <div className={`p-2 rounded-2xl transition-all ${isActive ? 'text-white shadow-lg shadow-black/10' : 'text-[#737373]'}`} style={isActive ? { background: 'linear-gradient(135deg, #D6B35A, #B8902E)' } : {}}>
                   <Icon size={22} strokeWidth={2.2} />
                 </div>
-                <span className={`text-[10px] font-medium ${isActive ? 'text-[#1F7A4F]' : 'text-[#737373]'}`}>{label}</span>
+                <span className={`text-[10px] font-medium ${isActive ? 'text-[#B8902E]' : 'text-[#737373]'}`}>{label}</span>
               </NavLink>
             );
           })}
