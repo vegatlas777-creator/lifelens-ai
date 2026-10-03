@@ -56,8 +56,9 @@ export default function Profile() {
 
       {/* Premium header card */}
       <div className="px-5">
-        <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15" style={{ background: 'linear-gradient(135deg, #C9A84E 0%, #A8842E 100%)', border: '1px solid #8B6F22' }}>
-          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+        <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15 border border-[#8B6F22]">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
           <div className="relative p-6 flex items-center gap-4">
             {/* Avatar with gold ring */}
             <div className="relative flex-shrink-0">
@@ -68,10 +69,10 @@ export default function Profile() {
             </div>
             {/* Identity block */}
             <div className="flex-1 min-w-0">
-              <p className="text-lg font-bold font-heading truncate" style={{ color: '#1F1A14' }}>{user?.full_name || 'User'}</p>
-              <p className="text-xs truncate mt-0.5" style={{ color: '#4B4032' }}>{user?.email}</p>
+              <p className="text-lg font-bold font-heading truncate text-white drop-shadow-lg">{user?.full_name || 'User'}</p>
+              <p className="text-xs truncate mt-0.5 text-white/90 drop-shadow-lg">{user?.email}</p>
               <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold"
-                style={{ background: subStatus.isPremium ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.3)', color: '#1F1A14', border: '1px solid rgba(184,144,46,0.4)' }}>
+                style={{ background: subStatus.isPremium ? 'rgba(214,179,90,0.9)' : 'rgba(255,255,255,0.85)', color: '#1F1A14', border: '1px solid rgba(184,144,46,0.5)' }}>
                 {subStatus.isPremium ? (<><Crown size={11} /> PREMIUM</>) : 'FREE PLAN'}
               </div>
             </div>
