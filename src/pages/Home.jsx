@@ -96,13 +96,12 @@ export default function Home() {
             alt="Woman stretching"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0B2E20]/90 via-[#0B2E20]/65 to-[#14573B]/55" />
           <div className="relative p-5 min-h-[170px] flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex w-fit items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/25 backdrop-blur-md text-xs font-semibold text-white"
+              className="inline-flex w-fit items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2D9F6A] text-xs font-semibold text-white"
             >
               <Sparkles size={11} /> Your AI wellness companion
             </motion.div>
@@ -110,7 +109,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-2xl font-bold tracking-tight mt-2 leading-tight text-white font-heading"
+              className="text-2xl font-bold tracking-tight mt-2 leading-tight text-white font-heading drop-shadow-lg"
             >
               {greeting}, {firstName}.
             </motion.h1>
@@ -118,7 +117,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-sm text-white/90 mt-0.5 font-medium"
+              className="text-sm text-white mt-0.5 font-medium drop-shadow-lg"
             >
               Let's make today count.
             </motion.p>
@@ -136,7 +135,7 @@ export default function Home() {
               {!subStatus.isPremium && (
                 <Link
                   to="/pricing"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/40 text-white text-xs font-semibold"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2D9F6A] border border-white/40 text-white text-xs font-semibold"
                 >
                   <Crown size={13} /> Premium
                 </Link>
@@ -173,7 +172,7 @@ export default function Home() {
       {/* Premium strip */}
       {!subStatus.isPremium && (
         <div className="px-5 mt-4">
-          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#0B2E20] to-[#14573B] p-3.5 text-white shadow-lg shadow-black/10">
+          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] p-3.5 text-white shadow-lg shadow-black/10">
             <div className="p-2 rounded-xl bg-white/25 backdrop-blur"><Crown size={18} /></div>
             <div className="flex-1">
               <p className="text-sm font-bold font-heading">Go Premium</p>
