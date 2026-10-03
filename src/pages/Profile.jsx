@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { User, LogOut, Activity, Flame, Dumbbell, ChevronRight, Crown, Calculator, TrendingUp, CreditCard, LogOut as LogOutIcon } from 'lucide-react';
+import { User, LogOut, Activity, Flame, Dumbbell, ChevronRight, Crown, Calculator, TrendingUp, CreditCard, LogOut as LogOutIcon, Smartphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getTodayStr } from '@/lib/dateUtils';
 import { getSubscriptionStatus } from '@/lib/subscription';
@@ -137,6 +137,29 @@ export default function Profile() {
         <SectionHeading>Preferences</SectionHeading>
         <div className="mt-2 rounded-2xl overflow-hidden shadow-sm shadow-black/5" style={{ background: CARD, border: `1px solid ${BORDER}` }}>
           <SettingsRow to="/pricing" icon={CreditCard} title="Subscription & Pricing" />
+        </div>
+      </div>
+
+      {/* Get app on mobile */}
+      <div className="px-5 mt-4">
+        <SectionHeading>Get App on Mobile</SectionHeading>
+        <div className="mt-2 rounded-2xl p-4 flex items-center gap-4 shadow-sm shadow-black/5" style={{ background: CARD, border: `1px solid ${BORDER}` }}>
+          <div className="flex-shrink-0 p-2 rounded-xl" style={{ background: '#FFFDFC', border: `1px solid ${BORDER}` }}>
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https%3A%2F%2F3in1healthychoice.base44.app&color=2B241C&bgcolor=FFFDFC&margin=0"
+              alt="QR code to open app on phone"
+              className="w-28 h-28"
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-1.5 mb-1">
+              <Smartphone size={14} style={{ color: GOLD_DARK }} />
+              <p className="text-sm font-semibold" style={{ color: TEXT }}>Scan to open on phone</p>
+            </div>
+            <p className="text-xs leading-relaxed" style={{ color: TEXT_SEC }}>
+              Point your phone camera at this QR code to open the app in your mobile browser.
+            </p>
+          </div>
         </div>
       </div>
 
