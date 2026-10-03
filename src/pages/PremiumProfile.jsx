@@ -6,6 +6,7 @@ import ProfileForm from '@/components/premium/ProfileForm';
 import WeightTracker from '@/components/premium/WeightTracker';
 import MeasurementsTracker from '@/components/premium/MeasurementsTracker';
 import ProgressDashboard from '@/components/premium/ProgressDashboard';
+import BackButton from '@/components/BackButton';
 
 const tabs = [
   { id: 'profile', label: 'Profile', icon: User },
@@ -46,6 +47,7 @@ export default function PremiumProfile() {
   return (
     <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
+        <BackButton />
         <div className="flex items-center gap-2">
           <Crown size={20} className="text-[#2D9F6A]" />
           <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Premium Profile</h1>

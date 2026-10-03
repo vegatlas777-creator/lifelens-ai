@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Activity as ActivityIcon, Footprints, MapPin, Timer, Flame, Watch, Smartphone, TrendingUp, Target } from 'lucide-react';
 import { getTodayStr, getLast7Days } from '@/lib/dateUtils';
 import { useAuth } from '@/lib/AuthContext';
+import BackButton from '@/components/BackButton';
 
 const STEP_GOAL = 10000;
 
@@ -96,6 +97,7 @@ export default function Activity() {
   return (
     <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
+        <BackButton />
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Activity Tracking</h1>
         <p className="text-sm text-[#737373]">Steps, distance & active minutes</p>
       </div>

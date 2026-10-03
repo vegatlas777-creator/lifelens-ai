@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Calculator, Activity, Target, Loader2, TrendingDown, Minus, TrendingUp, ArrowRight, ChevronLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Calculator, Activity, Target, Loader2, TrendingDown, Minus, TrendingUp, ArrowRight } from 'lucide-react';
 import { activityLevels } from '@/lib/workoutData';
 import { useAuth } from '@/lib/AuthContext';
+import BackButton from '@/components/BackButton';
 
 export default function MetabolicCalculator() {
-  const navigate = useNavigate();
   const [form, setForm] = useState({ age: '', gender: 'male', height_cm: '', weight_kg: '', activity_level: 'moderate' });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -60,9 +59,7 @@ export default function MetabolicCalculator() {
   return (
     <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
-        <button onClick={() => navigate(-1)} className="mb-2 inline-flex items-center gap-1 text-sm font-medium text-[#1F7A4F] hover:opacity-70 transition-opacity">
-          <ChevronLeft size={18} /> Back
-        </button>
+        <BackButton />
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Metabolic Calculator</h1>
         <p className="text-sm text-[#737373]">BMR, TDEE & calorie targets</p>
       </div>

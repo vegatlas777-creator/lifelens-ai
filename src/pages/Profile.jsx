@@ -4,6 +4,7 @@ import { User, LogOut, Activity, Flame, Dumbbell, ChevronRight, Crown } from 'lu
 import { Link } from 'react-router-dom';
 import { getTodayStr } from '@/lib/dateUtils';
 import { getSubscriptionStatus } from '@/lib/subscription';
+import BackButton from '@/components/BackButton';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -39,6 +40,7 @@ export default function Profile() {
   return (
     <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
+        <BackButton />
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Profile</h1>
       </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Check, Crown, Sparkles, Loader2 } from 'lucide-react';
 import { getSubscriptionStatus, startCheckout, FREE_FEATURES, PREMIUM_FEATURES } from '@/lib/subscription';
+import BackButton from '@/components/BackButton';
 
 export default function Pricing() {
   const [subStatus, setSubStatus] = useState({ isPremium: false, status: 'free', loading: true });
@@ -47,6 +48,7 @@ export default function Pricing() {
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B2E20]/85 via-[#14573B]/85 to-[#0F3D2A]/90" />
         <div className="relative px-5 pt-14 pb-8 text-center text-white">
+          <div className="absolute top-3 left-5"><BackButton light /></div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/25 backdrop-blur mb-3">
             <Crown size={14} />
             <span className="text-xs font-semibold">3 in 1 Healthy Choice Premium</span>

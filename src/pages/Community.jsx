@@ -5,6 +5,7 @@ import PostCard from '@/components/community/PostCard';
 import PostForm from '@/components/community/PostForm';
 import { CATEGORIES } from '@/lib/communityData';
 import { getSubscriptionStatus } from '@/lib/subscription';
+import BackButton from '@/components/BackButton';
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
@@ -94,6 +95,7 @@ export default function Community() {
     <div className="min-h-screen bg-[#FFF8DC] pb-4">
       {/* Header */}
       <div className="px-5 pt-12 pb-3">
+        <BackButton />
         <div className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 flex items-center justify-center">
             <Users size={20} className="text-[#2D9F6A]" />

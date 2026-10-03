@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getSubscriptionStatus } from '@/lib/subscription';
 import { getTodayStr } from '@/lib/dateUtils';
 import { useAuth } from '@/lib/AuthContext';
+import BackButton from '@/components/BackButton';
 
 export default function HealthCoach() {
   const [messages, setMessages] = useState([]);
@@ -63,27 +64,30 @@ export default function HealthCoach() {
 
   return (
     <div className="flex flex-col h-[calc(100dvh-7rem)] bg-[#FFF8DC]">
-      <div className="px-5 pt-12 pb-4 border-b border-[#E0E0E0] flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5">
-            <Sparkles size={22} className="text-[#2D9F6A]" />
+      <div className="px-5 pt-12 pb-4 border-b border-[#E0E0E0]">
+        <BackButton />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5">
+              <Sparkles size={22} className="text-[#2D9F6A]" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold tracking-tight text-[#0A0A0A] font-heading">AI Health Coach</h1>
+              <p className="text-xs text-[#737373] flex items-center gap-1"><Sparkles size={10} /> Powered by AI</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-xl font-bold tracking-tight text-[#0A0A0A] font-heading">AI Health Coach</h1>
-            <p className="text-xs text-[#737373] flex items-center gap-1"><Sparkles size={10} /> Powered by AI</p>
+          <div className="flex items-center gap-2">
+            {!subStatus.isPremium && (
+              <Link to="/pricing" className="p-2 rounded-xl bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] text-white shadow-md shadow-black/10">
+                <Crown size={18} />
+              </Link>
+            )}
+            {messages.length > 1 && (
+              <button onClick={clearChat} className="p-2 rounded-xl text-[#737373] hover:text-red-500">
+                <Trash2 size={18} />
+              </button>
+            )}
           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          {!subStatus.isPremium && (
-            <Link to="/pricing" className="p-2 rounded-xl bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] text-white shadow-md shadow-black/10">
-              <Crown size={18} />
-            </Link>
-          )}
-          {messages.length > 1 && (
-            <button onClick={clearChat} className="p-2 rounded-xl text-[#737373] hover:text-red-500">
-              <Trash2 size={18} />
-            </button>
-          )}
         </div>
       </div>
 
