@@ -146,20 +146,11 @@ export default function Home() {
       </div>
 
       {/* Today's metrics — 2x2 */}
-      <div className="px-5 mt-4">
-        <div className="relative rounded-3xl overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1000&q=80"
-            alt="People exercising in gym"
-            className="absolute inset-0 w-full h-full object-cover opacity-40"
-          />
-          <div className="relative grid grid-cols-2 gap-3 p-4">
-            <MetricCard icon={<Footprints size={18} className="text-[#1F7A4F]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
-            <MetricCard icon={<Flame size={18} className="text-[#2D9F6A]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
-            <MetricCard icon={<Zap size={18} className="text-[#2D9F6A]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
-            <MetricCard icon={<ActivityIcon size={18} className="text-[#2D9F6A]" />} label="Active Min" value={`${activeMinutes}`} sub="minutes" />
-          </div>
-        </div>
+      <div className="px-5 mt-4 grid grid-cols-2 gap-3">
+        <MetricCard image="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=600&q=80" icon={<Footprints size={18} className="text-[#1F7A4F]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub="goal 10,000" />
+        <MetricCard image="https://images.unsplash.com/photo-1575052814074-c05122e0a17a?w=600&q=80" icon={<Flame size={18} className="text-[#2D9F6A]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
+        <MetricCard image="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=600&q=80" icon={<Zap size={18} className="text-[#2D9F6A]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
+        <MetricCard image="https://images.unsplash.com/photo-1665997960421-40f7ff374166?w=600&q=80" icon={<ActivityIcon size={18} className="text-[#2D9F6A]" />} label="Active Min" value={`${activeMinutes}`} sub="minutes" />
       </div>
 
       {/* Quick access — feature grid */}
@@ -195,20 +186,24 @@ export default function Home() {
   );
 }
 
-function MetricCard({ icon, label, value, sub }) {
+function MetricCard({ image, icon, label, value, sub }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl p-3.5"
+      className="relative rounded-2xl overflow-hidden h-36 shadow-sm shadow-black/10"
     >
-      <div className="w-9 h-9 rounded-xl bg-white/70 backdrop-blur-sm flex items-center justify-center mb-2.5 shadow-sm shadow-black/5">
-        {icon}
+      <img src={image} alt="Woman exercising" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8DC]/40 to-transparent" />
+      <div className="relative p-3.5 flex flex-col justify-center h-full">
+        <div className="w-9 h-9 rounded-xl bg-white/70 backdrop-blur-sm flex items-center justify-center mb-2.5 shadow-sm shadow-black/5">
+          {icon}
+        </div>
+        <p className="text-2xl font-bold tracking-tight leading-none font-heading text-[#0A0A0A] drop-shadow-sm">{value}</p>
+        <p className="text-xs text-[#404040] mt-1 font-semibold drop-shadow-sm">{label}</p>
+        <p className="text-[10px] text-[#737373] mt-0.5 drop-shadow-sm">{sub}</p>
       </div>
-      <p className="text-2xl font-bold tracking-tight leading-none font-heading text-[#0A0A0A] drop-shadow-sm">{value}</p>
-      <p className="text-xs text-[#404040] mt-1 font-semibold drop-shadow-sm">{label}</p>
-      <p className="text-[10px] text-[#737373] mt-0.5 drop-shadow-sm">{sub}</p>
     </motion.div>
   );
 }
