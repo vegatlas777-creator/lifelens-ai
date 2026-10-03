@@ -172,13 +172,13 @@ export default function Home() {
       {/* Premium strip */}
       {!subStatus.isPremium && (
         <div className="px-5 mt-4">
-          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] p-3.5 text-white shadow-lg shadow-black/10">
-            <div className="p-2 rounded-xl bg-white/25 backdrop-blur"><Crown size={18} /></div>
+          <Link to="/pricing" className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#E0BF66] to-[#C9962C] p-3.5 shadow-lg shadow-black/10 border border-[#B8871E]">
+            <div className="p-2 rounded-xl bg-white/30 backdrop-blur"><Crown size={18} className="text-[#1F1A14]" /></div>
             <div className="flex-1">
-              <p className="text-sm font-bold font-heading">Go Premium</p>
-              <p className="text-[11px] opacity-90">Unlimited AI · 7-day free trial</p>
+              <p className="text-sm font-bold font-heading text-[#1F1A14]">Go Premium</p>
+              <p className="text-[11px] text-[#4B4032]">Unlimited AI · 7-day free trial</p>
             </div>
-            <ChevronRight size={18} />
+            <ChevronRight size={18} className="text-[#1F1A14]" />
           </Link>
         </div>
       )}
