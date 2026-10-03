@@ -110,10 +110,10 @@ export default function Community() {
       {/* Daily topic */}
       {dailyTopic && (
         <div className="px-5 mt-2">
-          <div className="rounded-2xl bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] p-4 text-white shadow-md shadow-black/10">
-            <p className="text-[10px] font-semibold opacity-90 uppercase">Daily Discussion Topic</p>
-            <p className="text-base font-bold mt-0.5 font-heading">{dailyTopic.emoji} {dailyTopic.label}</p>
-            <p className="text-xs opacity-90 mt-1">Share your thoughts on today's topic!</p>
+          <div className="rounded-2xl bg-gradient-to-r from-[#E0BF66] to-[#C9962C] p-4 shadow-md shadow-black/10 border border-[#B8871E]">
+            <p className="text-[10px] font-semibold uppercase text-[#4B4032]">Daily Discussion Topic</p>
+            <p className="text-base font-bold mt-0.5 font-heading text-[#1F1A14]">{dailyTopic.emoji} {dailyTopic.label}</p>
+            <p className="text-xs mt-1 text-[#4B4032]">Share your thoughts on today's topic!</p>
           </div>
         </div>
       )}
@@ -140,7 +140,7 @@ export default function Community() {
       {/* Create post button */}
       <div className="px-5 mt-3">
         {!showForm ? (
-          <button onClick={() => setShowForm(true)} className="w-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10">
+          <button onClick={() => setShowForm(true)} className="w-full rounded-full bg-gradient-to-r from-[#E0BF66] to-[#C9962C] text-[#1F1A14] py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10 border border-[#B8871E]">
             <Plus size={16} /> Start a Discussion
           </button>
         ) : (
