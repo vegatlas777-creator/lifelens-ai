@@ -1,11 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Send, Loader2, Sparkles, Trash2, Crown } from 'lucide-react';
+import { Send, Loader2, Sparkles, Trash2, Crown, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getSubscriptionStatus } from '@/lib/subscription';
 import { getTodayStr } from '@/lib/dateUtils';
 import { useAuth } from '@/lib/AuthContext';
 import BackButton from '@/components/BackButton';
+
+const WELLNESS_TIPS = [
+  { icon: '💧', text: 'Start your day with a glass of water — hydration boosts metabolism and energy.' },
+  { icon: '🚶', text: 'A 10-minute walk after meals can improve digestion and blood sugar control.' },
+  { icon: '🥗', text: 'Fill half your plate with vegetables at every meal for natural fiber and vitamins.' },
+  { icon: '😴', text: 'Aim for 7–9 hours of sleep — recovery is when your body rebuilds and strengthens.' },
+  { icon: '🧘', text: 'Take 3 deep breaths before eating. Mindful meals improve digestion and satisfaction.' },
+  { icon: '💪', text: 'Strength training 2× a week preserves muscle and keeps your metabolism humming.' },
+  { icon: '☀️', text: 'Morning sunlight for 10 minutes helps regulate your sleep-wake cycle.' },
+];
 
 export default function HealthCoach() {
   const [messages, setMessages] = useState([]);
@@ -14,6 +24,11 @@ export default function HealthCoach() {
   const [subStatus, setSubStatus] = useState({ isPremium: false, loading: true });
   const { guard } = useAuth();
   const scrollRef = useRef(null);
+
+  const dailyTip = useMemo(() => {
+    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+    return WELLNESS_TIPS[dayOfYear % WELLNESS_TIPS.length];
+  }, []);
 
   useEffect(() => {
     loadMessages();
@@ -87,6 +102,21 @@ export default function HealthCoach() {
                 <Trash2 size={18} />
               </button>
             )}
+          </div>
+        </div>
+      </div>
+
+      {/* Daily wellness tip */}
+      <div className="px-5 py-3">
+        <div className="rounded-2xl bg-[#FFFDFC] border border-[#E5DDD1] shadow-sm shadow-black/5 p-3.5 flex items-start gap-3">
+          <div className="p-2 rounded-xl bg-[#FDF6E3] flex-shrink-0">
+            <Lightbulb size={18} className="text-[#B8902E]" />
+          </div>
+          <div className="flex-1">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#B8902E]">Daily Tip</p>
+            <p className="text-sm text-[#404040] mt-1 leading-relaxed">
+              <span className="mr-1">{dailyTip.icon}</span>{dailyTip.text}
+            </p>
           </div>
         </div>
       </div>

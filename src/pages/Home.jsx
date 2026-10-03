@@ -1,20 +1,10 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Bell, Leaf, ArrowRight, Crown, Flame, Footprints, Activity as ActivityIcon, Zap, Sparkles, ChevronRight, Target, Lightbulb, Plus, Utensils, Dumbbell } from 'lucide-react';
+import { Bell, Leaf, ArrowRight, Crown, Flame, Footprints, Activity as ActivityIcon, Zap, Sparkles, ChevronRight, Target, Utensils, Dumbbell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getTodayStr } from '@/lib/dateUtils';
 import { getSubscriptionStatus } from '@/lib/subscription';
-
-const WELLNESS_TIPS = [
-  { icon: '💧', text: 'Start your day with a glass of water — hydration boosts metabolism and energy.' },
-  { icon: '🚶', text: 'A 10-minute walk after meals can improve digestion and blood sugar control.' },
-  { icon: '🥗', text: 'Fill half your plate with vegetables at every meal for natural fiber and vitamins.' },
-  { icon: '😴', text: 'Aim for 7–9 hours of sleep — recovery is when your body rebuilds and strengthens.' },
-  { icon: '🧘', text: 'Take 3 deep breaths before eating. Mindful meals improve digestion and satisfaction.' },
-  { icon: '💪', text: 'Strength training 2× a week preserves muscle and keeps your metabolism humming.' },
-  { icon: '☀️', text: 'Morning sunlight for 10 minutes helps regulate your sleep-wake cycle.' },
-];
 
 export default function Home() {
   const [todayCalories, setTodayCalories] = useState(0);
@@ -67,11 +57,6 @@ export default function Home() {
   const stepPct = Math.min((todaySteps / stepGoal) * 100, 100);
   const activePct = Math.min((activeMinutes / 30) * 100, 100);
 
-  const dailyTip = useMemo(() => {
-    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
-    return WELLNESS_TIPS[dayOfYear % WELLNESS_TIPS.length];
-  }, []);
-
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#F6F1E8]">
@@ -111,7 +96,7 @@ export default function Home() {
       <div className="px-5 mt-1">
         <div className="relative rounded-3xl overflow-hidden border border-[#E0E0E0] shadow-lg shadow-black/10">
           <img
-            src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&q=80"
+            src="https://images.unsplash.com/photo-1464457312177-2e703e0f913b?w=1200&q=80"
             alt="Woman stretching"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -121,7 +106,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex w-fit items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#2D9F6A] text-xs font-semibold text-white"
+              className="inline-flex w-fit items-center gap-1.5 px-2.5 py-1 rounded-full bg-gradient-to-r from-[#E0BF66] to-[#C9962C] text-xs font-semibold text-[#1F1A14]"
             >
               <Sparkles size={11} /> Your AI wellness companion
             </motion.div>
@@ -155,7 +140,7 @@ export default function Home() {
               {!subStatus.isPremium && (
                 <Link
                   to="/pricing"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2D9F6A] border border-white/40 text-white text-xs font-semibold"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#E0BF66] to-[#C9962C] border border-white/40 text-[#1F1A14] text-xs font-semibold"
                 >
                   <Crown size={13} /> Premium
                 </Link>
@@ -221,26 +206,6 @@ export default function Home() {
           <QuickLog to="/fitness" icon={Dumbbell} label="Log Workout" />
           <QuickLog to="/activity" icon={Footprints} label="Log Steps" />
         </div>
-      </div>
-
-      {/* Daily wellness tip */}
-      <div className="px-5 mt-4">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="rounded-2xl bg-[#FFFDFC] border border-[#E5DDD1] shadow-sm shadow-black/5 p-4 flex items-start gap-3"
-        >
-          <div className="p-2 rounded-xl bg-[#FDF6E3] flex-shrink-0">
-            <Lightbulb size={18} className="text-[#B8902E]" />
-          </div>
-          <div className="flex-1">
-            <p className="text-[11px] font-bold uppercase tracking-wider text-[#B8902E]">Daily Tip</p>
-            <p className="text-sm text-[#404040] mt-1 leading-relaxed">
-              <span className="mr-1">{dailyTip.icon}</span>{dailyTip.text}
-            </p>
-          </div>
-        </motion.div>
       </div>
 
       {/* Quick access — feature grid */}
@@ -320,12 +285,12 @@ function QuickLog({ to, icon: Icon, label }) {
   return (
     <Link
       to={to}
-      className="flex-1 flex items-center justify-center gap-1.5 rounded-2xl bg-[#FFFDFC] border border-[#E5DDD1] shadow-sm shadow-black/5 py-3 hover:border-[#2D9F6A] hover:bg-[#E6F4EC]/40 transition-colors group"
+      className="flex-1 flex items-center justify-center gap-1.5 rounded-2xl bg-gradient-to-r from-[#E0BF66] to-[#C9962C] border border-[#B8871E] shadow-sm shadow-black/10 py-3 hover:opacity-90 transition-opacity"
     >
-      <div className="p-1.5 rounded-lg bg-[#E6F4EC] group-hover:bg-[#2D9F6A] transition-colors">
-        <Icon size={14} className="text-[#1F7A4F] group-hover:text-white transition-colors" />
+      <div className="p-1.5 rounded-lg bg-white/30">
+        <Icon size={14} className="text-[#1F1A14]" />
       </div>
-      <span className="text-xs font-semibold text-[#404040]">{label}</span>
+      <span className="text-xs font-semibold text-[#1F1A14]">{label}</span>
     </Link>
   );
 }
