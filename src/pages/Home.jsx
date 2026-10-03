@@ -96,11 +96,11 @@ export default function Home() {
       <div className="px-5 mt-1">
         <div className="relative rounded-3xl overflow-hidden border border-[#E0E0E0] shadow-lg shadow-black/10">
           <img
-            src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=1200&q=80"
-            alt="Woman stretching"
+            src="https://media.base44.com/images/public/6a4d2399ef3bc08d1d9e1e75/dc948ce8e_generated_image.png"
+            alt="Woman working out in gym"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(168, 132, 46, 0.20)' }} />
           <div className="relative p-5 min-h-[170px] flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
