@@ -66,7 +66,7 @@ export default function Home() {
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
 
   return (
-    <div className="min-h-screen bg-[#FFF8DC] text-[#0A0A0A] pb-6">
+    <div className="min-h-screen bg-[#F6F1E8] text-[#0A0A0A] pb-6">
       {/* Top bar */}
       <div className="px-5 pt-10 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5 lg:hidden">
