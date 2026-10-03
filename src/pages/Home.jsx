@@ -194,7 +194,7 @@ function MetricCard({ image, icon, label, value, sub }) {
       transition={{ duration: 0.4 }}
       className="relative rounded-2xl overflow-hidden h-36 shadow-sm shadow-black/10"
     >
-      <img src={image} alt="Woman exercising" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+      <img src={image} alt="Woman exercising" className="absolute inset-0 w-full h-full object-cover opacity-20" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8DC]/40 to-transparent" />
       <div className="relative p-3.5 flex flex-col justify-center h-full">
         <div className="w-9 h-9 rounded-xl bg-white/70 backdrop-blur-sm flex items-center justify-center mb-2.5 shadow-sm shadow-black/5">
