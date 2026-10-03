@@ -56,7 +56,7 @@ export default function Profile() {
 
       {/* Premium header card */}
       <div className="px-5">
-        <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15" style={{ background: 'linear-gradient(135deg, #E8D091 0%, #D6B35A 100%)', border: '1px solid #B8902E' }}>
+        <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15" style={{ background: 'linear-gradient(135deg, #C9A84E 0%, #A8842E 100%)', border: '1px solid #8B6F22' }}>
           <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
           <div className="relative p-6 flex items-center gap-4">
             {/* Avatar with gold ring */}
