@@ -60,7 +60,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[#F6F1E8]">
-        <div className="w-10 h-10 border-4 border-[#E5DDD1] border-t-[#2D9F6A] rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-[#E5DDD1] border-t-[#C9962C] rounded-full animate-spin" />
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default function Home() {
       {/* Top bar */}
       <div className="px-5 pt-10 pb-3 flex items-center justify-between">
         <div className="flex items-center gap-2.5 lg:hidden">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center shadow-lg shadow-black/10">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#E0BF66] to-[#C9962C] flex items-center justify-center shadow-lg shadow-black/10">
             <Leaf size={20} className="text-white" />
           </div>
           <span className="text-base font-bold tracking-tight font-heading">3 in 1 Healthy Choice</span>
@@ -83,10 +83,10 @@ export default function Home() {
           <h2 className="text-xl font-bold tracking-tight font-heading">Dashboard</h2>
         </div>
         <div className="flex items-center gap-2.5">
-          <button className="w-10 h-10 rounded-full bg-[#FFFDFC] shadow-sm shadow-black/5 border border-[#E5DDD1] flex items-center justify-center text-[#737373] hover:bg-[#E6F4EC] transition-colors">
+          <button className="w-10 h-10 rounded-full bg-[#FFFDFC] shadow-sm shadow-black/5 border border-[#E5DDD1] flex items-center justify-center text-[#737373] hover:bg-[#FDF6E3] transition-colors">
             <Bell size={17} />
           </button>
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-black/10">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E0BF66] to-[#C9962C] flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-black/10">
             {firstName[0]?.toUpperCase()}
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function Home() {
       <div className="px-5 mt-1">
         <div className="relative rounded-3xl overflow-hidden border border-[#E0E0E0] shadow-lg shadow-black/10">
           <img
-            src="https://images.unsplash.com/photo-1464457312177-2e703e0f913b?w=1200&q=80"
+            src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=1200&q=80"
             alt="Woman stretching"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -133,7 +133,7 @@ export default function Home() {
               className="flex items-center gap-2 mt-3">
               <Link
                 to="/coach"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#1F7A4F] text-xs font-bold shadow-md hover:scale-[1.03] transition-transform"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white text-[#B8902E] text-xs font-bold shadow-md hover:scale-[1.03] transition-transform"
               >
                 Chat with AI Coach <ArrowRight size={14} />
               </Link>
@@ -160,8 +160,8 @@ export default function Home() {
         >
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-lg bg-[#E6F4EC]">
-                <Target size={14} className="text-[#1F7A4F]" />
+              <div className="p-1.5 rounded-lg bg-[#FDF6E3]">
+                <Target size={14} className="text-[#B8902E]" />
               </div>
               <p className="text-xs font-semibold text-[#404040]">Daily Calorie Goal</p>
             </div>
@@ -174,14 +174,14 @@ export default function Home() {
               initial={{ width: 0 }}
               animate={{ width: `${caloriePct}%` }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className={`h-full rounded-full ${caloriePct >= 100 ? 'bg-gradient-to-r from-[#E0A800] to-[#C9962C]' : 'bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58]'}`}
+              className={`h-full rounded-full ${caloriePct >= 100 ? 'bg-gradient-to-r from-[#E0A800] to-[#C9962C]' : 'bg-gradient-to-r from-[#E0BF66] to-[#C9962C]'}`}
             />
           </div>
           <div className="flex items-center justify-between mt-2">
             <p className="text-[11px] text-[#737373]">
               {caloriesLeft > 0 ? `${caloriesLeft} kcal remaining` : 'Goal reached — great job!'}
             </p>
-            <Link to="/calories" className="text-[11px] font-semibold text-[#1F7A4F] hover:underline inline-flex items-center gap-0.5">
+            <Link to="/calories" className="text-[11px] font-semibold text-[#B8902E] hover:underline inline-flex items-center gap-0.5">
               Log food <ArrowRight size={10} />
             </Link>
           </div>
@@ -192,10 +192,10 @@ export default function Home() {
       <div className="px-5 mt-5">
         <SectionHeader title="Today's Progress" />
         <div className="grid grid-cols-2 gap-3 mt-3">
-          <MetricCard image="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=600&q=80" icon={<Footprints size={18} className="text-[#1F7A4F]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub={`goal ${stepGoal.toLocaleString()}`} progress={stepPct} />
-          <MetricCard image="https://images.unsplash.com/photo-1575052814074-c05122e0a17a?w=600&q=80" icon={<Flame size={18} className="text-[#2D9F6A]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
-          <MetricCard image="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=600&q=80" icon={<Zap size={18} className="text-[#2D9F6A]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
-          <MetricCard image="https://images.unsplash.com/photo-1665997960421-40f7ff374166?w=600&q=80" icon={<ActivityIcon size={18} className="text-[#2D9F6A]" />} label="Active Min" value={`${activeMinutes}`} sub="of 30 min goal" progress={activePct} />
+          <MetricCard image="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=600&q=80" icon={<Footprints size={18} className="text-[#B8902E]" />} label="Steps Today" value={todaySteps.toLocaleString()} sub={`goal ${stepGoal.toLocaleString()}`} progress={stepPct} />
+          <MetricCard image="https://images.unsplash.com/photo-1575052814074-c05122e0a17a?w=600&q=80" icon={<Flame size={18} className="text-[#B8902E]" />} label="Calories Left" value={`${caloriesLeft}`} sub="kcal remaining" />
+          <MetricCard image="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=600&q=80" icon={<Zap size={18} className="text-[#B8902E]" />} label="Burned" value={`${totalBurned}`} sub="kcal today" />
+          <MetricCard image="https://images.unsplash.com/photo-1665997960421-40f7ff374166?w=600&q=80" icon={<ActivityIcon size={18} className="text-[#B8902E]" />} label="Active Min" value={`${activeMinutes}`} sub="of 30 min goal" progress={activePct} />
         </div>
       </div>
 
@@ -241,7 +241,7 @@ export default function Home() {
 function SectionHeader({ title }) {
   return (
     <div className="flex items-center gap-2">
-      <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#2D9F6A] to-[#1F8A58]" />
+      <div className="w-1 h-5 rounded-full bg-gradient-to-b from-[#E0BF66] to-[#C9962C]" />
       <h2 className="text-base font-bold tracking-tight font-heading">{title}</h2>
     </div>
   );
@@ -272,7 +272,7 @@ function MetricCard({ image, icon, label, value, sub, progress }) {
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
-              className="h-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58]"
+              className="h-full rounded-full bg-gradient-to-r from-[#E0BF66] to-[#C9962C]"
             />
           </div>
         )}
