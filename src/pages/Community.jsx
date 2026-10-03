@@ -110,10 +110,13 @@ export default function Community() {
       {/* Daily topic */}
       {dailyTopic && (
         <div className="px-5 mt-2">
-          <div className="rounded-2xl bg-gradient-to-r from-[#E0BF66] to-[#C9962C] p-4 shadow-md shadow-black/10 border border-[#B8871E]">
-            <p className="text-[10px] font-semibold uppercase text-[#4B4032]">Daily Discussion Topic</p>
-            <p className="text-base font-bold mt-0.5 font-heading text-[#1F1A14]">{dailyTopic.emoji} {dailyTopic.label}</p>
-            <p className="text-xs mt-1 text-[#4B4032]">Share your thoughts on today's topic!</p>
+          <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#F2E0A0] to-[#E8C97A] p-4 shadow-md shadow-black/10 border border-[#B8871E]">
+            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+            <div className="relative">
+              <p className="text-[10px] font-semibold uppercase text-[#4B4032]">Daily Discussion Topic</p>
+              <p className="text-base font-bold mt-0.5 font-heading text-[#1F1A14]">{dailyTopic.emoji} {dailyTopic.label}</p>
+              <p className="text-xs mt-1 text-[#4B4032]">Share your thoughts on today's topic!</p>
+            </div>
           </div>
         </div>
       )}
@@ -140,8 +143,9 @@ export default function Community() {
       {/* Create post button */}
       <div className="px-5 mt-3">
         {!showForm ? (
-          <button onClick={() => setShowForm(true)} className="w-full rounded-full bg-gradient-to-r from-[#E0BF66] to-[#C9962C] text-[#1F1A14] py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10 border border-[#B8871E]">
-            <Plus size={16} /> Start a Discussion
+          <button onClick={() => setShowForm(true)} className="relative w-full rounded-full overflow-hidden bg-gradient-to-r from-[#F2E0A0] to-[#E8C97A] text-[#1F1A14] py-3 font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-black/10 border border-[#B8871E]">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+            <Plus size={16} className="relative" /> <span className="relative">Start a Discussion</span>
           </button>
         ) : (
           <PostForm user={user} isPremium={isPremium} onCreated={onCreated} onCancel={() => setShowForm(false)} />
