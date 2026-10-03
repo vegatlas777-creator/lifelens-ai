@@ -57,8 +57,8 @@ export default function Profile() {
       {/* Premium header card */}
       <div className="px-5">
         <div className="relative overflow-hidden rounded-3xl shadow-lg shadow-black/15" style={{ background: 'linear-gradient(135deg, #1B2333 0%, #243044 100%)' }}>
-          {/* subtle gold sheen */}
-          <div className="absolute inset-0 opacity-[0.07]" style={{ background: 'radial-gradient(circle at 80% 20%, #D6B35A 0%, transparent 60%)' }} />
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(75,64,50,0.65) 0%, rgba(43,36,28,0.55) 100%)' }} />
           <div className="relative p-6 flex items-center gap-4">
             {/* Avatar with gold ring */}
             <div className="relative flex-shrink-0">
