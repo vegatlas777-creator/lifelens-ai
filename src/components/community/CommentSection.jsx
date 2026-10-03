@@ -116,7 +116,7 @@ export default function CommentSection({ postId, user, isPremium }) {
 
       {/* New comment form */}
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-4 space-y-2">
-        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment..." rows={2} className="w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A] resize-none" />
+        <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} placeholder="Add a comment..." rows={2} className="w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A] resize-none" />
         {imagePreview && (
           <div className="relative rounded-xl overflow-hidden">
             <img src={imagePreview} alt="preview" className="w-full h-32 object-cover" />
@@ -125,12 +125,12 @@ export default function CommentSection({ postId, user, isPremium }) {
         )}
         <div className="flex items-center gap-2">
           {isPremium ? (
-            <label className="flex items-center gap-1 px-2.5 py-2 rounded-full bg-[#F3F7F5] border border-[#E0E0E0] text-xs text-[#737373] cursor-pointer">
+            <label className="flex items-center gap-1 px-2.5 py-2 rounded-full bg-[#FFF8DC] border border-[#E0E0E0] text-xs text-[#737373] cursor-pointer">
               <ImagePlus size={14} />
               <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
             </label>
           ) : (
-            <Link to="/pricing" className="px-2.5 py-2 rounded-full bg-[#F3F7F5] border border-[#E0E0E0] text-xs text-[#A3A3A3]">
+            <Link to="/pricing" className="px-2.5 py-2 rounded-full bg-[#FFF8DC] border border-[#E0E0E0] text-xs text-[#A3A3A3]">
               <Crown size={14} className="text-[#2D9F6A]" />
             </Link>
           )}
@@ -153,7 +153,7 @@ export default function CommentSection({ postId, user, isPremium }) {
           ))}
           {replyingTo === c.id && (
             <div className="mt-2 flex items-center gap-2">
-              <input value={replyText} onChange={(e) => setReplyText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addReply(c.id)} placeholder="Write a reply..." className="flex-1 rounded-full bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2 text-xs focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]" />
+              <input value={replyText} onChange={(e) => setReplyText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addReply(c.id)} placeholder="Write a reply..." className="flex-1 rounded-full bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2 text-xs focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]" />
               <button onClick={() => addReply(c.id)} className="p-2 rounded-full bg-[#2D9F6A]"><Send size={14} className="text-white" /></button>
             </div>
           )}
@@ -168,7 +168,7 @@ function CommentItem({ comment, userId, onLike, onReply, onReport, isReply, chil
   const likeCount = comment.liked_by?.length || 0;
   return (
     <div className={isReply ? 'ml-8' : ''}>
-      <div className={`rounded-2xl ${isReply ? 'bg-[#F3F7F5] border border-[#E0E0E0]' : 'bg-white border border-[#E0E0E0] shadow-sm shadow-black/5'} p-3`}>
+      <div className={`rounded-2xl ${isReply ? 'bg-[#FFF8DC] border border-[#E0E0E0]' : 'bg-white border border-[#E0E0E0] shadow-sm shadow-black/5'} p-3`}>
         <div className="flex items-center gap-2 mb-1">
           <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#2D9F6A] to-[#1F8A58] flex items-center justify-center text-white text-[10px] font-bold">
             {comment.author_name?.[0]?.toUpperCase() || 'U'}

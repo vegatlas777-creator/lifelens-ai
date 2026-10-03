@@ -167,7 +167,7 @@ export default function CalorieCounter() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Calorie Counter</h1>
         <p className="text-sm text-[#737373]">Log meals by photo, voice, or text</p>
@@ -366,7 +366,7 @@ function MacroPill({ label, value, unit }) {
 
 function ResultStat({ label, value, unit, icon: Icon }) {
   return (
-    <div className="rounded-xl bg-[#F3F7F5] p-3">
+    <div className="rounded-xl bg-[#FFF8DC] p-3">
       <div className="flex items-center gap-1.5 mb-1">
         {Icon && <Icon size={12} className="text-[#1F7A4F]" />}
         <span className="text-xs text-[#737373]">{label}</span>

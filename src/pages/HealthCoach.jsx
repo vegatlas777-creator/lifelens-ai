@@ -62,7 +62,7 @@ export default function HealthCoach() {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100dvh-7rem)] bg-[#F3F7F5]">
+    <div className="flex flex-col h-[calc(100dvh-7rem)] bg-[#FFF8DC]">
       <div className="px-5 pt-12 pb-4 border-b border-[#E0E0E0] flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5">
@@ -106,7 +106,7 @@ export default function HealthCoach() {
         <div ref={scrollRef} />
       </div>
 
-      <div className="px-5 py-3 border-t border-[#E0E0E0] bg-[#F3F7F5]">
+      <div className="px-5 py-3 border-t border-[#E0E0E0] bg-[#FFF8DC]">
         <div className="flex items-center gap-2">
           <input
             value={input}

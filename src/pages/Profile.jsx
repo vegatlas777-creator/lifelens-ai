@@ -37,7 +37,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Profile</h1>
       </div>
@@ -115,12 +115,12 @@ export default function Profile() {
 
         {/* Settings */}
         <div className="mt-4 rounded-2xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 divide-y divide-[#E0E0E0]">
-          <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#F3F7F5] transition-colors">
+          <Link to="/metabolic" className="w-full flex items-center gap-3 p-4 hover:bg-[#FFF8DC] transition-colors">
             <div className="p-2 rounded-xl bg-[#E6F4EC]"><Activity size={18} className="text-[#2D9F6A]" /></div>
             <span className="flex-1 text-left text-sm font-medium text-[#0A0A0A]">Metabolic Calculator</span>
             <ChevronRight size={18} className="text-[#A3A3A3]" />
           </Link>
-          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#F3F7F5] transition-colors">
+          <Link to="/premium-profile" className="w-full flex items-center gap-3 p-4 hover:bg-[#FFF8DC] transition-colors">
             <div className="p-2 rounded-xl bg-[#E6F4EC]"><Activity size={18} className="text-[#2D9F6A]" /></div>
             <div className="flex-1 text-left">
               <p className="text-sm font-medium text-[#0A0A0A]">Premium Profile & Progress</p>
@@ -128,7 +128,7 @@ export default function Profile() {
             </div>
             <ChevronRight size={18} className="text-[#A3A3A3]" />
           </Link>
-          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#F3F7F5] transition-colors">
+          <Link to="/pricing" className="w-full flex items-center gap-3 p-4 hover:bg-[#FFF8DC] transition-colors">
             <div className="p-2 rounded-xl bg-[#E6F4EC]"><Crown size={18} className="text-[#2D9F6A]" /></div>
             <span className="flex-1 text-left text-sm font-medium text-[#0A0A0A]">Subscription & Pricing</span>
             <ChevronRight size={18} className="text-[#A3A3A3]" />

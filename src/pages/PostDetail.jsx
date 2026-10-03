@@ -61,7 +61,7 @@ export default function PostDetail() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F3F7F5]">
+      <div className="flex items-center justify-center min-h-screen bg-[#FFF8DC]">
         <Loader2 size={28} className="text-[#2D9F6A] animate-spin" />
       </div>
     );
@@ -69,7 +69,7 @@ export default function PostDetail() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#F3F7F5] flex flex-col items-center justify-center px-5">
+      <div className="min-h-screen bg-[#FFF8DC] flex flex-col items-center justify-center px-5">
         <p className="text-sm text-[#737373]">Post not found.</p>
         <Link to="/community" className="mt-3 px-4 py-2 rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white text-sm font-semibold">Back to Community</Link>
       </div>
@@ -82,7 +82,7 @@ export default function PostDetail() {
   const likeCount = post.liked_by?.length || 0;
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       {/* Header */}
       <div className="px-5 pt-12 pb-3 flex items-center gap-3 border-b border-[#E0E0E0]">
         <button onClick={() => navigate('/community')} className="p-1.5 rounded-full hover:bg-[#E6F4EC]"><ArrowLeft size={20} className="text-[#2D9F6A]" /></button>

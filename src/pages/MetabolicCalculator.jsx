@@ -56,7 +56,7 @@ export default function MetabolicCalculator() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Metabolic Calculator</h1>
         <p className="text-sm text-[#737373]">BMR, TDEE & calorie targets</p>
@@ -149,7 +149,7 @@ export default function MetabolicCalculator() {
   );
 }
 
-const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 
 function Field({ label, children }) {
   return (

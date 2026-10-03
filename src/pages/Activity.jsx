@@ -82,7 +82,7 @@ export default function Activity() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F3F7F5]">
+      <div className="flex items-center justify-center min-h-screen bg-[#FFF8DC]">
         <div className="w-8 h-8 border-4 border-[#E0E0E0] border-t-[#2D9F6A] rounded-full animate-spin" />
       </div>
     );
@@ -94,7 +94,7 @@ export default function Activity() {
   const stepsBelowAvg = avgSteps - steps;
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
         <h1 className="text-2xl font-bold text-[#0A0A0A] font-heading">Activity Tracking</h1>
         <p className="text-sm text-[#737373]">Steps, distance & active minutes</p>

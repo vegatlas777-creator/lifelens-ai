@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { CATEGORIES } from '@/lib/communityData';
 import { useAuth } from '@/lib/AuthContext';
 
-const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 
 export default function PostForm({ user, isPremium, onCreated, onCancel }) {
   const [title, setTitle] = useState('');
@@ -68,12 +68,12 @@ export default function PostForm({ user, isPremium, onCreated, onCancel }) {
       )}
       <div className="flex items-center gap-2">
         {isPremium ? (
-          <label className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F3F7F5] border border-[#E0E0E0] text-xs font-medium text-[#737373] cursor-pointer">
+          <label className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#FFF8DC] border border-[#E0E0E0] text-xs font-medium text-[#737373] cursor-pointer">
             <ImagePlus size={14} /> Photo
             <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
           </label>
         ) : (
-          <Link to="/pricing" className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#F3F7F5] border border-[#E0E0E0] text-xs font-medium text-[#A3A3A3]">
+          <Link to="/pricing" className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#FFF8DC] border border-[#E0E0E0] text-xs font-medium text-[#A3A3A3]">
             <Crown size={14} className="text-[#2D9F6A]" /> Premium for photos
           </Link>
         )}

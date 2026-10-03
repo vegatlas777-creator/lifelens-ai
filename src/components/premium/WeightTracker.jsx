@@ -46,8 +46,8 @@ export default function WeightTracker() {
       {/* Add weight */}
       <div className="rounded-3xl bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 p-5">
         <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 font-heading">Log New Weight</h3>
-        <input type="number" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight in kg" className="w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A] mb-2" />
-        <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes (optional)" className="w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A] mb-3" />
+        <input type="number" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight in kg" className="w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A] mb-2" />
+        <input type="text" value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes (optional)" className="w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A] mb-3" />
         <button onClick={addEntry} disabled={adding || !weight} className="w-full rounded-full bg-gradient-to-r from-[#2D9F6A] to-[#1F8A58] text-white py-3 font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 shadow-md shadow-black/10">
           {adding ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />} Add Weight Entry
         </button>

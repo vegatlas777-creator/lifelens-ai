@@ -23,7 +23,7 @@ const mobileNavItems = [
 export default function Layout() {
   const location = useLocation();
   return (
-    <div className="min-h-screen bg-[#F3F7F5]">
+    <div className="min-h-screen bg-[#FFF8DC]">
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 flex-col border-r border-[#E0E0E0] bg-[#E6F4EC] z-40">
         <div className="px-6 py-8 flex items-center gap-2.5">

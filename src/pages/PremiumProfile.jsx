@@ -22,7 +22,7 @@ export default function PremiumProfile() {
 
   if (subStatus.loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[#F3F7F5]">
+      <div className="flex items-center justify-center min-h-screen bg-[#FFF8DC]">
         <Loader2 size={28} className="text-[#2D9F6A] animate-spin" />
       </div>
     );
@@ -30,7 +30,7 @@ export default function PremiumProfile() {
 
   if (!subStatus.isPremium) {
     return (
-      <div className="min-h-screen bg-[#F3F7F5] flex flex-col items-center justify-center px-5">
+      <div className="min-h-screen bg-[#FFF8DC] flex flex-col items-center justify-center px-5">
         <div className="w-16 h-16 rounded-full bg-white border border-[#E0E0E0] shadow-sm shadow-black/5 flex items-center justify-center mb-4">
           <Crown size={32} className="text-[#2D9F6A]" />
         </div>
@@ -44,7 +44,7 @@ export default function PremiumProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       <div className="px-5 pt-12 pb-3">
         <div className="flex items-center gap-2">
           <Crown size={20} className="text-[#2D9F6A]" />

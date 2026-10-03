@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, Save, User } from 'lucide-react';
 import { activityLevels } from '@/lib/workoutData';
 
-const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 const goalOptions = [
   { value: 'loss', label: 'Weight Loss' },
   { value: 'maintenance', label: 'Weight Maintenance' },

@@ -91,7 +91,7 @@ export default function Community() {
   });
 
   return (
-    <div className="min-h-screen bg-[#F3F7F5] pb-4">
+    <div className="min-h-screen bg-[#FFF8DC] pb-4">
       {/* Header */}
       <div className="px-5 pt-12 pb-3">
         <div className="flex items-center gap-2">

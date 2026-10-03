@@ -34,7 +34,7 @@ export default function Pricing() {
   }
 
   return (
-    <div className="pb-4 min-h-screen bg-[#F3F7F5]">
+    <div className="pb-4 min-h-screen bg-[#FFF8DC]">
       {/* Hero with background images */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-0.5">

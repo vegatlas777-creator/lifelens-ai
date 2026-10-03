@@ -3,7 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, Plus, Ruler } from 'lucide-react';
 import { getTodayStr, formatDate } from '@/lib/dateUtils';
 
-const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 
 export default function MeasurementsTracker() {
   const [entries, setEntries] = useState([]);
@@ -61,7 +61,7 @@ export default function MeasurementsTracker() {
           <h3 className="text-sm font-bold text-[#0A0A0A] mb-3 font-heading">Measurement History</h3>
           <div className="space-y-3">
             {entries.map((e, i) => (
-              <div key={e.id || i} className="rounded-xl bg-[#F3F7F5] p-3">
+              <div key={e.id || i} className="rounded-xl bg-[#FFF8DC] p-3">
                 <p className="text-xs font-medium text-[#737373] mb-2">{formatDate(e.entry_date)}</p>
                 <div className="grid grid-cols-5 gap-1 text-center">
                   {['chest_cm', 'waist_cm', 'hips_cm', 'arm_cm', 'thigh_cm'].map((k) => (

@@ -26,7 +26,7 @@ const intensityLevels = [
   { value: 'high', label: 'High Intensity', desc: 'Maximum effort' },
 ];
 
-const inputCls = "w-full rounded-xl bg-[#F3F7F5] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
+const inputCls = "w-full rounded-xl bg-[#FFF8DC] border border-[#E0E0E0] px-3 py-2.5 text-sm focus:outline-none focus:border-[#2D9F6A] text-[#0A0A0A]";
 
 export default function ActivityCalorieBurn() {
   const [form, setForm] = useState({ age: '', weight: '', height: '', gender: 'male', intensity: 'moderate' });
@@ -92,7 +92,7 @@ export default function ActivityCalorieBurn() {
               <button
                 key={lvl.value}
                 onClick={() => setForm({ ...form, intensity: lvl.value })}
-                className={`rounded-xl p-2.5 text-left transition-colors ${form.intensity === lvl.value ? 'bg-[#2D9F6A] text-white' : 'bg-[#F3F7F5] border border-[#E0E0E0] text-[#737373]'}`}
+                className={`rounded-xl p-2.5 text-left transition-colors ${form.intensity === lvl.value ? 'bg-[#2D9F6A] text-white' : 'bg-[#FFF8DC] border border-[#E0E0E0] text-[#737373]'}`}
               >
                 <p className="text-sm font-medium">{lvl.label}</p>
                 <p className={`text-[10px] ${form.intensity === lvl.value ? 'text-white/80' : 'text-[#A3A3A3]'}`}>{lvl.desc}</p>
@@ -162,7 +162,7 @@ export default function ActivityCalorieBurn() {
 
 function CalorieStat({ minutes, calories, highlighted }) {
   return (
-    <div className={`rounded-xl p-2.5 text-center ${highlighted ? 'bg-[#2D9F6A]/30' : 'bg-[#F3F7F5]'}`}>
+    <div className={`rounded-xl p-2.5 text-center ${highlighted ? 'bg-[#2D9F6A]/30' : 'bg-[#FFF8DC]'}`}>
       <div className="flex items-center justify-center gap-1 mb-1">
         <Clock size={10} className="text-[#A3A3A3]" />
         <p className="text-[10px] text-[#737373]">{minutes}</p>
